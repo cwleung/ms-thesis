@@ -1,0 +1,14 @@
+Related Works
+There have been a several of works focus on word embedding and topic model. Major of them combined statistical model and embedding approach to model topic distribution. In other words, representing a word by mapping every single word into continuous space
+-	Gaussian Topic Model models the topic using Gaussian distributions with latent means and covariances. 
+-	Correlated Topic model with embeddings the author combined the embedding method and correlated topic model. 
+Amortized inference are common in implementing to topic models, specifically, a neural network architecture with encoder-decoder are used into topic model structure for model inference.
+-	Autoencoding Variational Inference for Topic Model the author applied amortized variational inference to approximate the variational distribution of the model.
+-	Embedded Topic model, which on top of the ProdLDA topic model, implemented Word2Vec semantics to further improve the performance on topic coherence and predictive distribution.
+Some other attempts use graph techniques to model topic distributions.
+-	Graph Attention Topic Model, the author used graph attention network to model the topic distribution. 
+In this paper, we develop the Transformer Embedded Topic Model (TMTE), a model that combine word embedding and topic model together to make a better fit of the dataset. Moreover, we integrate the Transformer into embedding, such that we can also take assumption of word position and convert it into meaningful contextual embeddings. 
+In its generative process, the model uses the topic embedding to forma a per-topic distribution over the vocabulary. Specifically, the TMTE uses a log-linear model that takes the inner product of the word embedding matrix and the topic embedding.
+With this form, the TMTE assigns high probability to a word v in topic k by measuring the agreement between the word’s embedding and the topic’s embedding.
+
+To evaluate our model, we applied the proposed model on 20Newsgroups and Reuter-21578 dataset. The experiment results demonstrate that our model is capable to obtain high quality topics than the state-of-the-art model. 

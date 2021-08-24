@@ -1,0 +1,17 @@
+The TETM utilizes the Transformer as embedding to the topic-word representations. To compare with the original topic model, the word-topic distribution $ \beta $ is the 
+First, the topic embedding embeds the vocabulary into L-dimensional space, which is by Transformer embedding. Second, the context embedding maps the embedding into K-dimensional space . 
+In the generative process, the TETM uses the topic embedding to form a per-topic vector to represent the meaning over the vocabulary. 
+% Generative process
+The generative process of the $ d^{th} $ document is the following:
+\begin{enumerate}
+\item Draw topic proportions $ \theta_d\sim\mathcal{LN}(0,I) $
+\item For each word n in the document:
+\begin{enumerate}
+\item Draw topic assignment $ z_{dn}\sim Cat(\theta_d) $
+\item Draw the word $ w_{dn}\sim softmax(\rho^\top\alpha_{z_{dn}}) $
+\end{enumerate}
+\end{enumerate}
+In Step 1, the topic proportion $ \theta_d $ is drawn from the logistic-normal distribution $ \mathcal{LN}(\cdot) $ with zero mean and identical covariance.
+From Step 2-a, for each word position $ n $ in document $ d $, a topic assignment to word $ w_{dn} $ is drawn from categorical distribution $ Cat(\theta_d) $ parameterized by topic proportion $ \theta_d $
+Step 2-b, the model draw a word from embedding of the vocabulary $ \rho $ and the assigned topic embedding $ \alpha_{z_{dn}} $ to draw the observed word from the assigned topic, as given by $ z_{dn} $. The embedding is applied softmax function to make them topic distribution.
+The TETM likelihood uses a matrix of word embedding $ \rho $, a representation of the vocabulary in a lower dimensional space. In practice, it can either rely on previously fitted embeddings as part of the fitting procedure, it simultaneously finds topics and an embedding space.
