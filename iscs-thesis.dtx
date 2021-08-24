@@ -1,20 +1,20 @@
 % \iffalse meta-comment
 %
-% 'iscs-thesis' ドキュメントクラス
+% 'iscs-thesis' $B%I%-%e%a%s%H%/%i%9(B
 %
-%  東京大学大学院情報理工学系研究科コンピュータ科学専攻
-%  / 東京大学理学部情報科学科 の学位論文を組版するための
-%  ドキュメントクラスです.
+%  $BEl5~Bg3XBg3X1!>pJsM}9)3X7O8&5f2J%3%s%T%e!<%?2J3X@l96(B
+%  / $BEl5~Bg3XM}3XIt>pJs2J3X2J(B $B$N3X0LO@J8$rAHHG$9$k$?$a$N(B
+%  $B%I%-%e%a%s%H%/%i%9$G$9(B.
 %
-%  著作者:  山本 泰宇 (ymmt@is.s.u-tokyo.ac.jp) [原作]
-%           八登 崇之 (yato@is.s.u-tokyo.ac.jp) [修正]
+%  $BCx:n<T(B:  $B;3K\(B $BBY1'(B (ymmt@is.s.u-tokyo.ac.jp) [$B86:n(B]
+%           $BH,EP(B $B?rG7(B (yato@is.s.u-tokyo.ac.jp) [$B=$@5(B]
 %
-%  このファイルを pLaTeX2e でコンパイルすると, 詳しい説明
-%  の書かれた文書(dvi ファイル)が生成されます.
-%  このソフトウェアは誰でも自由に使用および配布できますが,
-%  使用した結果に対しては著作者は責任を負わないものとします.
-%  このソフトウェアを改変する場合には, 上記の説明文書の中に
-%  書かれた注意書きを守ってください.
+%  $B$3$N%U%!%$%k$r(B pLaTeX2e $B$G%3%s%Q%$%k$9$k$H(B, $B>\$7$$@bL@(B
+%  $B$N=q$+$l$?J8=q(B(dvi $B%U%!%$%k(B)$B$,@8@.$5$l$^$9(B.
+%  $B$3$N%=%U%H%&%'%"$OC/$G$b<+M3$K;HMQ$*$h$SG[I[$G$-$^$9$,(B,
+%  $B;HMQ$7$?7k2L$KBP$7$F$OCx:n<T$O@UG$$rIi$o$J$$$b$N$H$7$^$9(B.
+%  $B$3$N%=%U%H%&%'%"$r2~JQ$9$k>l9g$K$O(B, $B>e5-$N@bL@J8=q$NCf$K(B
+%  $B=q$+$l$?Cm0U=q$-$r<i$C$F$/$@$5$$(B.
 % \fi
 %^^A--------------------------------------------------------
 %\DisableCrossrefs
@@ -22,7 +22,7 @@
 %\MakeShortVerb{\|}
 %\CheckSum{3477}
 %^^A--------------------------------------------------------
-%\iffalse  # driver 部は出力しない
+%\iffalse  # driver $BIt$O=PNO$7$J$$(B
 %    \begin{macrocode}
 %<*driver>
 \documentclass[a4j]{jarticle}
@@ -52,8 +52,8 @@
 %</driver>
 %\fi
 %^^A========================================================
-%\title{ドキュメントクラス \textsf{iscs-thesis} (v1.3)}
-%\author{八登 崇之 (yato@is.s.u-tokyo.ac.jp)}
+%\title{$B%I%-%e%a%s%H%/%i%9(B \textsf{iscs-thesis} (v1.3)}
+%\author{$BH,EP(B $B?rG7(B (yato@is.s.u-tokyo.ac.jp)}
 %\date{2014/09/02}
 %\maketitle
 %^^A--------------------------------------------------------
@@ -62,231 +62,231 @@
 %\fi
 %
 %^^A========================================================
-%\section{概説}
+%\section{$B35@b(B}
 %\label{sec:Intro}
 %^^A--------------------------------------------------------
 %
-%本ドキュメントクラス \PKN{iscs-thesis} は,
-%東京大学大学院情報理工学系研究科コンピュータ科学専攻
-%および東京大学理学部情報科学科の
-%学位論文(卒業論文/修士論文/博士論文)を組版するためのものです.
+%$BK\%I%-%e%a%s%H%/%i%9(B \PKN{iscs-thesis} $B$O(B,
+%$BEl5~Bg3XBg3X1!>pJsM}9)3X7O8&5f2J%3%s%T%e!<%?2J3X@l96(B
+%$B$*$h$SEl5~Bg3XM}3XIt>pJs2J3X2J$N(B
+%$B3X0LO@J8(B($BB46HO@J8(B/$B=$;NO@J8(B/$BGn;NO@J8(B)$B$rAHHG$9$k$?$a$N$b$N$G$9(B.
 %
 %^^A----------------
-%\subsection{インストール}
+%\subsection{$B%$%s%9%H!<%k(B}
 %\label{ssec:Install}
 %
-%|iscs-thesis.dtx| と |iscs-thesis.ins| のあるディレクトリで
+%|iscs-thesis.dtx| $B$H(B |iscs-thesis.ins| $B$N$"$k%G%#%l%/%H%j$G(B
 %\begin{quote}\begin{verbatim}
 %platex iscs-thesis.ins
 %\end{verbatim}\end{quote}
-%を実行すると, そのディレクトリに |iscs-thesis.cls| が
-%生成されるので, その |iscs-thesis.cls| を \TeX\ が読める
-%ディレクトリ(論文のソースファイルのあるディレクトリ等)に
-%置いてください.
-%なお, |iscs-thesis.cls| が一緒に配布されている場合は,
-%第三者による改変が行われていない限り,
-%それは上述の方法で生成されるものと
-%(漢字コードの差異を除いて)同一です.
+%$B$r<B9T$9$k$H(B, $B$=$N%G%#%l%/%H%j$K(B |iscs-thesis.cls| $B$,(B
+%$B@8@.$5$l$k$N$G(B, $B$=$N(B |iscs-thesis.cls| $B$r(B \TeX\ $B$,FI$a$k(B
+%$B%G%#%l%/%H%j(B($BO@J8$N%=!<%9%U%!%$%k$N$"$k%G%#%l%/%H%jEy(B)$B$K(B
+%$BCV$$$F$/$@$5$$(B.
+%$B$J$*(B, |iscs-thesis.cls| $B$,0l=o$KG[I[$5$l$F$$$k>l9g$O(B,
+%$BBh;0<T$K$h$k2~JQ$,9T$o$l$F$$$J$$8B$j(B,
+%$B$=$l$O>e=R$NJ}K!$G@8@.$5$l$k$b$N$H(B
+%($B4A;z%3!<%I$N:90[$r=|$$$F(B)$BF10l$G$9(B.
 %
 %\par\noindent
-%注意 1: v1.1e から配布する.cls ファイルを JIS エンコーディングに
-%しました.
-%JIS のファイルは, SJIS または EUC ベースの \pTeX システムでも使えます.
+%$BCm0U(B 1: v1.1e $B$+$iG[I[$9$k(B.cls $B%U%!%$%k$r(B JIS $B%(%s%3!<%G%#%s%0$K(B
+%$B$7$^$7$?(B.
+%JIS $B$N%U%!%$%k$O(B, SJIS $B$^$?$O(B EUC $B%Y!<%9$N(B \pTeX $B%7%9%F%`$G$b;H$($^$9(B.
 %\par\noindent
-%注意 2: このソースには, \DCN{docstrip} の公式のモジュール定義
-%はありません.
-%(わからない人は気にしないように.)
+%$BCm0U(B 2: $B$3$N%=!<%9$K$O(B, \DCN{docstrip} $B$N8x<0$N%b%8%e!<%kDj5A(B
+%$B$O$"$j$^$;$s(B.
+%($B$o$+$i$J$$?M$O5$$K$7$J$$$h$&$K(B.)
 %
 %
 %^^A----------------
-%\subsection{クラスオプション}
+%\subsection{$B%/%i%9%*%W%7%g%s(B}
 %
-%すなわち, 論文のソースの冒頭の
+%$B$9$J$o$A(B, $BO@J8$N%=!<%9$NKAF,$N(B
 %\begin{quote}\begin{verbatim}
 %\documentclass[...]{iscs-thesis}
 %\end{verbatim}\end{quote}
-%の `|...|' の部分に書くものです.
-%\LaTeXe\ の \PKN{report} クラス(欧文用)と概ね同じ
-%ですが, 変更点を示しました.
+%$B$N(B `|...|' $B$NItJ,$K=q$/$b$N$G$9(B.
+%\LaTeXe\ $B$N(B \PKN{report} $B%/%i%9(B($B2$J8MQ(B)$B$H35$MF1$8(B
+%$B$G$9$,(B, $BJQ99E@$r<($7$^$7$?(B.
 %
 %\begin{description}
-%\item[論文の種類(追加)]
-%  |senior| (卒業論文), |master| (修士論文),
-%  |doctor| (博士論文) のいずれか 1 つを
-%  必ず指定してください.
-%\item[基底フォントサイズ]
-%  |10pt|, |11pt|, |12pt| のいずれか.
-%  v1.2 から既定値が |11pt| に変更.
+%\item[$BO@J8$N<oN`(B($BDI2C(B)]
+%  |senior| ($BB46HO@J8(B), |master| ($B=$;NO@J8(B),
+%  |doctor| ($BGn;NO@J8(B) $B$N$$$:$l$+(B 1 $B$D$r(B
+%  $BI,$:;XDj$7$F$/$@$5$$(B.
+%\item[$B4pDl%U%)%s%H%5%$%:(B]
+%  |10pt|, |11pt|, |12pt| $B$N$$$:$l$+(B.
+%  v1.2 $B$+$i4{DjCM$,(B |11pt| $B$KJQ99(B.
 %\item[\OPN{interim}]
-%  表紙を中間報告(要旨提出)用のものにします.
-%\item[Overfull box の設定]
-%  何と |draft| (出力する) を既定値にしています.
-%  消したい場合は |final| を指定してください.
+%  $BI=;f$rCf4VJs9p(B($BMW;]Ds=P(B)$BMQ$N$b$N$K$7$^$9(B.
+%\item[Overfull box $B$N@_Dj(B]
+%  $B2?$H(B |draft| ($B=PNO$9$k(B) $B$r4{DjCM$K$7$F$$$^$9(B.
+%  $B>C$7$?$$>l9g$O(B |final| $B$r;XDj$7$F$/$@$5$$(B.
 %\item[\OPN{sloppy}]
-%  単語間が空き過ぎになるのを許容して, 行分割が失敗する
-%  (その結果行からはみ出して出力される)のを防ぎます.
-%  Overfull に対処している暇がない時の応急処置に使えます.
-%  (プリアンブルに |\sloppy| を書いたのと同じです.)
-%\item[用紙サイズ]
-%  |a4paper| (A4 判, 既定値), |letterpaper| (US letter size),
-%  |legalpaper| (US legal size) のほかに,
-%  新たに |b4paper| (JIS B4 版, 364\,mm $\times$ 257\,mm)
-%  を追加しました.
-%  (もちろん, 学位論文は A4 判のはずですが.)
-%\item[要旨の出力の方法]
-%  英文と和文の要旨の間の改ページの制御です.
+%  $BC18l4V$,6u$-2a$.$K$J$k$N$r5vMF$7$F(B, $B9TJ,3d$,<:GT$9$k(B
+%  ($B$=$N7k2L9T$+$i$O$_=P$7$F=PNO$5$l$k(B)$B$N$rKI$.$^$9(B.
+%  Overfull $B$KBP=h$7$F$$$k2K$,$J$$;~$N1~5^=hCV$K;H$($^$9(B.
+%  ($B%W%j%"%s%V%k$K(B |\sloppy| $B$r=q$$$?$N$HF1$8$G$9(B.)
+%\item[$BMQ;f%5%$%:(B]
+%  |a4paper| (A4 $BH=(B, $B4{DjCM(B), |letterpaper| (US letter size),
+%  |legalpaper| (US legal size) $B$N$[$+$K(B,
+%  $B?7$?$K(B |b4paper| (JIS B4 $BHG(B, 364\,mm $\times$ 257\,mm)
+%  $B$rDI2C$7$^$7$?(B.
+%  ($B$b$A$m$s(B, $B3X0LO@J8$O(B A4 $BH=$N$O$:$G$9$,(B.)
+%\item[$BMW;]$N=PNO$NJ}K!(B]
+%  $B1QJ8$HOBJ8$NMW;]$N4V$N2~%Z!<%8$N@)8f$G$9(B.
 %  \begin{itemize}
-%  \item |splitabst|:\quad 必ず改ページを入れます.
-%  \item |nosplitabst|:\quad 改ページを入れません.
-%  \item |autosplitabst| (既定値):\quad
-%    英文と和文の両方が併せて 1 ページに収まる場合は入れず,
-%    その他の場合は入れます.
+%  \item |splitabst|:\quad $BI,$:2~%Z!<%8$rF~$l$^$9(B.
+%  \item |nosplitabst|:\quad $B2~%Z!<%8$rF~$l$^$;$s(B.
+%  \item |autosplitabst| ($B4{DjCM(B):\quad
+%    $B1QJ8$HOBJ8$NN>J}$,J;$;$F(B 1 $B%Z!<%8$K<}$^$k>l9g$OF~$l$:(B,
+%    $B$=$NB>$N>l9g$OF~$l$^$9(B.
 %  \end{itemize}
-%  普通は既定値でいいと思います.
-%  英文と和文がともに 1～1.5 ページの量の場合,
-%  既定値(|splitabst| と同じ)では 4 ページになりますが,
-%  |nosplitabst| を指定して 3 ページにする方を好むかも
-%  しれません.
-%\item[前付けのページ番号]
-%  表題のページを前付けのページに含めるかどうかを指定します.
+%  $BIaDL$O4{DjCM$G$$$$$H;W$$$^$9(B.
+%  $B1QJ8$HOBJ8$,$H$b$K(B 1$B!A(B1.5 $B%Z!<%8$NNL$N>l9g(B,
+%  $B4{DjCM(B(|splitabst| $B$HF1$8(B)$B$G$O(B 4 $B%Z!<%8$K$J$j$^$9$,(B,
+%  |nosplitabst| $B$r;XDj$7$F(B 3 $B%Z!<%8$K$9$kJ}$r9%$`$+$b(B
+%  $B$7$l$^$;$s(B.
+%\item[$BA0IU$1$N%Z!<%8HV9f(B]
+%  $BI=Bj$N%Z!<%8$rA0IU$1$N%Z!<%8$K4^$a$k$+$I$&$+$r;XDj$7$^$9(B.
 %  \begin{itemize}
-%  \item |counttitlepage| (既定値):\quad
-%    表題のページをページ i とします.
-%    表題ページの前に別に表紙がある場合はこの設定が適切です.
+%  \item |counttitlepage| ($B4{DjCM(B):\quad
+%    $BI=Bj$N%Z!<%8$r%Z!<%8(B i $B$H$7$^$9(B.
+%    $BI=Bj%Z!<%8$NA0$KJL$KI=;f$,$"$k>l9g$O$3$N@_Dj$,E,@Z$G$9(B.
 %  \item |nocounttitlepage| :\quad
-%    表題のページの次の紙をページ i とします.
-%    簡易製本で表題ページを表紙として扱う場合はこの設定が適切です.
+%    $BI=Bj$N%Z!<%8$N<!$N;f$r%Z!<%8(B i $B$H$7$^$9(B.
+%    $B4J0W@=K\$GI=Bj%Z!<%8$rI=;f$H$7$F07$&>l9g$O$3$N@_Dj$,E,@Z$G$9(B.
 %  \end{itemize}
 %\item[\OPN{simpletitlepage}]
-%  博士論文を簡易製本する場合に適応し, 表題ページの体裁を
-%  製本時の表紙のもの(表題と氏名のみ)に変更します.
+%  $BGn;NO@J8$r4J0W@=K\$9$k>l9g$KE,1~$7(B, $BI=Bj%Z!<%8$NBN:[$r(B
+%  $B@=K\;~$NI=;f$N$b$N(B($BI=Bj$H;aL>$N$_(B)$B$KJQ99$7$^$9(B.
 %\item[\OPN{nobindoffset}]
-%  v1.3a からページレイアウトを計算する時に「綴じ代」を考慮するように
-%  しています.
-%  このオプションを指定すると綴じ代がないものと扱います.
+%  v1.3a $B$+$i%Z!<%8%l%$%"%&%H$r7W;;$9$k;~$K!VDV$8Be!W$r9MN8$9$k$h$&$K(B
+%  $B$7$F$$$^$9(B.
+%  $B$3$N%*%W%7%g%s$r;XDj$9$k$HDV$8Be$,$J$$$b$N$H07$$$^$9(B.
 %\item[\OPN{english}]
-%  表紙および要旨の和文部分を出力しません.
-%  (ただし, ソースファイルは和文文字を含むので,
-%  必ず \pLaTeX\ を使う必要があります.)
-%  本文に和文文字がない限り, できる |.dvi| ファイルは
-%  和文フォントを含まないものになります.
-%\item[\OPN{prodigal}] (このオプションは v1.3 で廃止された.)
+%  $BI=;f$*$h$SMW;]$NOBJ8ItJ,$r=PNO$7$^$;$s(B.
+%  ($B$?$@$7(B, $B%=!<%9%U%!%$%k$OOBJ8J8;z$r4^$`$N$G(B,
+%  $BI,$:(B \pLaTeX\ $B$r;H$&I,MW$,$"$j$^$9(B.)
+%  $BK\J8$KOBJ8J8;z$,$J$$8B$j(B, $B$G$-$k(B |.dvi| $B%U%!%$%k$O(B
+%  $BOBJ8%U%)%s%H$r4^$^$J$$$b$N$K$J$j$^$9(B.
+%\item[\OPN{prodigal}] ($B$3$N%*%W%7%g%s$O(B v1.3 $B$GGQ;_$5$l$?(B.)
 %\item[\OPN{longline}]
-%  行の長さを妙に大きくする設定にします.
-%  通常は行長は英小文字 80 字分の幅に相当する長さになりますが,
-%  代わりに, 左右マージンが紙面横幅の 1/12 の長さになります.
-%\item[その他諸々]
-%  \PKN{report} と同じく,
+%  $B9T$ND9$5$rL/$KBg$-$/$9$k@_Dj$K$7$^$9(B.
+%  $BDL>o$O9TD9$O1Q>.J8;z(B 80 $B;zJ,$NI}$KAjEv$9$kD9$5$K$J$j$^$9$,(B,
+%  $BBe$o$j$K(B, $B:81&%^!<%8%s$,;fLL2#I}$N(B 1/12 $B$ND9$5$K$J$j$^$9(B.
+%\item[$B$=$NB>=t!9(B]
+%  \PKN{report} $B$HF1$8$/(B,
 %  |twocolumn|, |twoside|, |openright|, |openbib|,
-%  |fleqn|, |leqno| が使えます.
+%  |fleqn|, |leqno| $B$,;H$($^$9(B.
 %\end{description}
-%提出する論文を作る場合は最初の 2 つ(と |final|)を
-%指定すれば十分です.
+%$BDs=P$9$kO@J8$r:n$k>l9g$O:G=i$N(B 2 $B$D(B($B$H(B |final|)$B$r(B
+%$B;XDj$9$l$P==J,$G$9(B.
 %
-%\paragraph{廃止したオプション}
-%\PKN{report} にあった次のオプションを廃止しました.
+%\paragraph{$BGQ;_$7$?%*%W%7%g%s(B}
+%\PKN{report} $B$K$"$C$?<!$N%*%W%7%g%s$rGQ;_$7$^$7$?(B.
 %\begin{description}
 %\item[\OPN{a5paper}, \OPN{b5paper}, \OPN{executivepaper}]
-%  A4 より小さい紙面では表題のページがうまく組めないので.
+%  A4 $B$h$j>.$5$$;fLL$G$OI=Bj$N%Z!<%8$,$&$^$/AH$a$J$$$N$G(B.
 %\item[\OPN{landscape}]
-%  まさか横置きにする人なんていないでしょう.
+%  $B$^$5$+2#CV$-$K$9$k?M$J$s$F$$$J$$$G$7$g$&(B.
 %\item[\OPN{titlepage}]
-%  表題は常に独立のページに出力されます.
+%  $BI=Bj$O>o$KFHN)$N%Z!<%8$K=PNO$5$l$^$9(B.
 %\end{description}
 %
 %^^A----------------
-%\subsection{テンプレート}
+%\subsection{$B%F%s%W%l!<%H(B}
 %
 %\begin{quote}\footnotesize\begin{verbatim}
 %\documentclass[master,12pt]{iscs-thesis}
-%  % 論文の種類とフォントサイズをオプションに
-%%\usepackage{graphicx}% 必要に応じて
-%%\usepackage{mysettings}% 自分用設定
+%  % $BO@J8$N<oN`$H%U%)%s%H%5%$%:$r%*%W%7%g%s$K(B
+%%\usepackage{graphicx}% $BI,MW$K1~$8$F(B
+%%\usepackage{mysettings}% $B<+J,MQ@_Dj(B
 %%-------------------
 %\etitle{Title in English}
-%\jtitle{和文標題}
+%\jtitle{$BOBJ8I8Bj(B}
 %\eauthor{Your Name}
-%\jauthor{氏名}
+%\jauthor{$B;aL>(B}
 %\esupervisor{Name of Your Supervisor}
-%\jsupervisor{指導教官氏名}
+%\jsupervisor{$B;XF36541;aL>(B}
 %\supervisortitle{Title of Your Supervisor} % Professor, etc.
 %\date{February 8, 200X}
 %%-------------------
 %\begin{document}
-%\input{abstract}              % 要旨
+%\input{abstract}              % $BMW;](B
 %   %\begin{eabstract}...\end{eabstract}
 %   %\begin{jabstract}...\end{jabstract}
 %\maketitle
-%\input{acknowledge}           % 謝辞
+%\input{acknowledge}           % $B<U<-(B
 %   %\begin{acknowledge}...\end{acknowledge}
-%\frontmatter          %% 前付け
-%\tableofcontents              % 目次
-%%\listoffigures               % 図目次
-%%\listoftables                % 表目次
+%\frontmatter          %% $BA0IU$1(B
+%\tableofcontents              % $BL\<!(B
+%%\listoffigures               % $B?^L\<!(B
+%%\listoftables                % $BI=L\<!(B
 %%-------------------
-%\mainmatter           %% 本文
-%\include{introduction}        % 1 章
+%\mainmatter           %% $BK\J8(B
+%\include{introduction}        % 1 $B>O(B
 %   %\chapter{Introduction}...
-%\include{preliminaries}       % 2 章
-%\include{another-section}     % 3 章
-%\include{yet-another-section} % 4 章
-%\include{conclusion}          % 5 章
+%\include{preliminaries}       % 2 $B>O(B
+%\include{another-section}     % 3 $B>O(B
+%\include{yet-another-section} % 4 $B>O(B
+%\include{conclusion}          % 5 $B>O(B
 %%-------------------
-%\bibliographystyle{plain}     % 参考文献
+%\bibliographystyle{plain}     % $B;29MJ88%(B
 %\bibliography{mybib}          %
 %%-------------------
 %\end{document}
 %\end{verbatim}\end{quote}
 %
 %^^A----------------
-%\subsection{コードを変更する場合の注意}
+%\subsection{$B%3!<%I$rJQ99$9$k>l9g$NCm0U(B}
 %\label{ssec:Modify}
 %
-%\PKN{iscs-thesis} のコード(プログラム)を変更する場合には
-%次の 2 つがあります.
+%\PKN{iscs-thesis} $B$N%3!<%I(B($B%W%m%0%i%`(B)$B$rJQ99$9$k>l9g$K$O(B
+%$B<!$N(B 2 $B$D$,$"$j$^$9(B.
 %
-%\paragraph{全使用者のためになる改良}
-%つまりバグ取りや機能拡張などです.
-%この場合は,
+%\paragraph{$BA4;HMQ<T$N$?$a$K$J$k2~NI(B}
+%$B$D$^$j%P%0<h$j$d5!G=3HD%$J$I$G$9(B.
+%$B$3$N>l9g$O(B,
 %\begin{quote}
-%|.cls| を直接書き換えるのではなく,
-%必ず一度 |.dtx| を書き換えて, \ref{ssec:Install} 節で
-%書いたインストール作業により新しい |.cls| を得る
+%|.cls| $B$rD>@\=q$-49$($k$N$G$O$J$/(B,
+%$BI,$:0lEY(B |.dtx| $B$r=q$-49$($F(B, \ref{ssec:Install} $B@a$G(B
+%$B=q$$$?%$%s%9%H!<%k:n6H$K$h$j?7$7$$(B |.cls| $B$rF@$k(B
 %\end{quote}
-%ようにしてください.
-%|.cls| ファイルは, 単に |.dtx| の中の(大量にある) |%| で
-%始まる行を取り除いたものなので, |.cls| の各行に対応する
-%行が必ず存在します.
-%それを自分の思うように修正すればよいわけです.
-%変更履歴を残した方がいいのは勿論ですが,
-%それができない場合でも, 最低限バージョン番号は
-%きちんと変更しておきましょう.
-%そして必ず |.cls| と一緒に |.dtx| も配布しましょう.
+%$B$h$&$K$7$F$/$@$5$$(B.
+%|.cls| $B%U%!%$%k$O(B, $BC1$K(B |.dtx| $B$NCf$N(B($BBgNL$K$"$k(B) |%| $B$G(B
+%$B;O$^$k9T$r<h$j=|$$$?$b$N$J$N$G(B, |.cls| $B$N3F9T$KBP1~$9$k(B
+%$B9T$,I,$:B8:_$7$^$9(B.
+%$B$=$l$r<+J,$N;W$&$h$&$K=$@5$9$l$P$h$$$o$1$G$9(B.
+%$BJQ99MzNr$r;D$7$?J}$,$$$$$N$OL^O@$G$9$,(B,
+%$B$=$l$,$G$-$J$$>l9g$G$b(B, $B:GDc8B%P!<%8%g%sHV9f$O(B
+%$B$-$A$s$HJQ99$7$F$*$-$^$7$g$&(B.
+%$B$=$7$FI,$:(B |.cls| $B$H0l=o$K(B |.dtx| $B$bG[I[$7$^$7$g$&(B.
 %
-%\paragraph{自分専用の設定変更}
-%この場合に上と同じ手順をとっても構いません
-%(配布はしないでしょうが).
-%しかし, 自分専用の設定の場合は,
-%修正部分を記したパッケージファイルを作成して
-%それを読み込むという方法の方が合理的だと思います.
+%\paragraph{$B<+J,@lMQ$N@_DjJQ99(B}
+%$B$3$N>l9g$K>e$HF1$8<j=g$r$H$C$F$b9=$$$^$;$s(B
+%($BG[I[$O$7$J$$$G$7$g$&$,(B).
+%$B$7$+$7(B, $B<+J,@lMQ$N@_Dj$N>l9g$O(B,
+%$B=$@5ItJ,$r5-$7$?%Q%C%1!<%8%U%!%$%k$r:n@.$7$F(B
+%$B$=$l$rFI$_9~$`$H$$$&J}K!$NJ}$,9gM}E*$@$H;W$$$^$9(B.
 %
-%例えば, 図表のキャプションの字の大きさを |\small| に
-%変えたいとしましょう.
-%|.cls| ファイルを眺めると,
-%次のマクロの定義を変えればいいことが分かります.
+%$BNc$($P(B, $B?^I=$N%-%c%W%7%g%s$N;z$NBg$-$5$r(B |\small| $B$K(B
+%$BJQ$($?$$$H$7$^$7$g$&(B.
+%|.cls| $B%U%!%$%k$rD/$a$k$H(B,
+%$B<!$N%^%/%m$NDj5A$rJQ$($l$P$$$$$3$H$,J,$+$j$^$9(B.
 %\begin{quote}\small\begin{verbatim}
-%\long\def\@makecaption#1#2{% この最初に \small を入れる
+%\long\def\@makecaption#1#2{% $B$3$N:G=i$K(B \small $B$rF~$l$k(B
 %  \vskip\abovecaptionskip
 %  \sbox\@tempboxa{#1: #2}%
-%  ...(中略)...
+%  ...($BCfN,(B)...
 %  \vskip\belowcaptionskip}
 %\end{verbatim}\end{quote}
-%そこで, 次の内容のファイル |mystyle.sty| を作ります.
-%(他の定義も加えてあります.)
+%$B$=$3$G(B, $B<!$NFbMF$N%U%!%$%k(B |mystyle.sty| $B$r:n$j$^$9(B.
+%($BB>$NDj5A$b2C$($F$"$j$^$9(B.)
 %\begin{quote}\small\begin{verbatim}
-%%% キャプションのフォントを \small にする
+%%% $B%-%c%W%7%g%s$N%U%)%s%H$r(B \small $B$K$9$k(B
 %\long\def\@makecaption#1#2{%
-%  \small                       % 追加
+%  \small                       % $BDI2C(B
 %  \vskip\abovecaptionskip
 %  \sbox\@tempboxa{#1: #2}%
 %  \ifdim \wd\@tempboxa >\hsize
@@ -296,338 +296,338 @@
 %    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
 %  \fi
 %  \vskip\belowcaptionskip}
-%%% \HUGE: 巨大な字を出す(type1cm 等が必要)
+%%% \HUGE: $B5pBg$J;z$r=P$9(B(type1cm $BEy$,I,MW(B)
 %\newcommand\HUGE{\@setfontsize\HUGE{50}{75}}
 %\end{verbatim}\end{quote}
-%(注意: |\usepackage| で読み込まれるパッケージの中は\ 
-%|\makeatletter| の状態で処理されるので,
-%|\makeatletter| する必要はありません.)
+%($BCm0U(B: |\usepackage| $B$GFI$_9~$^$l$k%Q%C%1!<%8$NCf$O(B\ 
+%|\makeatletter| $B$N>uBV$G=hM}$5$l$k$N$G(B,
+%|\makeatletter| $B$9$kI,MW$O$"$j$^$;$s(B.)
 %
-%そして, 次のようにしてこのファイルを読み込ませれば
-%自分専用の設定になります.
+%$B$=$7$F(B, $B<!$N$h$&$K$7$F$3$N%U%!%$%k$rFI$_9~$^$;$l$P(B
+%$B<+J,@lMQ$N@_Dj$K$J$j$^$9(B.
 %\begin{quote}\small\begin{verbatim}
 %\documentclass[senior,12pt]{iscs-thesis}
 %\usepackage{mystyle}
-%  ...(以下略)...
+%  ...($B0J2<N,(B)...
 %\end{verbatim}\end{quote}
 %
-%もし, 止むを得ず |.cls| ファイルを直接編集することに
-%なった場合は, せめて「\TeX\ 社会の掟」だけは守りましょう.
-%すなわち
+%$B$b$7(B, $B;_$`$rF@$:(B |.cls| $B%U%!%$%k$rD>@\JT=8$9$k$3$H$K(B
+%$B$J$C$?>l9g$O(B, $B$;$a$F!V(B\TeX\ $B<R2q$NY]!W$@$1$O<i$j$^$7$g$&(B.
+%$B$9$J$o$A(B
 %\begin{quote}
-%  ドキュメントクラスの名前(|iscs-thesis|)を他の名前に
-%  変更しましょう.
+%  $B%I%-%e%a%s%H%/%i%9$NL>A0(B(|iscs-thesis|)$B$rB>$NL>A0$K(B
+%  $BJQ99$7$^$7$g$&(B.
 %\end{quote}
-%この作業は |.cls| ファイル中の `|iscs-thesis|' の文字列を
-%新しいものに単純に(テキストエディタ等で)置換するだけでできますが,
-%|\ProvidesClass| の中の情報は自分で適当なものに直してください.
-%あとファイル名も変更しましょう.
-%たとえ自分からは他人に配布する意図がなかったとしても,
-%誰かがサーバに置いてある自分用のファイルを勝手に
-%コピーして使うかもしれないので\ldots.
+%$B$3$N:n6H$O(B |.cls| $B%U%!%$%kCf$N(B `|iscs-thesis|' $B$NJ8;zNs$r(B
+%$B?7$7$$$b$N$KC1=c$K(B($B%F%-%9%H%(%G%#%?Ey$G(B)$BCV49$9$k$@$1$G$G$-$^$9$,(B,
+%|\ProvidesClass| $B$NCf$N>pJs$O<+J,$GE,Ev$J$b$N$KD>$7$F$/$@$5$$(B.
+%$B$"$H%U%!%$%kL>$bJQ99$7$^$7$g$&(B.
+%$B$?$H$(<+J,$+$i$OB>?M$KG[I[$9$k0U?^$,$J$+$C$?$H$7$F$b(B,
+%$BC/$+$,%5!<%P$KCV$$$F$"$k<+J,MQ$N%U%!%$%k$r>!<j$K(B
+%$B%3%T!<$7$F;H$&$+$b$7$l$J$$$N$G(B\ldots.
 %
 %^^A----------------
-%\subsection{コマンドリファレンス}
+%\subsection{$B%3%^%s%I%j%U%!%l%s%9(B}
 %\label{ssec:Commands}
 %
-%最後に, このドキュメントクラス特有のコマンドと環境
-%についてまとめておきます.
+%$B:G8e$K(B, $B$3$N%I%-%e%a%s%H%/%i%9FCM-$N%3%^%s%I$H4D6-(B
+%$B$K$D$$$F$^$H$a$F$*$-$^$9(B.
 %
 %\begin{itemize}
-%\item 以下の命令・環境は語句や文章を設定する
-%  (|\maketitle| で出力される).
-%  |\documentclass| と |\maketitle| の間のどこでも使える.
+%\item $B0J2<$NL?Na!&4D6-$O8l6g$dJ8>O$r@_Dj$9$k(B
+%  (|\maketitle| $B$G=PNO$5$l$k(B).
+%  |\documentclass| $B$H(B |\maketitle| $B$N4V$N$I$3$G$b;H$($k(B.
 %  \begin{itemize}
-%  \item |\etitle{|\meta{str}|}|:\quad 標題(英文).
-%  \item |\jtitle{|\meta{str}|}|:\quad 標題(和文).
-%  \item |\eauthor{|\meta{str}|}|:\quad 著者名(英文).
-%  \item |\jauthor{|\meta{str}|}|:\quad 著者名(和文).
-%  \item |\esupervisor{|\meta{str}|}|:\quad 指導教官名(英文).
-%  \item |\jsupervisor{|\meta{str}|}|:\quad 指導教官名(和文).
+%  \item |\etitle{|\meta{str}|}|:\quad $BI8Bj(B($B1QJ8(B).
+%  \item |\jtitle{|\meta{str}|}|:\quad $BI8Bj(B($BOBJ8(B).
+%  \item |\eauthor{|\meta{str}|}|:\quad $BCx<TL>(B($B1QJ8(B).
+%  \item |\jauthor{|\meta{str}|}|:\quad $BCx<TL>(B($BOBJ8(B).
+%  \item |\esupervisor{|\meta{str}|}|:\quad $B;XF36541L>(B($B1QJ8(B).
+%  \item |\jsupervisor{|\meta{str}|}|:\quad $B;XF36541L>(B($BOBJ8(B).
 %  \item |\supervisortitle{|\meta{str}|}|:\quad 
-%    指導教官の職名. Professor 等.
+%    $B;XF36541$N?&L>(B. Professor $BEy(B.
 %  \item |\supervisortitleline{|\meta{str}|}|:\quad 
-%    指導教官の職名の行の全体.
-%    |\supervisortitle| で指定した文字列は, \meta{str} の中で\ 
-%    |\thesupervisortitle| として参照できる.
-%  \item |\date{|\meta{str}|}|:\quad 日付.
-%    未設定だとエラーになる.
-%    ただし |\today| は使える.
-%  \item |eabstract| 環境:\quad 英文要旨.
-%  \item |jabstract| 環境:\quad 和文要旨.
+%    $B;XF36541$N?&L>$N9T$NA4BN(B.
+%    |\supervisortitle| $B$G;XDj$7$?J8;zNs$O(B, \meta{str} $B$NCf$G(B\ 
+%    |\thesupervisortitle| $B$H$7$F;2>H$G$-$k(B.
+%  \item |\date{|\meta{str}|}|:\quad $BF|IU(B.
+%    $BL$@_Dj$@$H%(%i!<$K$J$k(B.
+%    $B$?$@$7(B |\today| $B$O;H$($k(B.
+%  \item |eabstract| $B4D6-(B:\quad $B1QJ8MW;](B.
+%  \item |jabstract| $B4D6-(B:\quad $BOBJ8MW;](B.
 %  \end{itemize}
 %
 %\item |\maketitle|:\quad
-%  表紙のページを出力し, 続いて |eabstract|, |jabstract| で
-%  設定された要旨を出力する.
-%  設定に応じて, 表紙と要旨の間に空白ページが挿入される.
+%  $BI=;f$N%Z!<%8$r=PNO$7(B, $BB3$$$F(B |eabstract|, |jabstract| $B$G(B
+%  $B@_Dj$5$l$?MW;]$r=PNO$9$k(B.
+%  $B@_Dj$K1~$8$F(B, $BI=;f$HMW;]$N4V$K6uGr%Z!<%8$,A^F~$5$l$k(B.
 %
-%\item |acknowledge| 環境:\quad
-%  謝辞の文章を新たなページに出力する.
+%\item |acknowledge| $B4D6-(B:\quad
+%  $B<U<-$NJ8>O$r?7$?$J%Z!<%8$K=PNO$9$k(B.
 %
 %\item |\switchinterim{|\meta{yes}|}{|\meta{no}|}|:\quad
-%|interim| 指定時は \meta{yes}, それ以外は \meta{no} に
-%展開される.
+%|interim| $B;XDj;~$O(B \meta{yes}, $B$=$l0J30$O(B \meta{no} $B$K(B
+%$BE83+$5$l$k(B.
 %
 %\item |\switchenglish{|\meta{yes}|}{|\meta{no}|}|:\quad
-%|english| 指定時は \meta{yes}, それ以外は \meta{no} に
-%展開される.
+%|english| $B;XDj;~$O(B \meta{yes}, $B$=$l0J30$O(B \meta{no} $B$K(B
+%$BE83+$5$l$k(B.
 %
 %\item |\chapterfont{|\meta{cmd1}|}{|\meta{cmd2}|}|:\quad
-%番号付(|\chapter|)および
-%番号なし(|\chapter*|)の章見出しのフォントをそれぞれ\ 
-%\meta{cmd1} および \meta{cmd2} に設定する.
-%初期値は両方とも |\LARGE\bfseries|.
+%$BHV9fIU(B(|\chapter|)$B$*$h$S(B
+%$BHV9f$J$7(B(|\chapter*|)$B$N>O8+=P$7$N%U%)%s%H$r$=$l$>$l(B\ 
+%\meta{cmd1} $B$*$h$S(B \meta{cmd2} $B$K@_Dj$9$k(B.
+%$B=i4|CM$ON>J}$H$b(B |\LARGE\bfseries|.
 %
 %\item |\sectionfont{|\meta{cmd1}|}{|\meta{cmd2}|}{|\meta{cmd3}|}|:\quad
-%節(|\section|), \SpGlue 小節(|\subsection|), \SpGlue
-%小々節(|\subsubsection|)の見出しのフォントをそれぞれ\ 
-%\meta{cmd1}, \meta{cmd2}, \meta{cmd3} に設定する.
-%初期値は節が |\large\bfseries|,
-%小節と小々節が |\normalsize\bfseries|.
+%$B@a(B(|\section|), \SpGlue $B>.@a(B(|\subsection|), \SpGlue
+%$B>.!9@a(B(|\subsubsection|)$B$N8+=P$7$N%U%)%s%H$r$=$l$>$l(B\ 
+%\meta{cmd1}, \meta{cmd2}, \meta{cmd3} $B$K@_Dj$9$k(B.
+%$B=i4|CM$O@a$,(B |\large\bfseries|,
+%$B>.@a$H>.!9@a$,(B |\normalsize\bfseries|.
 %
 %\item |\noblankaftertp|:\quad
-%  表紙ページ直後の空白ページの出力を抑止する.
-%  (|twoside| および |openright| 指定時は無効.)
+%  $BI=;f%Z!<%8D>8e$N6uGr%Z!<%8$N=PNO$rM^;_$9$k(B.
+%  (|twoside| $B$*$h$S(B |openright| $B;XDj;~$OL58z(B.)
 %
 %\end{itemize}
 %
 %
 %^^A========================================================
-%\section{変更履歴}
+%\section{$BJQ99MzNr(B}
 %\label{sec:Changes}
 %^^A--------------------------------------------------------
 %
-%^^A \changes って結局役に立たないな....
+%^^A \changes $B$C$F7k6ILr$KN)$?$J$$$J(B....
 %
 %\begin{description}
-%\item[Version 1.0] [1996/12/22, 山本]
+%\item[Version 1.0] [1996/12/22, $B;3K\(B]
 %  \begin{itemize}
-%  \item 初期バージョン.
-%  \item \JLaTeXe\ 標準の `\PKN{j-report}' クラスを基にしている.
-%    学位論文は英語なのになぜ和文用のクラスを用いたのかは不明.
-%  \item そのため, 一部の設定(段落下げの量など)が和文用のもの
-%    になっているという不具合があった.
-%  \item また \JLaTeXe\ の標準クラスオプションファイル
-%    (|j-size10.clo| など)を読み込むので,
-%    \JLaTeX\ がインストールされていないシステム
-%    (最近では \pLaTeX\ が主流なのでこれもよくある)では
-%    これらのファイルを別に用意しなければならなかった.
-%  \item この版では `\PKN{j-report}' にある全てのクラスオプション
-%    が指定できたが, |nottitlepage| 等の実際に使われ得ない
-%    ものは実装されていない.
-%    実を言えば, 1 つだけ謎のオプションが追加されているのだが\ldots.
-%    何を意図したのだろう.
-%    (v1.1 では廃止した.)
+%  \item $B=i4|%P!<%8%g%s(B.
+%  \item \JLaTeXe\ $BI8=`$N(B `\PKN{j-report}' $B%/%i%9$r4p$K$7$F$$$k(B.
+%    $B3X0LO@J8$O1Q8l$J$N$K$J$<OBJ8MQ$N%/%i%9$rMQ$$$?$N$+$OITL@(B.
+%  \item $B$=$N$?$a(B, $B0lIt$N@_Dj(B($BCJMn2<$2$NNL$J$I(B)$B$,OBJ8MQ$N$b$N(B
+%    $B$K$J$C$F$$$k$H$$$&IT6q9g$,$"$C$?(B.
+%  \item $B$^$?(B \JLaTeXe\ $B$NI8=`%/%i%9%*%W%7%g%s%U%!%$%k(B
+%    (|j-size10.clo| $B$J$I(B)$B$rFI$_9~$`$N$G(B,
+%    \JLaTeX\ $B$,%$%s%9%H!<%k$5$l$F$$$J$$%7%9%F%`(B
+%    ($B:G6a$G$O(B \pLaTeX\ $B$,<gN.$J$N$G$3$l$b$h$/$"$k(B)$B$G$O(B
+%    $B$3$l$i$N%U%!%$%k$rJL$KMQ0U$7$J$1$l$P$J$i$J$+$C$?(B.
+%  \item $B$3$NHG$G$O(B `\PKN{j-report}' $B$K$"$kA4$F$N%/%i%9%*%W%7%g%s(B
+%    $B$,;XDj$G$-$?$,(B, |nottitlepage| $BEy$N<B:]$K;H$o$lF@$J$$(B
+%    $B$b$N$O<BAu$5$l$F$$$J$$(B.
+%    $B<B$r8@$($P(B, 1 $B$D$@$1Ff$N%*%W%7%g%s$,DI2C$5$l$F$$$k$N$@$,(B\ldots.
+%    $B2?$r0U?^$7$?$N$@$m$&(B.
+%    (v1.1 $B$G$OGQ;_$7$?(B.)
 %  \end{itemize}
 %
-%\item[Version 1.1] [2005/02/20, 八登]
+%\item[Version 1.1] [2005/02/20, $BH,EP(B]
 %  \begin{itemize}
-%  \item v1.0 で設定が \PKN{j-report} のままになっていて, かつ,
-%    \PKN{j-report} と \PKN{report} (\LaTeXe\ 標準) で異なっている
-%    部分については, なるべく \PKN{report} に合わせた.
-%    ただし, テキスト領域の大きさや行送りなど, 一部のパラメタ
-%    (おもに |j-sizeXX.clo| の前半で設定されているもの)は
-%    \PKN{j-report} のままにしている.
-%    これによる顕著な変更は次の 2 つ:
+%  \item v1.0 $B$G@_Dj$,(B \PKN{j-report} $B$N$^$^$K$J$C$F$$$F(B, $B$+$D(B,
+%    \PKN{j-report} $B$H(B \PKN{report} (\LaTeXe\ $BI8=`(B) $B$G0[$J$C$F$$$k(B
+%    $BItJ,$K$D$$$F$O(B, $B$J$k$Y$/(B \PKN{report} $B$K9g$o$;$?(B.
+%    $B$?$@$7(B, $B%F%-%9%HNN0h$NBg$-$5$d9TAw$j$J$I(B, $B0lIt$N%Q%i%a%?(B
+%    ($B$*$b$K(B |j-sizeXX.clo| $B$NA0H>$G@_Dj$5$l$F$$$k$b$N(B)$B$O(B
+%    \PKN{j-report} $B$N$^$^$K$7$F$$$k(B.
+%    $B$3$l$K$h$k82Cx$JJQ99$O<!$N(B 2 $B$D(B:
 %    \begin{itemize}
-%    \item 章(|\chapter|)や節(|\section|)等の見出し直後の段落下げ
-%      をしなくなった. (欧文ではしないのが普通.)
-%      する設定に戻す場合には, \PKN{indentfirst} パッケージを
-%      使えばよい.
-%    \item 段落下げの量を 1.5\,em (二段組の場合は 1\,em) に
-%      変更した.
-%      元は 1\,zw だった.
+%    \item $B>O(B(|\chapter|)$B$d@a(B(|\section|)$BEy$N8+=P$7D>8e$NCJMn2<$2(B
+%      $B$r$7$J$/$J$C$?(B. ($B2$J8$G$O$7$J$$$N$,IaDL(B.)
+%      $B$9$k@_Dj$KLa$9>l9g$K$O(B, \PKN{indentfirst} $B%Q%C%1!<%8$r(B
+%      $B;H$($P$h$$(B.
+%    \item $BCJMn2<$2$NNL$r(B 1.5\,em ($BFsCJAH$N>l9g$O(B 1\,em) $B$K(B
+%      $BJQ99$7$?(B.
+%      $B85$O(B 1\,zw $B$@$C$?(B.
 %    \end{itemize}
-%  \item クラスオプションについて, 無意味なものを廃止した.
-%    またそれによって決して実行されなくなるコードを
-%    取り除いた.
-%  \item 元々クラスオプションファイル(|j-sizeXX.clo|)になっていた
-%    部分を本体に組み込んで, 1 つのファイルだけで使えるようにした.
-%  \item クラスファイルを \DCN{docstrip} ソース(|.dtx| ファイル)の
-%    形で配布することにした.
-%    こうした理由の 1 つはこの版に正統性を持たせるためである.
+%  \item $B%/%i%9%*%W%7%g%s$K$D$$$F(B, $BL50UL#$J$b$N$rGQ;_$7$?(B.
+%    $B$^$?$=$l$K$h$C$F7h$7$F<B9T$5$l$J$/$J$k%3!<%I$r(B
+%    $B<h$j=|$$$?(B.
+%  \item $B85!9%/%i%9%*%W%7%g%s%U%!%$%k(B(|j-sizeXX.clo|)$B$K$J$C$F$$$?(B
+%    $BItJ,$rK\BN$KAH$_9~$s$G(B, 1 $B$D$N%U%!%$%k$@$1$G;H$($k$h$&$K$7$?(B.
+%  \item $B%/%i%9%U%!%$%k$r(B \DCN{docstrip} $B%=!<%9(B(|.dtx| $B%U%!%$%k(B)$B$N(B
+%    $B7A$GG[I[$9$k$3$H$K$7$?(B.
+%    $B$3$&$7$?M}M3$N(B 1 $B$D$O$3$NHG$K@5E}@-$r;}$?$;$k$?$a$G$"$k(B.
 %  \end{itemize}
 %
-%\item[Version 1.1a] [2005/02/24, 八登]
+%\item[Version 1.1a] [2005/02/24, $BH,EP(B]
 %  \begin{itemize}
-%  \item `b3' 版の変更を取り入れた.
+%  \item `b3' $BHG$NJQ99$r<h$jF~$l$?(B.
 %    \begin{itemize}
-%    \item 表紙(標題)のフォントサイズおよび垂直空きが
-%      基底フォントサイズに依らずに一定になるようにした.
-%      ただ, |\textwidth| の値が異なるので,
-%      完全に同じにはならない.
-%    \item 標題が長い時に, 表紙に入るべき内容が 2 ページに
-%      分割されてしまう現象を起こりにくくした.
-%      とりあえず 7 行(英語と日本語あわせて)までは大丈夫.
-%    \item 要旨の中の段落下げの量を,
-%      英文(|eabstract|)が 1.5\,em, 和文(|jabstract|)が 1\,zw
-%      に修正した.
-%    (元はそれぞれ 0\,em と 1\,em.)
-%  \item 参考文献リストの見出し(つまり `References') が
-%    目次に出るようにした.
+%    \item $BI=;f(B($BI8Bj(B)$B$N%U%)%s%H%5%$%:$*$h$S?bD>6u$-$,(B
+%      $B4pDl%U%)%s%H%5%$%:$K0M$i$:$K0lDj$K$J$k$h$&$K$7$?(B.
+%      $B$?$@(B, |\textwidth| $B$NCM$,0[$J$k$N$G(B,
+%      $B40A4$KF1$8$K$O$J$i$J$$(B.
+%    \item $BI8Bj$,D9$$;~$K(B, $BI=;f$KF~$k$Y$-FbMF$,(B 2 $B%Z!<%8$K(B
+%      $BJ,3d$5$l$F$7$^$&8=>]$r5/$3$j$K$/$/$7$?(B.
+%      $B$H$j$"$($:(B 7 $B9T(B($B1Q8l$HF|K\8l$"$o$;$F(B)$B$^$G$OBg>fIW(B.
+%    \item $BMW;]$NCf$NCJMn2<$2$NNL$r(B,
+%      $B1QJ8(B(|eabstract|)$B$,(B 1.5\,em, $BOBJ8(B(|jabstract|)$B$,(B 1\,zw
+%      $B$K=$@5$7$?(B.
+%    ($B85$O$=$l$>$l(B 0\,em $B$H(B 1\,em.)
+%  \item $B;29MJ88%%j%9%H$N8+=P$7(B($B$D$^$j(B `References') $B$,(B
+%    $BL\<!$K=P$k$h$&$K$7$?(B.
 %  \end{itemize}
-%  \item さらに別の改変版に基づいて次を変更した.
+%  \item $B$5$i$KJL$N2~JQHG$K4p$E$$$F<!$rJQ99$7$?(B.
 %    \begin{itemize}
-%    \item 修士/博士の場合の学位を「理学」から「情報理工学」
+%    \item $B=$;N(B/$BGn;N$N>l9g$N3X0L$r!VM}3X!W$+$i!V>pJsM}9)3X!W(B
 %      (Degree of \ldots\ of Information Science and Technology
-%      in Computer Science) に変更した.
-%      (今まで変更されてなかったの!?)
-%      ただし, |gradiss| オプションを指定すると「理学」のままになる.
-%      昔の「理学系研究科情報科学専攻」の論文を改めて組版する
-%      ためのもの.
-%      ちなみに提出先は単に「東京大学大学院」なので変更なし.
-%    \item |interim| オプションを設けた.
-%      これを指定すると, 表紙が中間報告(要旨提出)のための
-%      ものになる,
+%      in Computer Science) $B$KJQ99$7$?(B.
+%      ($B:#$^$GJQ99$5$l$F$J$+$C$?$N(B!?)
+%      $B$?$@$7(B, |gradiss| $B%*%W%7%g%s$r;XDj$9$k$H!VM}3X!W$N$^$^$K$J$k(B.
+%      $B@N$N!VM}3X7O8&5f2J>pJs2J3X@l96!W$NO@J8$r2~$a$FAHHG$9$k(B
+%      $B$?$a$N$b$N(B.
+%      $B$A$J$_$KDs=P@h$OC1$K!VEl5~Bg3XBg3X1!!W$J$N$GJQ99$J$7(B.
+%    \item |interim| $B%*%W%7%g%s$r@_$1$?(B.
+%      $B$3$l$r;XDj$9$k$H(B, $BI=;f$,Cf4VJs9p(B($BMW;]Ds=P(B)$B$N$?$a$N(B
+%      $B$b$N$K$J$k(B,
 %  \end{itemize}
-%  \item |sloppy| オプションを設けた.
-%  \item |senior|, |master|, |doctor| のどれも指定されていないと
-%    エラー終了するようにした.
-%  \item |draft| を既定値にした. (嫌がらせ.)
-%  \item |description| 環境の定義を \PKN{jsarticle} と同様の
-%    ものに変更した.
-%  \item 和文フォントの明示的な代替設定を行った.
-%  \item 日付(|\date|)が設定されていないとエラーが出るようにした.
-%  \item その他, エラー処理を強化した.
+%  \item |sloppy| $B%*%W%7%g%s$r@_$1$?(B.
+%  \item |senior|, |master|, |doctor| $B$N$I$l$b;XDj$5$l$F$$$J$$$H(B
+%    $B%(%i!<=*N;$9$k$h$&$K$7$?(B.
+%  \item |draft| $B$r4{DjCM$K$7$?(B. ($B7y$,$i$;(B.)
+%  \item |description| $B4D6-$NDj5A$r(B \PKN{jsarticle} $B$HF1MM$N(B
+%    $B$b$N$KJQ99$7$?(B.
+%  \item $BOBJ8%U%)%s%H$NL@<(E*$JBeBX@_Dj$r9T$C$?(B.
+%  \item $BF|IU(B(|\date|)$B$,@_Dj$5$l$F$$$J$$$H%(%i!<$,=P$k$h$&$K$7$?(B.
+%  \item $B$=$NB>(B, $B%(%i!<=hM}$r6/2=$7$?(B.
 %  \end{itemize}
 %
-%\item[Version 1.1b] [2005/02/25, 八登]
+%\item[Version 1.1b] [2005/02/25, $BH,EP(B]
 %  \begin{itemize}
 %  \item |\frontmatter|, |\mainmatter|, |\backmatter|
-%    を正式に採用.
-%  \item それに伴い, テンプレートを変更した.
-%  \item 表紙のレイアウトを調整した.
-%    学位論文が共著になるわけがないので |\and| を廃止.
+%    $B$r@5<0$K:NMQ(B.
+%  \item $B$=$l$KH<$$(B, $B%F%s%W%l!<%H$rJQ99$7$?(B.
+%  \item $BI=;f$N%l%$%"%&%H$rD4@0$7$?(B.
+%    $B3X0LO@J8$,6&Cx$K$J$k$o$1$,$J$$$N$G(B |\and| $B$rGQ;_(B.
 %  \end{itemize}
 %
-%\item[Version 1.1c] [2005/02/27, 八登]
+%\item[Version 1.1c] [2005/02/27, $BH,EP(B]
 %  \begin{itemize}
-%  \item 要旨の処理(|eabstract| と |jabstract|)の定義を
-%    全面的に書き直した.
+%  \item $BMW;]$N=hM}(B(|eabstract| $B$H(B |jabstract|)$B$NDj5A$r(B
+%    $BA4LLE*$K=q$-D>$7$?(B.
 %    \begin{itemize}
-%    \item 従来の処理では
-%      要旨環境の中での改ページが禁止されていた.
-%      これは「和文と英文の両方が 1 ページに収まらない場合は,
-%      別ページに分ける」
-%      という機能を実現するためだと思われる,
-%      しかし, これだと, 和文だけで 1 ページ分の量を超える
-%      場合には, その出力がテキスト領域(あるいは紙面自体)を
-%      はみ出してしまう.
-%    \item これに対処するために, 要旨の処理方法を変更して,
-%      要旨の途中で改ページができるようにした.
-%      そして, 前記の機能に対応するため, 事前に 2 つの box の
-%      高さの合計を調べて処理を分けている.
-%      (詳細は |\ist@showabstract| 命令の説明を参照.
-%      この辺りの処理の妥当性については自信がないので, \TeX\ に
-%      詳しい方は再検討してください.)
-%    \item |interim| 指定の時は, 標題(表紙)と要旨の間に
-%      空白のページを置くのを抑止した.
+%    \item $B=>Mh$N=hM}$G$O(B
+%      $BMW;]4D6-$NCf$G$N2~%Z!<%8$,6X;_$5$l$F$$$?(B.
+%      $B$3$l$O!VOBJ8$H1QJ8$NN>J}$,(B 1 $B%Z!<%8$K<}$^$i$J$$>l9g$O(B,
+%      $BJL%Z!<%8$KJ,$1$k!W(B
+%      $B$H$$$&5!G=$r<B8=$9$k$?$a$@$H;W$o$l$k(B,
+%      $B$7$+$7(B, $B$3$l$@$H(B, $BOBJ8$@$1$G(B 1 $B%Z!<%8J,$NNL$rD6$($k(B
+%      $B>l9g$K$O(B, $B$=$N=PNO$,%F%-%9%HNN0h(B($B$"$k$$$O;fLL<+BN(B)$B$r(B
+%      $B$O$_=P$7$F$7$^$&(B.
+%    \item $B$3$l$KBP=h$9$k$?$a$K(B, $BMW;]$N=hM}J}K!$rJQ99$7$F(B,
+%      $BMW;]$NESCf$G2~%Z!<%8$,$G$-$k$h$&$K$7$?(B.
+%      $B$=$7$F(B, $BA05-$N5!G=$KBP1~$9$k$?$a(B, $B;vA0$K(B 2 $B$D$N(B box $B$N(B
+%      $B9b$5$N9g7W$rD4$Y$F=hM}$rJ,$1$F$$$k(B.
+%      ($B>\:Y$O(B |\ist@showabstract| $BL?Na$N@bL@$r;2>H(B.
+%      $B$3$NJU$j$N=hM}$NBEEv@-$K$D$$$F$O<+?.$,$J$$$N$G(B, \TeX\ $B$K(B
+%      $B>\$7$$J}$O:F8!F$$7$F$/$@$5$$(B.)
+%    \item |interim| $B;XDj$N;~$O(B, $BI8Bj(B($BI=;f(B)$B$HMW;]$N4V$K(B
+%      $B6uGr$N%Z!<%8$rCV$/$N$rM^;_$7$?(B.
 %    \end{itemize}
-%  \item |twoside| や |openright| を指定している時には
-%    ページ番号の偶奇が保たれるようにしなければならないが,
-%    そうなっていなかったために, 奇数/偶数ページの設定が
-%    逆転してしまうことがあった.
-%    (この現象は, \PKN{report} クラスで |twoside| と |titlepage|
-%    を指定して |abstract| 環境を用いた時にも起こる.)
-%    この不具合を直して, これらのオプションがきちんと
-%    働くようにした.
-%    (論文を自分用に印刷する時に両面にする人は多いけど,
-%    わざわざ両面用の設定にする人なんていないよな\ldots.)
+%  \item |twoside| $B$d(B |openright| $B$r;XDj$7$F$$$k;~$K$O(B
+%    $B%Z!<%8HV9f$N6v4q$,J]$?$l$k$h$&$K$7$J$1$l$P$J$i$J$$$,(B,
+%    $B$=$&$J$C$F$$$J$+$C$?$?$a$K(B, $B4q?t(B/$B6v?t%Z!<%8$N@_Dj$,(B
+%    $B5UE>$7$F$7$^$&$3$H$,$"$C$?(B.
+%    ($B$3$N8=>]$O(B, \PKN{report} $B%/%i%9$G(B |twoside| $B$H(B |titlepage|
+%    $B$r;XDj$7$F(B |abstract| $B4D6-$rMQ$$$?;~$K$b5/$3$k(B.)
+%    $B$3$NIT6q9g$rD>$7$F(B, $B$3$l$i$N%*%W%7%g%s$,$-$A$s$H(B
+%    $BF/$/$h$&$K$7$?(B.
+%    ($BO@J8$r<+J,MQ$K0u:~$9$k;~$KN>LL$K$9$k?M$OB?$$$1$I(B,
+%    $B$o$6$o$6N>LLMQ$N@_Dj$K$9$k?M$J$s$F$$$J$$$h$J(B\ldots.)
 %  \end{itemize}
 %
-%\item[Version 1.1d] [2005/03/03, 八登]
+%\item[Version 1.1d] [2005/03/03, $BH,EP(B]
 %  \begin{itemize}
-%  \item 間違った |.cls| ファイルが出力されていたので修正した.
+%  \item $B4V0c$C$?(B |.cls| $B%U%!%$%k$,=PNO$5$l$F$$$?$N$G=$@5$7$?(B.
 %  \item |splitabst| / |nosplitabst| / |autosplitabst|
-%    オプションを追加.
-%  \item |prodigal| オプションを追加.
-%    レイアウトはまだあまり調整していない.
-%  \item |english| オプションを追加.
-%  \item 配布する |.cls| ファイルを JIS エンコーディングにしようと
-%    して, \texttt{platex --kanji=jis iscs-thesis.ins} とすると,
-%    なぜか出てくる |.cls| が EUC になって困った.
-%    (\texttt{--kanki} はこのような目的で使用するオプション
-%    ではないらしい.)
+%    $B%*%W%7%g%s$rDI2C(B.
+%  \item |prodigal| $B%*%W%7%g%s$rDI2C(B.
+%    $B%l%$%"%&%H$O$^$@$"$^$jD4@0$7$F$$$J$$(B.
+%  \item |english| $B%*%W%7%g%s$rDI2C(B.
+%  \item $BG[I[$9$k(B |.cls| $B%U%!%$%k$r(B JIS $B%(%s%3!<%G%#%s%0$K$7$h$&$H(B
+%    $B$7$F(B, \texttt{platex --kanji=jis iscs-thesis.ins} $B$H$9$k$H(B,
+%    $B$J$<$+=P$F$/$k(B |.cls| $B$,(B EUC $B$K$J$C$F:$$C$?(B.
+%    (\texttt{--kanki} $B$O$3$N$h$&$JL\E*$G;HMQ$9$k%*%W%7%g%s(B
+%    $B$G$O$J$$$i$7$$(B.)
 %  \end{itemize}
 %
-%\item[Version 1.1e] [2005/12/17, 八登]
+%\item[Version 1.1e] [2005/12/17, $BH,EP(B]
 %  \begin{itemize}
-%  \item 結局, 配布用の |.cls| ファイルは後処理で JIS エンコーディング
-%    に変換することにした.
+%  \item $B7k6I(B, $BG[I[MQ$N(B |.cls| $B%U%!%$%k$O8e=hM}$G(B JIS $B%(%s%3!<%G%#%s%0(B
+%    $B$KJQ49$9$k$3$H$K$7$?(B.
 %  \end{itemize}
 %
-%\item[Version 1.1f] [2005/12/25, 八登]
+%\item[Version 1.1f] [2005/12/25, $BH,EP(B]
 %  \begin{itemize}
-%  \item 指導教官の職名を表す行全体を |\supervisortitleline|
-%    でカスタマイズ可能にした.
-%    そして, |master|/|doctor| の時の既定値を\ 
-%    ``\dots\ of Computer Science'' に変更した.
-%  \item |interim| 指定時の表紙で, ``An Interim Report'' の下に
-%    日本語で「中間報告」と出るようにした.
-%    (これを変更する場合は, |\jinterrimname| を再定義せよ.)
-%  \item |\switchinterim|, |\switchenglish| コマンドを新設.
-%  \item |\noblankaftertp| コマンドを新設.
-%  \item |\maketitle| を |\maketitlepage| と |\makeabstract|
-%    に分離する準備を始めている.
-%    現時点では, |\maketitle| の処理は(論理的に) v1.1e と同じ.
+%  \item $B;XF36541$N?&L>$rI=$99TA4BN$r(B |\supervisortitleline|
+%    $B$G%+%9%?%^%$%:2DG=$K$7$?(B.
+%    $B$=$7$F(B, |master|/|doctor| $B$N;~$N4{DjCM$r(B\ 
+%    ``\dots\ of Computer Science'' $B$KJQ99$7$?(B.
+%  \item |interim| $B;XDj;~$NI=;f$G(B, ``An Interim Report'' $B$N2<$K(B
+%    $BF|K\8l$G!VCf4VJs9p!W$H=P$k$h$&$K$7$?(B.
+%    ($B$3$l$rJQ99$9$k>l9g$O(B, |\jinterrimname| $B$r:FDj5A$;$h(B.)
+%  \item |\switchinterim|, |\switchenglish| $B%3%^%s%I$r?7@_(B.
+%  \item |\noblankaftertp| $B%3%^%s%I$r?7@_(B.
+%  \item |\maketitle| $B$r(B |\maketitlepage| $B$H(B |\makeabstract|
+%    $B$KJ,N%$9$k=`Hw$r;O$a$F$$$k(B.
+%    $B8=;~E@$G$O(B, |\maketitle| $B$N=hM}$O(B($BO@M}E*$K(B) v1.1e $B$HF1$8(B.
 %  \end{itemize}
 %
-%\item[Version 1.1g] [2006/06/29, 八登]
+%\item[Version 1.1g] [2006/06/29, $BH,EP(B]
 %  \begin{itemize}
-%  \item |\etitle| の中で |\\| (強制改行) を使うと
-%    エラーになっていたのを修正.
+%  \item |\etitle| $B$NCf$G(B |\\| ($B6/@)2~9T(B) $B$r;H$&$H(B
+%    $B%(%i!<$K$J$C$F$$$?$N$r=$@5(B.
 %  \end{itemize}
 %
 %\item[Version 1.2] [2008/12/24]
 %
-%\item[Version 1.3] [2009/01/22, 八登]
+%\item[Version 1.3] [2009/01/22, $BH,EP(B]
 %  \begin{itemize}
-%  \item レイアウトを全面的に改訂した.
+%  \item $B%l%$%"%&%H$rA4LLE*$K2~D{$7$?(B.
 %    \begin{itemize}
-%    \item 時代錯誤的な「ダブルスペース」の要請がなくなったので,
-%      行送りを \PKN{report} のものに合わせた.
-%    \item 縦方向のマージンを, ヘッダがないという前提で
-%      設定するようにした.
-%      今の設定でヘッダを使うと上部が窮屈になるので注意.
-%    \item 横方向のマージンは, 行の長さが英小文字 75 字に
-%      なるように設定した.
+%    \item $B;~Be:x8mE*$J!V%@%V%k%9%Z!<%9!W$NMW@A$,$J$/$J$C$?$N$G(B,
+%      $B9TAw$j$r(B \PKN{report} $B$N$b$N$K9g$o$;$?(B.
+%    \item $B=DJ}8~$N%^!<%8%s$r(B, $B%X%C%@$,$J$$$H$$$&A0Ds$G(B
+%      $B@_Dj$9$k$h$&$K$7$?(B.
+%      $B:#$N@_Dj$G%X%C%@$r;H$&$H>eIt$,5g6~$K$J$k$N$GCm0U(B.
+%    \item $B2#J}8~$N%^!<%8%s$O(B, $B9T$ND9$5$,1Q>.J8;z(B 75 $B;z$K(B
+%      $B$J$k$h$&$K@_Dj$7$?(B.
 %    \end{itemize}
-%  \item 基底文字サイズの既定値を v1.2 に合わせて 11pt に変更.
-%  \item |prodigal| オプションを廃止.
-%  \item |longline| オプションを追加.
-%    行をやたらと長くする.
-%  \item 表紙のページの内容が常に縦方向にセンタリング
-%    されるようにした.
-%  \item 博士論文の表紙の体裁を変更.
+%  \item $B4pDlJ8;z%5%$%:$N4{DjCM$r(B v1.2 $B$K9g$o$;$F(B 11pt $B$KJQ99(B.
+%  \item |prodigal| $B%*%W%7%g%s$rGQ;_(B.
+%  \item |longline| $B%*%W%7%g%s$rDI2C(B.
+%    $B9T$r$d$?$i$HD9$/$9$k(B.
+%  \item $BI=;f$N%Z!<%8$NFbMF$,>o$K=DJ}8~$K%;%s%?%j%s%0(B
+%    $B$5$l$k$h$&$K$7$?(B.
+%  \item $BGn;NO@J8$NI=;f$NBN:[$rJQ99(B.
 %  \end{itemize}
 %
-%\item[Version 1.3a] [2009/03/11, 八登]
+%\item[Version 1.3a] [2009/03/11, $BH,EP(B]
 %  \begin{itemize}
-%  \item 表題ページの後の空白ページを置かないのを既定にした.
-%  \item (|no|)|counttitlepage| オプションを追加.
-%  \item |simpletitlepage| オプションを追加.
-%    博士論文の簡易製本の時の表題ページ(表紙を兼ねる)の体裁を
-%    このオプションで指定するようにした.
-%  \item ページレイアウトの計算方法を変更した.
+%  \item $BI=Bj%Z!<%8$N8e$N6uGr%Z!<%8$rCV$+$J$$$N$r4{Dj$K$7$?(B.
+%  \item (|no|)|counttitlepage| $B%*%W%7%g%s$rDI2C(B.
+%  \item |simpletitlepage| $B%*%W%7%g%s$rDI2C(B.
+%    $BGn;NO@J8$N4J0W@=K\$N;~$NI=Bj%Z!<%8(B($BI=;f$r7s$M$k(B)$B$NBN:[$r(B
+%    $B$3$N%*%W%7%g%s$G;XDj$9$k$h$&$K$7$?(B.
+%  \item $B%Z!<%8%l%$%"%&%H$N7W;;J}K!$rJQ99$7$?(B.
 %    \begin{itemize}
-%    \item 「綴じ」の領域(9\,mm)を考慮することにした.
-%    \item |nobindoffset| オプションを追加.
-%      これが有効の時は「綴じ」の領域を無視する.
-%    \item テキスト領域を紙面サイズの 5/6 に設定した.
-%      (ただし |longline| 非設定時は, 行長制限のために
-%       横幅はこれより狭くなる.)
-%    \item ヘッダ・フッタ領域をテキスト領域から外した.
-%      ノンブルはテキスト領域の外側(下側)に配置される.
-%    \item マージン幅は左右で $1:1$, 上下で $2:3$ とした.
-%    \item |longline| 非設定時の行長制限を 75 字相当から 80 字
-%      相当に緩和した. 
+%    \item $B!VDV$8!W$NNN0h(B(9\,mm)$B$r9MN8$9$k$3$H$K$7$?(B.
+%    \item |nobindoffset| $B%*%W%7%g%s$rDI2C(B.
+%      $B$3$l$,M-8z$N;~$O!VDV$8!W$NNN0h$rL5;k$9$k(B.
+%    \item $B%F%-%9%HNN0h$r;fLL%5%$%:$N(B 5/6 $B$K@_Dj$7$?(B.
+%      ($B$?$@$7(B |longline| $BHs@_Dj;~$O(B, $B9TD9@)8B$N$?$a$K(B
+%       $B2#I}$O$3$l$h$j69$/$J$k(B.)
+%    \item $B%X%C%@!&%U%C%?NN0h$r%F%-%9%HNN0h$+$i30$7$?(B.
+%      $B%N%s%V%k$O%F%-%9%HNN0h$N30B&(B($B2<B&(B)$B$KG[CV$5$l$k(B.
+%    \item $B%^!<%8%sI}$O:81&$G(B $1:1$, $B>e2<$G(B $2:3$ $B$H$7$?(B.
+%    \item |longline| $BHs@_Dj;~$N9TD9@)8B$r(B 75 $B;zAjEv$+$i(B 80 $B;z(B
+%      $BAjEv$K4KOB$7$?(B. 
 %    \end{itemize}
 %  \end{itemize}
 %
-%\item[Version 1.3b] [2014/09/02, 藤沼]
+%\item[Version 1.3b] [2014/09/02, $BF#>B(B]
 %  \begin{itemize}
-%  \item 英文表題が全て大文字化されないようにした．
+%  \item $B1QJ8I=Bj$,A4$FBgJ8;z2=$5$l$J$$$h$&$K$7$?!%(B
 %  \end{itemize}
 %
 %\end{description}
@@ -642,26 +642,26 @@
 %^^A--------------------------------------------------------
 %
 %^^A========================================================
-%\section{プログラム}
+%\section{$B%W%m%0%i%`(B}
 %\label{sec:Program}
 %^^A--------------------------------------------------------
 %
-%以下の文中で,
+%$B0J2<$NJ8Cf$G(B,
 %\begin{itemize}
-%\item `\PKN{report}' は \LaTeXe\ (v1.4e\,[2001/04/21]) 標準
-%  の \PKN{report} クラス
-%\item `\PKN{book}' は \LaTeXe\ (v1.4e\,[2001/04/21]) 標準
-%  の \PKN{book} クラス
-%\item `\PKN{j-report}' は \JLaTeXe\ (v1.4b\,[2000/05/19]) 標準
-%  の \PKN{j-report} クラス
-%\item `\PKN{jsarticle}' は奥村晴彦氏作成の
-%  「\pLaTeXe\ 新ドキュメントクラス」([2004/12/29])の\ 
-%  \PKN{jsarticle} クラス
+%\item `\PKN{report}' $B$O(B \LaTeXe\ (v1.4e\,[2001/04/21]) $BI8=`(B
+%  $B$N(B \PKN{report} $B%/%i%9(B
+%\item `\PKN{book}' $B$O(B \LaTeXe\ (v1.4e\,[2001/04/21]) $BI8=`(B
+%  $B$N(B \PKN{book} $B%/%i%9(B
+%\item `\PKN{j-report}' $B$O(B \JLaTeXe\ (v1.4b\,[2000/05/19]) $BI8=`(B
+%  $B$N(B \PKN{j-report} $B%/%i%9(B
+%\item `\PKN{jsarticle}' $B$O1|B<@2I';a:n@.$N(B
+%  $B!V(B\pLaTeXe\ $B?7%I%-%e%a%s%H%/%i%9!W(B([2004/12/29])$B$N(B\ 
+%  \PKN{jsarticle} $B%/%i%9(B
 %\end{itemize}
-%のことを指す.
+%$B$N$3$H$r;X$9(B.
 %
 %^^A----------------
-%\subsection{クラスファイルの宣言}
+%\subsection{$B%/%i%9%U%!%$%k$N@k8@(B}
 %
 %    \begin{macrocode}
 %<*!isten>
@@ -671,7 +671,7 @@
      Dept of IS/CS thesis class]
 %    \end{macrocode}
 %
-%エラー処理のための命令.
+%$B%(%i!<=hM}$N$?$a$NL?Na(B.
 %    \begin{macrocode}
 \newcommand\ist@classname{iscs-thesis}
 \newcommand\ist@ahya{%
@@ -689,17 +689,17 @@
 %    \end{macrocode}
 %
 %^^A----------------
-%\subsection{オプションスイッチ}
+%\subsection{$B%*%W%7%g%s%9%$%C%A(B}
 %
 % \begin{macro}{\if@restonecol}
 % \begin{macro}{\if@titlepage}
 % \begin{macro}{\if@openright}
 % \begin{macro}{\if@mainmatter}
-%基本的に \PKN{report} と同じ.
-%ただし, |titlepage| オプションがないので,
-%|\if@titlepage| は常に真となる.
-%また, \PKN{book} と同様の |\mainmatter| 等のコマンドの
-%ために |\if@mainmatter| を用意する.
+%$B4pK\E*$K(B \PKN{report} $B$HF1$8(B.
+%$B$?$@$7(B, |titlepage| $B%*%W%7%g%s$,$J$$$N$G(B,
+%|\if@titlepage| $B$O>o$K??$H$J$k(B.
+%$B$^$?(B, \PKN{book} $B$HF1MM$N(B |\mainmatter| $BEy$N%3%^%s%I$N(B
+%$B$?$a$K(B |\if@mainmatter| $B$rMQ0U$9$k(B.
 %    \begin{macrocode}
 \newcommand\@ptsize{}
 \newif\if@restonecol
@@ -715,8 +715,8 @@
 %\begin{macro}{\if@seniorthesis}
 %\begin{macro}{\if@masterthesis}
 %\begin{macro}{\if@doctorthesis}
-%どの種類の論文であるかを表すスイッチ.
-%必ず丁度 1 つが真になる.
+%$B$I$N<oN`$NO@J8$G$"$k$+$rI=$9%9%$%C%A(B.
+%$BI,$:CzEY(B 1 $B$D$,??$K$J$k(B.
 %    \begin{macrocode}
 \newif\if@seniorthesis
 \newif\if@masterthesis
@@ -732,19 +732,19 @@
 %\begin{macro}{\ifist@english}
 %\begin{macro}{\ifist@blankaftertp}
 %\begin{macro}{\ist@splitabst}
-%その他のオプションに対するスイッチやマクロ.
+%$B$=$NB>$N%*%W%7%g%s$KBP$9$k%9%$%C%A$d%^%/%m(B.
 %\changes{v1.1a}{2005/02/24}
-%  {`ifist@interim 追加.}
+%  {`ifist@interim $BDI2C(B.}
 %\changes{v1.1a}{2005/02/24}
-%  {`ifist@sloppy 追加.}
+%  {`ifist@sloppy $BDI2C(B.}
 %\changes{v1.1d}{2005/02/28}
-%  {`ifist@prodigal, `ifist@splitabst 追加.}
+%  {`ifist@prodigal, `ifist@splitabst $BDI2C(B.}
 %\changes{v1.1d}{2005/03/03}
-%  {`ifist@english 追加.}
+%  {`ifist@english $BDI2C(B.}
 %\changes{v1.1f}{2005/12/25}
-%  {`ifist@blankaftertp 追加.}
+%  {`ifist@blankaftertp $BDI2C(B.}
 %\changes{v1.3a}{2009/03/11}
-%  {`ifist@blankaftertp の既定値を偽に変更.}
+%  {`ifist@blankaftertp $B$N4{DjCM$r56$KJQ99(B.}
 %    \begin{macrocode}
 \newif\ifist@interim
 \newif\ifist@gradiss
@@ -763,13 +763,13 @@
 %\begin{macro}{\ifist@longline}
 %\begin{macro}{\ifist@counttitlepage}
 %\begin{macro}{\ifist@simpletitlepage}
-%v1.3 で追加されたオプションに対するもの.
+%v1.3 $B$GDI2C$5$l$?%*%W%7%g%s$KBP$9$k$b$N(B.
 %\changes{v1.3}{2009/01/22}
-%  {`ifist@longline 追加, `ifist@prodigal 廃止.}
+%  {`ifist@longline $BDI2C(B, `ifist@prodigal $BGQ;_(B.}
 %\changes{v1.3a}{2009/02/14}
-%  {`ifist@counttitlepage, `ifist@bindoffset 追加.}
+%  {`ifist@counttitlepage, `ifist@bindoffset $BDI2C(B.}
 %\changes{v1.3a}{2009/03/11}
-%  {`ifist@simpletitlepage 追加.}
+%  {`ifist@simpletitlepage $BDI2C(B.}
 %    \begin{macrocode}
 \newif\ifist@longline
 \newif\ifist@counttitlepage
@@ -781,18 +781,18 @@
 %\end{macro}
 %
 %\begin{macro}{\bindoffset}
-%「綴じ」のために必要な用紙の端の幅。
+%$B!VDV$8!W$N$?$a$KI,MW$JMQ;f$NC<$NI}!#(B
 %\changes{v1.3}{2009/01/22}
-%  {`binfoffset 追加,}
+%  {`binfoffset $BDI2C(B,}
 %    \begin{macrocode}
 \newlength\bindoffset
 %    \end{macrocode}
 %\end{macro}
 %
 %^^A----------------
-%\subsection{オプションの宣言}
+%\subsection{$B%*%W%7%g%s$N@k8@(B}
 %
-%原稿サイズについての変更点は \ref{sec:Intro} 節で述べた通り.
+%$B869F%5%$%:$K$D$$$F$NJQ99E@$O(B \ref{sec:Intro} $B@a$G=R$Y$?DL$j(B.
 %    \begin{macrocode}
 \DeclareOption{a4paper}
    {\setlength\paperheight {297mm}%
@@ -808,7 +808,7 @@
     \setlength\paperwidth  {8.5in}}
 %    \end{macrocode}
 %
-%以下のものは \PKN{report} と同じ.
+%$B0J2<$N$b$N$O(B \PKN{report} $B$HF1$8(B.
 %    \begin{macrocode}
 \DeclareOption{10pt}{\renewcommand\@ptsize{0}}
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
@@ -835,9 +835,9 @@
 }
 %    \end{macrocode}
 %
-%|senior| 等のオプションの処理.
+%|senior| $BEy$N%*%W%7%g%s$N=hM}(B.
 %\changes{v1.1a}{2005/02/24}
-%  {interim, sloppy 追加.}
+%  {interim, sloppy $BDI2C(B.}
 %    \begin{macrocode}
 \DeclareOption{senior}%
   {\@seniorthesistrue \@masterthesisfalse \@doctorthesisfalse}
@@ -850,11 +850,11 @@
 \DeclareOption{sloppy}{\ist@sloppytrue}
 %    \end{macrocode}
 %
-%v1.1d で追加されたオプションの処理.
+%v1.1d $B$GDI2C$5$l$?%*%W%7%g%s$N=hM}(B.
 %\changes{v1.1d}{2005/02/28}
-%  {prodigal, splitabst 追加.}
+%  {prodigal, splitabst $BDI2C(B.}
 %\changes{v1.1d}{2005/03/03}
-%  {english 追加.}
+%  {english $BDI2C(B.}
 %    \begin{macrocode}
 \DeclareOption{splitabst}{\renewcommand\ist@splitabst{s}}
 \DeclareOption{nosplitabst}{\renewcommand\ist@splitabst{n}}
@@ -862,13 +862,13 @@
 \DeclareOption{english}{\ist@englishtrue}
 %    \end{macrocode}
 %
-%v1.3 で追加されたオプションの処理.
+%v1.3 $B$GDI2C$5$l$?%*%W%7%g%s$N=hM}(B.
 %\changes{v1.3}{2009/01/22}
-%  {longline 追加, prodigal 廃止.}
+%  {longline $BDI2C(B, prodigal $BGQ;_(B.}
 %\changes{v1.3a}{2009/02/14}
-%  {counttitlepage, nocounttitlepage, nobindoffset 追加.}
+%  {counttitlepage, nocounttitlepage, nobindoffset $BDI2C(B.}
 %\changes{v1.3a}{2009/03/11}
-%  {simpletitlepage 追加.}
+%  {simpletitlepage $BDI2C(B.}
 %    \begin{macrocode}
 \DeclareOption{longline}{\ist@longlinetrue}
 \DeclareOption{counttitlepage}{\ist@counttitlepagetrue}
@@ -880,24 +880,24 @@
 \DeclareOption{simpletitlepage}{\ist@simpletitlepagetrue}
 %    \end{macrocode}
 %
-%\subsection{オプションの実行}
+%\subsection{$B%*%W%7%g%s$N<B9T(B}
 %
-%既定値の設定, およびオプションの処理の実行.
-%v1.1a からは |draft| を既定値とする.
+%$B4{DjCM$N@_Dj(B, $B$*$h$S%*%W%7%g%s$N=hM}$N<B9T(B.
+%v1.1a $B$+$i$O(B |draft| $B$r4{DjCM$H$9$k(B.
 %\changes{v1.1a}{2005/02/24}
-%  {draft を既定値にする.}
+%  {draft $B$r4{DjCM$K$9$k(B.}
 %\changes{v1.1a}{2005/02/24}
-%  {senior を既定値にしない.}
+%  {senior $B$r4{DjCM$K$7$J$$(B.}
 %\changes{v1.3}{2009/01/22}
-%  {基底フォントサイズの既定値を 10pt から 11pt に変更.}
+%  {$B4pDl%U%)%s%H%5%$%:$N4{DjCM$r(B 10pt $B$+$i(B 11pt $B$KJQ99(B.}
 %    \begin{macrocode}
 \ExecuteOptions{a4paper,11pt,oneside,onecolumn,draft,openany,%
             autosplitabst,counttitlepage}
 \ProcessOptions
 %    \end{macrocode}
 %
-%|senior|, |master|, |doctor| のどれも指定されていない場合
-%はエラー終了する.
+%|senior|, |master|, |doctor| $B$N$I$l$b;XDj$5$l$F$$$J$$>l9g(B
+%$B$O%(%i!<=*N;$9$k(B.
 %    \begin{macrocode}
 \if@seniorthesis\else \if@masterthesis\else
   \if@doctorthesis\else
@@ -908,12 +908,12 @@
 %    \end{macrocode}
 %
 %\begin{macro}{\ifist@carepage}
-%|\ifist@carepage| は |twoside| と |openright| のいずれかが
-%指定されている場合に真となる.
-%これが真の場合には, むやみにページ番号(|\c@page|)を
-%リセットすることができない.
+%|\ifist@carepage| $B$O(B |twoside| $B$H(B |openright| $B$N$$$:$l$+$,(B
+%$B;XDj$5$l$F$$$k>l9g$K??$H$J$k(B.
+%$B$3$l$,??$N>l9g$K$O(B, $B$`$d$_$K%Z!<%8HV9f(B(|\c@page|)$B$r(B
+%$B%j%;%C%H$9$k$3$H$,$G$-$J$$(B.
 %\changes{v1.1c}{2005/02/27}
-%  {`ifist@carepage 追加.}
+%  {`ifist@carepage $BDI2C(B.}
 %    \begin{macrocode}
 \newif\ifist@carepage
 \if@twoside \ist@carepagetrue \fi
@@ -922,11 +922,11 @@
 %\end{macro}
 %
 %\begin{macro}{\ist@engine}
-%|\ist@engine| は用いている \TeX\ の種類を表す:
-%|p| = \pTeX, |j| = \JTeX, |e| = 欧文 \TeX.
-%これが |e| の時は, 自動的に |english| モードにする.
+%|\ist@engine| $B$OMQ$$$F$$$k(B \TeX\ $B$N<oN`$rI=$9(B:
+%|p| = \pTeX, |j| = \JTeX, |e| = $B2$J8(B \TeX.
+%$B$3$l$,(B |e| $B$N;~$O(B, $B<+F0E*$K(B |english| $B%b!<%I$K$9$k(B.
 %\changes{v1.1d}{2005/03/03}
-%  {`ist@engine 追加.}
+%  {`ist@engine $BDI2C(B.}
 %    \begin{macrocode}
 \newcommand\ist@engine{e}
 \@ifundefined{inhibitglue}{}{\renewcommand\ist@engine{p}}
@@ -937,10 +937,10 @@
 %
 %\begin{macro}{\switchinterim}
 %|\switchinterim{|\meta{yes}|}{|\meta{no}|}|: \SpGlue
-%|interim| 指定時は \meta{yes}, それ以外は \meta{no} に
-%展開される.
+%|interim| $B;XDj;~$O(B \meta{yes}, $B$=$l0J30$O(B \meta{no} $B$K(B
+%$BE83+$5$l$k(B.
 %\changes{v1.1f}{2005/12/25}
-%  {`switchinterim, `switchenglish 追加.}
+%  {`switchinterim, `switchenglish $BDI2C(B.}
 %    \begin{macrocode}
 \newcommand\switchinterim[2]{%
   \ifist@interim #1\else #2\fi
@@ -949,8 +949,8 @@
 %\end{macro}
 %\begin{macro}{\switchenglish}
 %|\switchenglish{|\meta{yes}|}{|\meta{no}|}|: \SpGlue
-%|english| 指定時は \meta{yes}, それ以外は \meta{no} に
-%展開される.
+%|english| $B;XDj;~$O(B \meta{yes}, $B$=$l0J30$O(B \meta{no} $B$K(B
+%$BE83+$5$l$k(B.
 %    \begin{macrocode}
 \newcommand\switchenglish[2]{%
   \ifist@english #1\else #2\fi
@@ -959,11 +959,11 @@
 %\end{macro}
 %
 %\changes{v1.3a}{2009/03/11}
-%  {`blankaftertp を新設.}
+%  {`blankaftertp $B$r?7@_(B.}
 %\begin{macro}{\blankaftertp}
 %\begin{macro}{\noblankaftertp}
 %|\blankaftertp|/|\noblankaftertp|: \SpGlue
-%表紙ページ直後の空白ページの挿入を有効/無効にする.
+%$BI=;f%Z!<%8D>8e$N6uGr%Z!<%8$NA^F~$rM-8z(B/$BL58z$K$9$k(B.
 %    \begin{macrocode}
 \newcommand\blankaftertp{%
   \ist@blankaftertptrue
@@ -975,44 +975,44 @@
 %\end{macro}
 %
 %
-%\subsection{フォント}
+%\subsection{$B%U%)%s%H(B}
 %
-%この小節の設定および後の設定の一部は, 元々の \PKN{report} では\ 
-%|sizeXX.clo| (\PKN{j-report} では |j-sizeXX.clo|,
-%|XX| は基底フォントサイズ) という補助ファイルから読み込んでいたが,
-%ここでは, |\@ptsize| の値による条件分岐をして設定を仕分ける
-%ことにする.
-%こうしても問題はないと思う.
+%$B$3$N>.@a$N@_Dj$*$h$S8e$N@_Dj$N0lIt$O(B, $B85!9$N(B \PKN{report} $B$G$O(B\ 
+%|sizeXX.clo| (\PKN{j-report} $B$G$O(B |j-sizeXX.clo|,
+%|XX| $B$O4pDl%U%)%s%H%5%$%:(B) $B$H$$$&Jd=u%U%!%$%k$+$iFI$_9~$s$G$$$?$,(B,
+%$B$3$3$G$O(B, |\@ptsize| $B$NCM$K$h$k>r7oJ,4t$r$7$F@_Dj$r;EJ,$1$k(B
+%$B$3$H$K$9$k(B.
+%$B$3$&$7$F$bLdBj$O$J$$$H;W$&(B.
 %\changes{v1.3}{2009/01/22}
-%  {行送りを全面的に report に合わせる.}
+%  {$B9TAw$j$rA4LLE*$K(B report $B$K9g$o$;$k(B.}
 %
-%最初に基底フォントサイズオプションが |10pt| の時の設定.
+%$B:G=i$K4pDl%U%)%s%H%5%$%:%*%W%7%g%s$,(B |10pt| $B$N;~$N@_Dj(B.
 %    \begin{macrocode}
 \if0\@ptsize\relax            %--------- 10pt
 %    \end{macrocode}
 %
-%フォントサイズ指定のユーザ命令では,
-%同時に行送りの大きさも指定する.
-%以下では, \PKN{report} の値をそのまま用いている.
-%\par\noindent ※\quad
-%v1.1 以前の時代は学位論文の体裁として「ダブルスペース」
-%(タイプライタにおいて改行を二重に行う)
-%が要請されていた.
-%タイプ打ちでない通常の組版においてダブルスペースが何を意味するか
-%は微妙な話であるが, v1.1 では和文用(\PKN{j-report})の行送りの
-%設定値を全面的に採用していた.\footnote
-%{\texttt{10pt} の \texttt{normalsize} での \PKN{j-report} の
-%行送りは 16.8\,pt である. 本来の「ダブルスペース」だと 20\,pt
-%だから随分違う. これは \PKN{setspace} 等のパッケージを
-%参考にした際の作者(八登)の勘違いに起因する.}
-%現在は, この時代錯誤的な「ダブルスペース」の要請が削除されて
-%いるので, 普通の欧文の行送りに従えばよい.
+%$B%U%)%s%H%5%$%:;XDj$N%f!<%6L?Na$G$O(B,
+%$BF1;~$K9TAw$j$NBg$-$5$b;XDj$9$k(B.
+%$B0J2<$G$O(B, \PKN{report} $B$NCM$r$=$N$^$^MQ$$$F$$$k(B.
+%\par\noindent $B"((B\quad
+%v1.1 $B0JA0$N;~Be$O3X0LO@J8$NBN:[$H$7$F!V%@%V%k%9%Z!<%9!W(B
+%($B%?%$%W%i%$%?$K$*$$$F2~9T$rFs=E$K9T$&(B)
+%$B$,MW@A$5$l$F$$$?(B.
+%$B%?%$%WBG$A$G$J$$DL>o$NAHHG$K$*$$$F%@%V%k%9%Z!<%9$,2?$r0UL#$9$k$+(B
+%$B$OHyL/$JOC$G$"$k$,(B, v1.1 $B$G$OOBJ8MQ(B(\PKN{j-report})$B$N9TAw$j$N(B
+%$B@_DjCM$rA4LLE*$K:NMQ$7$F$$$?(B.\footnote
+%{\texttt{10pt} $B$N(B \texttt{normalsize} $B$G$N(B \PKN{j-report} $B$N(B
+%$B9TAw$j$O(B 16.8\,pt $B$G$"$k(B. $BK\Mh$N!V%@%V%k%9%Z!<%9!W$@$H(B 20\,pt
+%$B$@$+$i?oJ,0c$&(B. $B$3$l$O(B \PKN{setspace} $BEy$N%Q%C%1!<%8$r(B
+%$B;29M$K$7$?:]$N:n<T(B($BH,EP(B)$B$N4*0c$$$K5/0x$9$k(B.}
+%$B8=:_$O(B, $B$3$N;~Be:x8mE*$J!V%@%V%k%9%Z!<%9!W$NMW@A$,:o=|$5$l$F(B
+%$B$$$k$N$G(B, $BIaDL$N2$J8$N9TAw$j$K=>$($P$h$$(B.
 %
 %\begin{macro}{\normalsize}
 %\begin{macro}{\small}
 %\begin{macro}{\footnotesize}
-%|10pt| の場合の設定.
-%レイアウト設定を伴うもの.
+%|10pt| $B$N>l9g$N@_Dj(B.
+%$B%l%$%"%&%H@_Dj$rH<$&$b$N(B.
 %    \begin{macrocode}
 \renewcommand\normalsize{%
    \@setfontsize\normalsize\@xpt\@xiipt
@@ -1054,7 +1054,7 @@
 %\begin{macro}{\Large}
 %\begin{macro}{\huge}
 %\begin{macro}{\Huge}
-%伴わないもの.
+%$BH<$o$J$$$b$N(B.
 %    \begin{macrocode}
 \newcommand\scriptsize{\@setfontsize\scriptsize\@viipt\@viiipt}
 \newcommand\tiny{\@setfontsize\tiny\@vpt\@vipt}
@@ -1076,30 +1076,30 @@
 %\begin{macro}{\marginparsep}
 %\begin{macro}{\marginparpush}
 %\noindent ($*$)
-%ここで基底サイズに依存する他の長さ変数を設定する.
+%$B$3$3$G4pDl%5%$%:$K0MB8$9$kB>$ND9$5JQ?t$r@_Dj$9$k(B.
 %
-%|\textwidth| は本文領域の幅で, 既定の設定(学位論文用の設定)で
-%はここで設定された値がそのまま使われる.
-%欧文の組版の場合, 行の長さは大体英小文字 65 字分が理想と
-%され, 長くても 75 字を超えてはならないとされる.
-%ただし, 読む人が慣れている場合に限り 80 文字まで可とされる
-%\footnote{\PKN{KOMA-script} クラスのドキュメント参照.
-%  計算機科学関連の書籍では行長が長いものが多く散見される.}.
-%以上の事情を勘案した結果,
-%このクラスでは, なるべく版面を大きくとれるように,
-%行長を 80 文字相当の長さにした.
-%算出方法は, \PKN{memoir} クラスの方法を適用した場合の Computer Modern
-%の「65 字相当幅」の 80/65 倍を超えない最大の 12\,pt (= 1\,pc) の
-%整数倍とした.
+%|\textwidth| $B$OK\J8NN0h$NI}$G(B, $B4{Dj$N@_Dj(B($B3X0LO@J8MQ$N@_Dj(B)$B$G(B
+%$B$O$3$3$G@_Dj$5$l$?CM$,$=$N$^$^;H$o$l$k(B.
+%$B2$J8$NAHHG$N>l9g(B, $B9T$ND9$5$OBgBN1Q>.J8;z(B 65 $B;zJ,$,M}A[$H(B
+%$B$5$l(B, $BD9$/$F$b(B 75 $B;z$rD6$($F$O$J$i$J$$$H$5$l$k(B.
+%$B$?$@$7(B, $BFI$`?M$,47$l$F$$$k>l9g$K8B$j(B 80 $BJ8;z$^$G2D$H$5$l$k(B
+%\footnote{\PKN{KOMA-script} $B%/%i%9$N%I%-%e%a%s%H;2>H(B.
+%  $B7W;;5!2J3X4XO"$N=q@R$G$O9TD9$,D9$$$b$N$,B?$/;68+$5$l$k(B.}.
+%$B0J>e$N;v>p$r4*0F$7$?7k2L(B,
+%$B$3$N%/%i%9$G$O(B, $B$J$k$Y$/HGLL$rBg$-$/$H$l$k$h$&$K(B,
+%$B9TD9$r(B 80 $BJ8;zAjEv$ND9$5$K$7$?(B.
+%$B;;=PJ}K!$O(B, \PKN{memoir} $B%/%i%9$NJ}K!$rE,MQ$7$?>l9g$N(B Computer Modern
+%$B$N!V(B65 $B;zAjEvI}!W$N(B 80/65 $BG\$rD6$($J$$:GBg$N(B 12\,pt (= 1\,pc) $B$N(B
+%$B@0?tG\$H$7$?(B.
 %\changes{v1.3}{2009/01/22}
-%  {`textwidth の既定値を 75 字幅とする.}
+%  {`textwidth $B$N4{DjCM$r(B 75 $B;zI}$H$9$k(B.}
 %\changes{v1.3a}{2009/02/11}
-%  {計算を間違っていたので修正.}
+%  {$B7W;;$r4V0c$C$F$$$?$N$G=$@5(B.}
 %\iffalse
-%   F    Laz     L65     L    N      F=基底フォントサイズ
-%  10pt 127.58  293.94  360  79.6    Laz= abc..xyz の幅
-%  11pt 139.70  318.69  384  78.3    L65= 65字相当幅
-%  12pt 149.88  339.46  408  78.1%   L= 行長 / N= 文字数
+%   F    Laz     L65     L    N      F=$B4pDl%U%)%s%H%5%$%:(B
+%  10pt 127.58  293.94  360  79.6    Laz= abc..xyz $B$NI}(B
+%  11pt 139.70  318.69  384  78.3    L65= 65$B;zAjEvI}(B
+%  12pt 149.88  339.46  408  78.1%   L= $B9TD9(B / N= $BJ8;z?t(B
 %  L65 = 2.042 Laz + 33.41 ; L = floor(L65*80/65/12)*12
 %\fi
 %    \begin{macrocode}
@@ -1112,10 +1112,10 @@
 %\end{macro}
 %\end{macro}
 %\end{macro}
-%以上で |10pt| の場合の設定は終わり.
+%$B0J>e$G(B |10pt| $B$N>l9g$N@_Dj$O=*$o$j(B.
 %
-%続いて |11pt| の場合.
-%説明は |10pt| の時と同じなので省略.
+%$BB3$$$F(B |11pt| $B$N>l9g(B.
+%$B@bL@$O(B |10pt| $B$N;~$HF1$8$J$N$G>JN,(B.
 %    \begin{macrocode}
 \else\if1\@ptsize\relax       %--------- 11pt
 \renewcommand\normalsize{%
@@ -1160,7 +1160,7 @@
 \setlength\marginparsep{10\p@}
 \setlength\marginparpush{5\p@}
 %    \end{macrocode}
-%最後に |12pt| の場合.
+%$B:G8e$K(B |12pt| $B$N>l9g(B.
 %    \begin{macrocode}
 \else                         %--------- 12pt
 \renewcommand\normalsize{%
@@ -1206,24 +1206,24 @@
 \setlength\marginparpush{7\p@}
 \fi\fi                        %---------
 %    \end{macrocode}
-%以上で基底フォントサイズ依存部分は一旦終了.
+%$B0J>e$G4pDl%U%)%s%H%5%$%:0MB8ItJ,$O0lC6=*N;(B.
 %
 %\changes{v1.1a}{2005/02/24}
-%  {`isttitlesize 追加.}
+%  {`isttitlesize $BDI2C(B.}
 %\begin{macro}{\isttitlesize}
-%タイトル用のフォントサイズ.
-%基底フォントサイズに依らないようにする.
-%内容は |10ot| の |\Large| と同じ.
+%$B%?%$%H%kMQ$N%U%)%s%H%5%$%:(B.
+%$B4pDl%U%)%s%H%5%$%:$K0M$i$J$$$h$&$K$9$k(B.
+%$BFbMF$O(B |10ot| $B$N(B |\Large| $B$HF1$8(B.
 %    \begin{macrocode}
 \newcommand\isttitlesize{\@setfontsize\isttitlesize\@xivpt{25.2}}
 %    \end{macrocode}
 %\end{macro}
 %
-%\qparag{和文フォントの代替設定}
-%和文フォントについての「代替されました」の警告メッセージを
-%止めるために, 明示的な代替設定をしておく.
+%\qparag{$BOBJ8%U%)%s%H$NBeBX@_Dj(B}
+%$BOBJ8%U%)%s%H$K$D$$$F$N!VBeBX$5$l$^$7$?!W$N7Y9p%a%C%;!<%8$r(B
+%$B;_$a$k$?$a$K(B, $BL@<(E*$JBeBX@_Dj$r$7$F$*$/(B.
 %\changes{v1.1a}{2005/02/24}
-%  {和文フォントの明示的な代替の設定.}
+%  {$BOBJ8%U%)%s%H$NL@<(E*$JBeBX$N@_Dj(B.}
 %    \begin{macrocode}
 \if p\ist@engine\relax
 \DeclareFontShape{JY1}{mc}{m}{it}{<->ssub*mc/m/n}{}
@@ -1255,10 +1255,10 @@
 %
 %
 %^^A----------------
-%\subsection{文書レイアウト}
+%\subsection{$BJ8=q%l%$%"%&%H(B}
 %
 %\begin{macro}{\bindoffset}
-%「綴じ」に必要な幅の設定.
+%$B!VDV$8!W$KI,MW$JI}$N@_Dj(B.
 %    \begin{macrocode}
 \ifist@bindoffset
   \setlength{\bindoffset}{9mm}
@@ -1272,8 +1272,8 @@
 %\begin{macro}{\normallineskip}
 %\begin{macro}{\baselinestretch}
 %\begin{macro}{\parskip}
-%\qparag{段落}
-%これらは \PKN{report} のまま.
+%\qparag{$BCJMn(B}
+%$B$3$l$i$O(B \PKN{report} $B$N$^$^(B.
 %    \begin{macrocode}
 \setlength\lineskip{1\p@}
 \setlength\normallineskip{1\p@}
@@ -1285,10 +1285,10 @@
 %\end{macro}
 
 %\begin{macro}{\parindent}
-%段落下げは 1.5\,em (二段組では 1\,em) に統一した.
-%これは \PKN{report} の値とほぼ同じ.
-%v1.0 では \PKN{j-report} のままの 1\,zw となっていたが,
-%これは明らかに不合理.
+%$BCJMn2<$2$O(B 1.5\,em ($BFsCJAH$G$O(B 1\,em) $B$KE}0l$7$?(B.
+%$B$3$l$O(B \PKN{report} $B$NCM$H$[$\F1$8(B.
+%v1.0 $B$G$O(B \PKN{j-report} $B$N$^$^$N(B 1\,zw $B$H$J$C$F$$$?$,(B,
+%$B$3$l$OL@$i$+$KIT9gM}(B.
 %    \begin{macrocode}
 \setlength\parskip{0\p@ \@plus \p@}
 \if@twocolumn
@@ -1305,7 +1305,7 @@
 %\begin{macro}{\@lowpenalty}
 %\begin{macro}{\@medpenalty}
 %\begin{macro}{\@highpenalty}
-%\PKN{report} のまま.
+%\PKN{report} $B$N$^$^(B.
 %    \begin{macrocode}
 \setlength\smallskipamount{3\p@ \@plus 1\p@ \@minus 1\p@}
 \setlength\medskipamount{6\p@ \@plus 2\p@ \@minus 2\p@}
@@ -1325,11 +1325,11 @@
 %\begin{macro}{\headsep}
 %\begin{macro}{\footskip}
 %\begin{macro}{\maxdepth}
-%\qparag{縦方向の空き}
-%|\headsep| を小さくした以外は \PKN{report} のまま.
-%|\topskip| は ($*$) で設定済.
+%\qparag{$B=DJ}8~$N6u$-(B}
+%|\headsep| $B$r>.$5$/$7$?0J30$O(B \PKN{report} $B$N$^$^(B.
+%|\topskip| $B$O(B ($*$) $B$G@_Dj:Q(B.
 %\changes{v1.3}{2009/01/22}
-%  {`headsep を変更.}
+%  {`headsep $B$rJQ99(B.}
 %    \begin{macrocode}
 \setlength\headheight{12\p@}
 \setlength\headsep   {12\p@}
@@ -1343,16 +1343,16 @@
 %\end{macro}
 %
 %\begin{macro}{\textwidth}
-%\qparag{テキスト領域の大きさ}
-%幅の設定.
-%この時点で |\textwidth| には ($*$) で設定した値が入っている.
-%二段組(|twocolumn|)または |longline| 設定時は, 
-%マージンを綴じを除いた紙面の幅の 1/6 とする.
-%すなわち |\textwidth|
-%を (|\paperwidth| $-$ |\bindoffset|) $\times$ 5/6 ($\dagger$)とする.
-%それ以外の場合は, ($*$) と ($\dagger$) のうち小さい方とする.
+%\qparag{$B%F%-%9%HNN0h$NBg$-$5(B}
+%$BI}$N@_Dj(B.
+%$B$3$N;~E@$G(B |\textwidth| $B$K$O(B ($*$) $B$G@_Dj$7$?CM$,F~$C$F$$$k(B.
+%$BFsCJAH(B(|twocolumn|)$B$^$?$O(B |longline| $B@_Dj;~$O(B, 
+%$B%^!<%8%s$rDV$8$r=|$$$?;fLL$NI}$N(B 1/6 $B$H$9$k(B.
+%$B$9$J$o$A(B |\textwidth|
+%$B$r(B (|\paperwidth| $-$ |\bindoffset|) $\times$ 5/6 ($\dagger$)$B$H$9$k(B.
+%$B$=$l0J30$N>l9g$O(B, ($*$) $B$H(B ($\dagger$) $B$N$&$A>.$5$$J}$H$9$k(B.
 %\changes{v1.3}{2009/01/22}
-%  {`textwidth の設定方法を変更.}
+%  {`textwidth $B$N@_DjJ}K!$rJQ99(B.}
 %    \begin{macrocode}
 \setlength\@tempdima{\paperwidth}
 \addtolength\@tempdima{-\bindoffset}
@@ -1369,15 +1369,15 @@
 %\end{macro}
 %
 %\begin{macro}{\textheight}
-%テキスト領域の高さの設定.
-%用紙の高さの 1/6 をマージンとする.
-%\PKN{report} では, ここでヘッダ・フッタの領域として 1.5\,in
-%を確保しているが, このクラスではヘッダ・フッタの領域をとらない.
-%つまり, テキスト領域の外側に配置される.
+%$B%F%-%9%HNN0h$N9b$5$N@_Dj(B.
+%$BMQ;f$N9b$5$N(B 1/6 $B$r%^!<%8%s$H$9$k(B.
+%\PKN{report} $B$G$O(B, $B$3$3$G%X%C%@!&%U%C%?$NNN0h$H$7$F(B 1.5\,in
+%$B$r3NJ]$7$F$$$k$,(B, $B$3$N%/%i%9$G$O%X%C%@!&%U%C%?$NNN0h$r$H$i$J$$(B.
+%$B$D$^$j(B, $B%F%-%9%HNN0h$N30B&$KG[CV$5$l$k(B.
 %\changes{v1.3}{2009/01/22}
-%  {`textheight の設定方法を変更.}
+%  {`textheight $B$N@_DjJ}K!$rJQ99(B.}
 %\changes{v1.3a}{2009/02/14}
-%  {`textheight の設定方法を変更.}
+%  {`textheight $B$N@_DjJ}K!$rJQ99(B.}
 %    \begin{macrocode}
 \setlength\@tempdima{.833333\paperheight}
 \divide\@tempdima\baselineskip
@@ -1388,9 +1388,9 @@
 %\end{macro}
 %
 %\begin{macro}{\marginparsep}
-%\qparag{マージン}
-%\PKN{report} のまま.
-%|\marginparpush| は ($*$) で設定済み.
+%\qparag{$B%^!<%8%s(B}
+%\PKN{report} $B$N$^$^(B.
+%|\marginparpush| $B$O(B ($*$) $B$G@_Dj:Q$_(B.
 %    \begin{macrocode}
 \if@twocolumn
  \setlength\marginparsep {10\p@}
@@ -1404,7 +1404,7 @@
 %\begin{macro}{\oddsidemargin}
 %\begin{macro}{\evensidemargin}
 %\begin{macro}{\marginparwidth}
-%これらの値は |\textwidth| から算出される.
+%$B$3$l$i$NCM$O(B |\textwidth| $B$+$i;;=P$5$l$k(B.
 %    \begin{macrocode}
 \if@twoside
   \setlength\@tempdima        {\paperwidth}
@@ -1443,13 +1443,13 @@
 %\end{macro}
 %
 %\begin{macro}{\topmargin}
-%これらの値は |\textheight| から算出される.
-%\PKN{report} とは異なり, 中央合わせの際にヘッダ・フッタ部分を
-%含めないようにしている.
+%$B$3$l$i$NCM$O(B |\textheight| $B$+$i;;=P$5$l$k(B.
+%\PKN{report} $B$H$O0[$J$j(B, $BCf1{9g$o$;$N:]$K%X%C%@!&%U%C%?ItJ,$r(B
+%$B4^$a$J$$$h$&$K$7$F$$$k(B.
 %\changes{v1.3}{2009/01/22}
-%  {`topmargin の算出方法を変更.}
+%  {`topmargin $B$N;;=PJ}K!$rJQ99(B.}
 %\changes{v1.3a}{2009/02/14}
-%  {`topmargin の算出方法を変更.}
+%  {`topmargin $B$N;;=PJ}K!$rJQ99(B.}
 %    \begin{macrocode}
 \setlength\@tempdima{\paperheight}
 \addtolength\@tempdima{-\textheight}
@@ -1461,15 +1461,15 @@
 %    \end{macrocode}
 %\end{macro}
 %
-%\qparag{脚注}
-%|\footnotesep|, |\skip\footins| の設定は後回し.
+%\qparag{$B5SCm(B}
+%|\footnotesep|, |\skip\footins| $B$N@_Dj$O8e2s$7(B.
 %
 %^^A---------------
-%\subsection{フロートの設定}
+%\subsection{$B%U%m!<%H$N@_Dj(B}
 %
-%\qparag{許容範囲}
-%これは \PKN{jsarticle} に合わせるように変更した.
-%元よりもフロートが入りやすくなるはず.
+%\qparag{$B5vMFHO0O(B}
+%$B$3$l$O(B \PKN{jsarticle} $B$K9g$o$;$k$h$&$KJQ99$7$?(B.
+%$B85$h$j$b%U%m!<%H$,F~$j$d$9$/$J$k$O$:(B.
 %    \begin{macrocode}
 \setcounter{topnumber}{2}
 \renewcommand\topfraction{.8}
@@ -1483,15 +1483,15 @@
 \renewcommand\dblfloatpagefraction{.8}
 %    \end{macrocode}
 %
-%残りの設定は基底フォントサイズに依存するので後回し.
+%$B;D$j$N@_Dj$O4pDl%U%)%s%H%5%$%:$K0MB8$9$k$N$G8e2s$7(B.
 %
 %^^A----------------
-%\subsection{ページスタイル}
-%すなわちヘッダ・フッタの設定.
+%\subsection{$B%Z!<%8%9%?%$%k(B}
+%$B$9$J$o$A%X%C%@!&%U%C%?$N@_Dj(B.
 %
-%|headings| スタイルの設定は,
-%v1.0 では \PKN{j-report} と同じであったが,
-%今では \PKN{report} と同じ.
+%|headings| $B%9%?%$%k$N@_Dj$O(B,
+%v1.0 $B$G$O(B \PKN{j-report} $B$HF1$8$G$"$C$?$,(B,
+%$B:#$G$O(B \PKN{report} $B$HF1$8(B.
 %    \begin{macrocode}
 \if@twoside
   \def\ps@headings{%
@@ -1539,10 +1539,10 @@
 %
 %\begin{macro}{\ist@saveps}
 %\begin{macro}{\ist@restoreps}
-%|\ist@saveps|\,/\,|\ist@restoreps| は現在のページスタイルを
-%退避/復帰する.
+%|\ist@saveps|\,/\,|\ist@restoreps| $B$O8=:_$N%Z!<%8%9%?%$%k$r(B
+%$BB`Hr(B/$BI|5"$9$k(B.
 %\changes{v1.1c}{2005/02/27}
-%  {`ist@saveps, `ist@restoreps 追加.}
+%  {`ist@saveps, `ist@restoreps $BDI2C(B.}
 %    \begin{macrocode}
 \newcommand\ist@saveps{%
   \let\ist@mkboth\@mkboth
@@ -1559,34 +1559,34 @@
 %\end{macro}
 %
 %^^A----------------
-%\subsection{文書マークアップ}
+%\subsection{$BJ8=q%^!<%/%"%C%W(B}
 %
-%\qparag{タイトル}
-%すなわち学位論文の表紙のページ.
-%\PKN{report} で |titlepage| オプションを指定したのと同様に,
-%常に独立のページに出力される,
-%v1.1a～1.1c で全面的な見直しを行った.
+%\qparag{$B%?%$%H%k(B}
+%$B$9$J$o$A3X0LO@J8$NI=;f$N%Z!<%8(B.
+%\PKN{report} $B$G(B |titlepage| $B%*%W%7%g%s$r;XDj$7$?$N$HF1MM$K(B,
+%$B>o$KFHN)$N%Z!<%8$K=PNO$5$l$k(B,
+%v1.1a$B!A(B1.1c $B$GA4LLE*$J8+D>$7$r9T$C$?(B.
 %\changes{v1.1a}{2005/02/24}
-%  {`maketitle についていろいろと変更.}
+%  {`maketitle $B$K$D$$$F$$$m$$$m$HJQ99(B.}
 %\changes{v1.1b}{2005/02/25}
-%  {`maketitle についてさらにと変更.}
+%  {`maketitle $B$K$D$$$F$5$i$K$HJQ99(B.}
 %\changes{v1.1c}{2005/02/27}
-%  {`maketitle の処理の大部分を下請け命令に移した.}
+%  {`maketitle $B$N=hM}$NBgItJ,$r2<@A$1L?Na$K0\$7$?(B.}
 %\changes{v1.1c}{2005/02/27}
-%  {要旨の出力方法を大幅に変更.}
+%  {$BMW;]$N=PNOJ}K!$rBgI}$KJQ99(B.}
 %\changes{v1.1f}{2005/12/25}
-%  {表紙と要旨の命令の分離. `maketitle はそれらを呼ぶだけ.}
+%  {$BI=;f$HMW;]$NL?Na$NJ,N%(B. `maketitle $B$O$=$l$i$r8F$V$@$1(B.}
 %\begin{macro}{\maketitle}
-%|\maketitlepage| による表紙出力の直後に\ 
-%|\makeabstract| による要旨出力を行う
-%(v1.1f よりこの 2 命令を新設).
-%表紙と要旨の間には通常は空白のページが置かれる(v1.0 と同様)が,
-%|interim| 指定の場合は置かれない.
-%^^A#v1.1c において, 実際に表紙を出力する部分を |\ist@maketitle| に,
-%^^A#要旨を出力する部分を |\ist@showabstract| に移した.
-%^^A#(設定変更を容易にするため.)
+%|\maketitlepage| $B$K$h$kI=;f=PNO$ND>8e$K(B\ 
+%|\makeabstract| $B$K$h$kMW;]=PNO$r9T$&(B
+%(v1.1f $B$h$j$3$N(B 2 $BL?Na$r?7@_(B).
+%$BI=;f$HMW;]$N4V$K$ODL>o$O6uGr$N%Z!<%8$,CV$+$l$k(B(v1.0 $B$HF1MM(B)$B$,(B,
+%|interim| $B;XDj$N>l9g$OCV$+$l$J$$(B.
+%^^A#v1.1c $B$K$*$$$F(B, $B<B:]$KI=;f$r=PNO$9$kItJ,$r(B |\ist@maketitle| $B$K(B,
+%^^A#$BMW;]$r=PNO$9$kItJ,$r(B |\ist@showabstract| $B$K0\$7$?(B.
+%^^A#($B@_DjJQ99$rMF0W$K$9$k$?$a(B.)
 %\changes{v1.3}{2009/02/14}
-%  {ページ番号の数え方を変更.}
+%  {$B%Z!<%8HV9f$N?t$(J}$rJQ99(B.}
 %    \begin{macrocode}
 \newcommand\maketitle{%
   \pagenumbering{roman}%
@@ -1599,7 +1599,7 @@
 %\end{macro}
 %
 %\begin{environment}{ist@titlepage}
-%ページ番号をリセットしない |titlepage| 環境.
+%$B%Z!<%8HV9f$r%j%;%C%H$7$J$$(B |titlepage| $B4D6-(B.
 %    \begin{macrocode}
 \newenvironment{ist@titlepage}
  {\ifist@carepage \cleardoublepage \fi
@@ -1613,8 +1613,8 @@
 %\end{environment}
 %
 %\begin{macro}{\ist@putblankpage}
-%空白のページを出力するための処理.
-%(v1.0 でなぜ空白ページを置くのかは未だ不明.)
+%$B6uGr$N%Z!<%8$r=PNO$9$k$?$a$N=hM}(B.
+%(v1.0 $B$G$J$<6uGr%Z!<%8$rCV$/$N$+$OL$$@ITL@(B.)
 %    \begin{macrocode}
 \newcommand\ist@putblankpage{%
   \ifist@interim \ist@blankaftertpfalse \fi
@@ -1627,10 +1627,10 @@
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\maketitlepage}
-%|\etitle|, |\date| 等を設定した後に |\maketitlepage| を実行すると,
-%論文の表紙が出力される.
+%|\etitle|, |\date| $BEy$r@_Dj$7$?8e$K(B |\maketitlepage| $B$r<B9T$9$k$H(B,
+%$BO@J8$NI=;f$,=PNO$5$l$k(B.
 %\changes{v1.1f}{2005/12/25}
-%  {`maketitlepage 追加.}
+%  {`maketitlepage $BDI2C(B.}
 %    \begin{macrocode}
 \newcommand\maketitlepage{%
   \ist@maketitle
@@ -1639,10 +1639,10 @@
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\makeabstract}
-%|eabstract| および |jabstract| 環境
-%を用いて入力された要旨(英文および和文)が出力される.
+%|eabstract| $B$*$h$S(B |jabstract| $B4D6-(B
+%$B$rMQ$$$FF~NO$5$l$?MW;](B($B1QJ8$*$h$SOBJ8(B)$B$,=PNO$5$l$k(B.
 %\changes{v1.1f}{2005/12/25}
-%  {`makeabstract 追加.}
+%  {`makeabstract $BDI2C(B.}
 %    \begin{macrocode}
 \newcommand\makeabstract{%
   \ist@showabstract
@@ -1652,12 +1652,12 @@
 %\end{macro}
 %
 %\begin{macro}{\ist@maketitle}
-%実際に表紙のページを出力する命令.
-%学位論文が共著になるわけがないので,
-%|\and| を廃止して定義を単純にした.
-%1 つのブロック内の行送りが常に |\isttitlesize| で設定した
-%ものになるようにした.
-%今の設定では, タイトルは 12 行(英文・和文あわせて)まで書ける.
+%$B<B:]$KI=;f$N%Z!<%8$r=PNO$9$kL?Na(B.
+%$B3X0LO@J8$,6&Cx$K$J$k$o$1$,$J$$$N$G(B,
+%|\and| $B$rGQ;_$7$FDj5A$rC1=c$K$7$?(B.
+%1 $B$D$N%V%m%C%/Fb$N9TAw$j$,>o$K(B |\isttitlesize| $B$G@_Dj$7$?(B
+%$B$b$N$K$J$k$h$&$K$7$?(B.
+%$B:#$N@_Dj$G$O(B, $B%?%$%H%k$O(B 12 $B9T(B($B1QJ8!&OBJ8$"$o$;$F(B)$B$^$G=q$1$k(B.
 %    \begin{macrocode}
 \newcommand\ist@maketitle{\begin{ist@titlepage}%
   \let\footnotesize\small
@@ -1690,9 +1690,9 @@
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\ist@hookcr}
-%|\etitle| で |\\|(強制改行)を使うとエラーになることへの対処.
+%|\etitle| $B$G(B |\\|($B6/@)2~9T(B)$B$r;H$&$H%(%i!<$K$J$k$3$H$X$NBP=h(B.
 %\changes{v1.1g}{2006/06/29}
-%  {`ist@hookcr 等を追加.}
+%  {`ist@hookcr $BEy$rDI2C(B.}
 %    \begin{macrocode}
 \def\ist@hookcr{%
   \let\ist@curcr\\\def\\{\protect\ist@curcr}}
@@ -1700,41 +1700,41 @@
 %\end{macro}
 %
 %\begin{macro}{\ist@showabstract}
-%実際に要旨を出力する命令.
+%$B<B:]$KMW;]$r=PNO$9$kL?Na(B.
 %
-%\noindent ※ 要旨の処理について:\quad
+%\noindent $B"((B $BMW;]$N=hM}$K$D$$$F(B:\quad
 %\label{anc:abstract}
-%従来の処理では, まず |ebastract|, |jabstract| 環境で
-%各内容を box register に代入して, |\maketitle| において
-%その register の中身を出力するという方法をとっていた.
-%しかし, その際に中に入れる box として |minipage| 環境を
-%中に含んだ |\hbox| を用いていたので, その結果,
-%要旨環境の中での改ページが禁止されていた.
-%これは「和文と英文の両方が 1 ページに収まらない場合は,
-%別ページに分ける」
-%という処理を実現するためだと思われる,
-%しかし, これだと, 和文だけで 1 ページ分の量を超える
-%場合には, その出力がテキスト領域(さらに多いと紙面自体)を
-%はみ出してしまう.
+%$B=>Mh$N=hM}$G$O(B, $B$^$:(B |ebastract|, |jabstract| $B4D6-$G(B
+%$B3FFbMF$r(B box register $B$KBeF~$7$F(B, |\maketitle| $B$K$*$$$F(B
+%$B$=$N(B register $B$NCf?H$r=PNO$9$k$H$$$&J}K!$r$H$C$F$$$?(B.
+%$B$7$+$7(B, $B$=$N:]$KCf$KF~$l$k(B box $B$H$7$F(B |minipage| $B4D6-$r(B
+%$BCf$K4^$s$@(B |\hbox| $B$rMQ$$$F$$$?$N$G(B, $B$=$N7k2L(B,
+%$BMW;]4D6-$NCf$G$N2~%Z!<%8$,6X;_$5$l$F$$$?(B.
+%$B$3$l$O!VOBJ8$H1QJ8$NN>J}$,(B 1 $B%Z!<%8$K<}$^$i$J$$>l9g$O(B,
+%$BJL%Z!<%8$KJ,$1$k!W(B
+%$B$H$$$&=hM}$r<B8=$9$k$?$a$@$H;W$o$l$k(B,
+%$B$7$+$7(B, $B$3$l$@$H(B, $BOBJ8$@$1$G(B 1 $B%Z!<%8J,$NNL$rD6$($k(B
+%$B>l9g$K$O(B, $B$=$N=PNO$,%F%-%9%HNN0h(B($B$5$i$KB?$$$H;fLL<+BN(B)$B$r(B
+%$B$O$_=P$7$F$7$^$&(B.
 %
-%これに対処するために, 用いる box を |\vbox| にして,
-%さらに, |\unvbox| で出力することで, 要旨の途中で
-%改ページができるようにした.
-%そして, 要旨が長い時に別ページにする機能に対応するため,
-%事前に 2 つの box の高さの合計を調べて処理を分けている.
-%(この処理の妥当性については自信がないので, \TeX\ に
-%詳しい方は再検討してください.)
+%$B$3$l$KBP=h$9$k$?$a$K(B, $BMQ$$$k(B box $B$r(B |\vbox| $B$K$7$F(B,
+%$B$5$i$K(B, |\unvbox| $B$G=PNO$9$k$3$H$G(B, $BMW;]$NESCf$G(B
+%$B2~%Z!<%8$,$G$-$k$h$&$K$7$?(B.
+%$B$=$7$F(B, $BMW;]$,D9$$;~$KJL%Z!<%8$K$9$k5!G=$KBP1~$9$k$?$a(B,
+%$B;vA0$K(B 2 $B$D$N(B box $B$N9b$5$N9g7W$rD4$Y$F=hM}$rJ,$1$F$$$k(B.
+%($B$3$N=hM}$NBEEv@-$K$D$$$F$O<+?.$,$J$$$N$G(B, \TeX\ $B$K(B
+%$B>\$7$$J}$O:F8!F$$7$F$/$@$5$$(B.)
 %    \begin{macrocode}
 \newcommand\ist@showabstract{%
 %    \end{macrocode}
-%英文と和文の要旨の間に入る垂直空きの量.
+%$B1QJ8$HOBJ8$NMW;]$N4V$KF~$k?bD>6u$-$NNL(B.
 %    \begin{macrocode}
   \setlength{\@tempskipb}{36\p@\@minus24\p@}
 %    \end{macrocode}
-%|autosplitabst| 指定時は,
-%(英文要旨の縦幅) + (和文要旨の縦幅) + (挿入する空きの自然長)
-%が |\textheight| より大きいか小さいかで処理を分ける.
-%大きい場合は, 設定を |splitabst| にする.
+%|autosplitabst| $B;XDj;~$O(B,
+%($B1QJ8MW;]$N=DI}(B) + ($BOBJ8MW;]$N=DI}(B) + ($BA^F~$9$k6u$-$N<+A3D9(B)
+%$B$,(B |\textheight| $B$h$jBg$-$$$+>.$5$$$+$G=hM}$rJ,$1$k(B.
+%$BBg$-$$>l9g$O(B, $B@_Dj$r(B |splitabst| $B$K$9$k(B.
 %    \begin{macrocode}
   \if a\ist@splitabst \relax
     \setlength\@tempdima{\@tempskipb}%
@@ -1747,12 +1747,12 @@
     \fi
   \fi
 %    \end{macrocode}
-%|autosplitabst| でかつ要旨が小さい場合の処理:
-%従来通り, |titlepage| 環境を用いて, 両方の要旨を出力する.
-%必ず 1 ページに収まるはず.
-%(こちらの方が後述の方法よりバグが少ないと思われるので,
-%この場合を特別扱いしている.
-%本来は, 後述の場合で処理してかまわない.)
+%|autosplitabst| $B$G$+$DMW;]$,>.$5$$>l9g$N=hM}(B:
+%$B=>MhDL$j(B, |titlepage| $B4D6-$rMQ$$$F(B, $BN>J}$NMW;]$r=PNO$9$k(B.
+%$BI,$:(B 1 $B%Z!<%8$K<}$^$k$O$:(B.
+%($B$3$A$i$NJ}$,8e=R$NJ}K!$h$j%P%0$,>/$J$$$H;W$o$l$k$N$G(B,
+%$B$3$N>l9g$rFCJL07$$$7$F$$$k(B.
+%$BK\Mh$O(B, $B8e=R$N>l9g$G=hM}$7$F$+$^$o$J$$(B.)
 %    \begin{macrocode}
   \if a\ist@splitabst \relax
     \begin{ist@titlepage}%
@@ -1761,18 +1761,18 @@
       \unvbox\jabstractbox
     \end{ist@titlepage}%
 %    \end{macrocode}
-%残りの場合の処理:
-%要旨が 3 ページ以上になる場合には, ページスタイルの一時的な変更
-%(|empty| に変える)を |titlepage| に任せるという方法が使えない.
-%(2 ページならば, |\end{titlepage| の後で |\thispagestyle{empty}|
-%をすればよい.)
-%仕方がないので, 現在のページスタイルを退避/復帰する命令
-%(|\ist@saveps|\,/\,|\ist@restoreps|)を用意して対処した.
-%この点を除くと, 前処理・後処理は |titlepage| 環境のそれと同じ.
-%|splitabst| 設定時(または |autosplitabst| で要旨が大きい時)は\ 
-%2 つの要旨の出力の間で改ページし,
-%|nosplitabst| 設定時は 2 つの要旨の間に |\@tempskipb| の
-%空きを入れる.
+%$B;D$j$N>l9g$N=hM}(B:
+%$BMW;]$,(B 3 $B%Z!<%80J>e$K$J$k>l9g$K$O(B, $B%Z!<%8%9%?%$%k$N0l;~E*$JJQ99(B
+%(|empty| $B$KJQ$($k(B)$B$r(B |titlepage| $B$KG$$;$k$H$$$&J}K!$,;H$($J$$(B.
+%(2 $B%Z!<%8$J$i$P(B, |\end{titlepage| $B$N8e$G(B |\thispagestyle{empty}|
+%$B$r$9$l$P$h$$(B.)
+%$B;EJ}$,$J$$$N$G(B, $B8=:_$N%Z!<%8%9%?%$%k$rB`Hr(B/$BI|5"$9$kL?Na(B
+%(|\ist@saveps|\,/\,|\ist@restoreps|)$B$rMQ0U$7$FBP=h$7$?(B.
+%$B$3$NE@$r=|$/$H(B, $BA0=hM}!&8e=hM}$O(B |titlepage| $B4D6-$N$=$l$HF1$8(B.
+%|splitabst| $B@_Dj;~(B($B$^$?$O(B |autosplitabst| $B$GMW;]$,Bg$-$$;~(B)$B$O(B\ 
+%2 $B$D$NMW;]$N=PNO$N4V$G2~%Z!<%8$7(B,
+%|nosplitabst| $B@_Dj;~$O(B 2 $B$D$NMW;]$N4V$K(B |\@tempskipb| $B$N(B
+%$B6u$-$rF~$l$k(B.
 %    \begin{macrocode}
   \else
     \ifist@carepage \cleardoublepage \fi
@@ -1793,7 +1793,7 @@
 %\end{macro}
 %
 %\begin{macro}{\ist@submittedtoblock}
-%``Submitted to \ldots'' で始まる文言の内容.
+%``Submitted to \ldots'' $B$G;O$^$kJ88@$NFbMF(B.
 %    \begin{macrocode}
 \newcommand\ist@submittedtoblock{%
   Submitted to\\\@submittedto\\
@@ -1827,8 +1827,8 @@
 %
 %\begin{macro}{\ist@maketitle@post}
 %\begin{macro}{\ist@showabstract@post}
-%用済みのマクロを消して記憶領域を空ける.
-%この処理は今では必要ないのかもしれない.
+%$BMQ:Q$_$N%^%/%m$r>C$7$F5-21NN0h$r6u$1$k(B.
+%$B$3$N=hM}$O:#$G$OI,MW$J$$$N$+$b$7$l$J$$(B.
 %    \begin{macrocode}
 \newcommand\ist@maketitle@post{%
   \global\let\thanks\relax
@@ -1873,10 +1873,10 @@
 %\end{macro}
 %\end{macro}
 %
-%\qparag{博士論文の表紙}
-%博士論文を簡易製本する場合は, 表題ページがそのまま表紙になる
-%ので, これを規定の形式に合わせる必要がある.
-%|simpletitlepage| オプションでこれを行える.
+%\qparag{$BGn;NO@J8$NI=;f(B}
+%$BGn;NO@J8$r4J0W@=K\$9$k>l9g$O(B, $BI=Bj%Z!<%8$,$=$N$^$^I=;f$K$J$k(B
+%$B$N$G(B, $B$3$l$r5,Dj$N7A<0$K9g$o$;$kI,MW$,$"$k(B.
+%|simpletitlepage| $B%*%W%7%g%s$G$3$l$r9T$($k(B.
 %    \begin{macrocode}
 \ifist@simpletitlepage
 \renewcommand\ist@maketitle{\begin{ist@titlepage}%
@@ -1897,8 +1897,8 @@
 \fi
 %    \end{macrocode}
 %
-%\qparag{\OPN{english} 設定時の表紙}
-%|english| 設定時の |\ist@maketitle| と |\ist@showabstract|.
+%\qparag{\OPN{english} $B@_Dj;~$NI=;f(B}
+%|english| $B@_Dj;~$N(B |\ist@maketitle| $B$H(B |\ist@showabstract|.
 %    \begin{macrocode}
 \ifist@english                %--------- english
 \renewcommand\ist@maketitle{\begin{ist@titlepage}%
@@ -1941,9 +1941,9 @@
 \fi                           %---------
 %    \end{macrocode}
 %
-%\qparag{節見出し}
-%カウンタ定義などの準備の部分.
-%\PKN{report} のまま.
+%\qparag{$B@a8+=P$7(B}
+%$B%+%&%s%?Dj5A$J$I$N=`Hw$NItJ,(B.
+%\PKN{report} $B$N$^$^(B.
 %    \begin{macrocode}
 \newcommand*\chaptermark[1]{}
 \setcounter{secnumdepth}{2}
@@ -1968,10 +1968,10 @@
 %\begin{macro}{\frontmatter}
 %\begin{macro}{\mainmatter}
 %\begin{macro}{\backmatter}
-%\PKN{book} で使える「前付け・本文・後付け」の制御を
-%取り入れてみた.
+%\PKN{book} $B$G;H$($k!VA0IU$1!&K\J8!&8eIU$1!W$N@)8f$r(B
+%$B<h$jF~$l$F$_$?(B.
 %\changes{v1.1b}{2005/02/25}
-%  {`mainmatter 等を追加.}
+%  {`mainmatter $BEy$rDI2C(B.}
 %    \begin{macrocode}
 \newcommand\frontmatter{%
   \ist@clearpage
@@ -1993,20 +1993,20 @@
 %\end{macro}
 %
 %\begin{macro}{\ist@clearpage}
-%|\ist@clearpage| は |twoside| と |openright| のいずれかが
-%指定されていれば |\cleardoublepage|,
-%そうでなければ |\clearpage| を行う.
+%|\ist@clearpage| $B$O(B |twoside| $B$H(B |openright| $B$N$$$:$l$+$,(B
+%$B;XDj$5$l$F$$$l$P(B |\cleardoublepage|,
+%$B$=$&$G$J$1$l$P(B |\clearpage| $B$r9T$&(B.
 %\changes{v1.1b}{2005/02/25}
-%  {`ist@clearpage 追加.}
+%  {`ist@clearpage $BDI2C(B.}
 %\changes{v1.1c}{2005/02/27}
-%  {`ist@clearpage の定義で `ifist@carepage を用いる.}
+%  {`ist@clearpage $B$NDj5A$G(B `ifist@carepage $B$rMQ$$$k(B.}
 %    \begin{macrocode}
 \newcommand\ist@clearpage{%
   \ifist@carepage \cleardoublepage \else \clearpage \fi}
 %    \end{macrocode}
 %\end{macro}
 %
-%部(part)の見出し.
+%$BIt(B(part)$B$N8+=P$7(B.
 %    \begin{macrocode}
 \newcommand\part{%
   \if@openright
@@ -2061,15 +2061,15 @@
               \fi}
 %    \end{macrocode}
 %
-%章(chapter)の見出し.
-%v1.0 から少し修正して \PKN{report} と同じにした.
-%ただし, 見出しの字の大きさは, \PKN{report} の |\huge| ではなく
-%\PKN{j-report} と同じ |\LARGE| である.
-%ここのフォント設定は \PKN{j-report} では\ 
-%|\chapn@font|, |\chapt@font| というマクロになっていて,
-%後述の |\chapterfont| という命令でこれらの中身が
-%変えられるようになっている.
-%この方式もそのまま引き継いでいる.
+%$B>O(B(chapter)$B$N8+=P$7(B.
+%v1.0 $B$+$i>/$7=$@5$7$F(B \PKN{report} $B$HF1$8$K$7$?(B.
+%$B$?$@$7(B, $B8+=P$7$N;z$NBg$-$5$O(B, \PKN{report} $B$N(B |\huge| $B$G$O$J$/(B
+%\PKN{j-report} $B$HF1$8(B |\LARGE| $B$G$"$k(B.
+%$B$3$3$N%U%)%s%H@_Dj$O(B \PKN{j-report} $B$G$O(B\ 
+%|\chapn@font|, |\chapt@font| $B$H$$$&%^%/%m$K$J$C$F$$$F(B,
+%$B8e=R$N(B |\chapterfont| $B$H$$$&L?Na$G$3$l$i$NCf?H$,(B
+%$BJQ$($i$l$k$h$&$K$J$C$F$$$k(B.
+%$B$3$NJ}<0$b$=$N$^$^0z$-7Q$$$G$$$k(B.
 %    \begin{macrocode}
 \newcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
                     \thispagestyle{plain}%
@@ -2129,30 +2129,30 @@
 %
 %\begin{macro}{\chapterfont}
 %|\chapterfont{|\meta{cmd1}|}{|\meta{cmd2}|}|: \SpGlue
-%番号付(|\chapter|)および
-%番号なし(|\chapter*|)の章見出しのフォントをそれぞれ\ 
-%\meta{cmd1} および \meta{cmd2} に設定する.
+%$BHV9fIU(B(|\chapter|)$B$*$h$S(B
+%$BHV9f$J$7(B(|\chapter*|)$B$N>O8+=P$7$N%U%)%s%H$r$=$l$>$l(B\ 
+%\meta{cmd1} $B$*$h$S(B \meta{cmd2} $B$K@_Dj$9$k(B.
 %    \begin{macrocode}
 \newcommand*\chapterfont[2]{%
    \gdef\chapn@font{#1}\gdef\chapt@font{#2}}
 %    \end{macrocode}
 %\end{macro}
-%初期値はともに |\LARGE\bfseries|.
+%$B=i4|CM$O$H$b$K(B |\LARGE\bfseries|.
 %    \begin{macrocode}
 \chapterfont{\LARGE\bfseries}{\LARGE\bfseries}
 %    \end{macrocode}
 %
-%節(section)以下の見出し.
-%\PKN{report} (欧文) では |\section| 等の直後の段落下げをしないのに
-%対して, \PKN{j-report} ではする.
-%元の \PKN{is-thesis} (v1.0) ではするように設定されていたが,
-%おそらく欧文ではしないのが普通だと思われるので,
-%しない設定に変更した.
-%(|\@startsection| の第 4 引数を負にすると「しない」になる.)
-%また, 節, 小節, 小々節の見出しの字の大きさも両者で異なり,
-%前述の章と同様にこれも \PKN{j-report} ではカスタマイズ可能
-%となっている.
-%これについては \PKN{j-report} を引き継ぐ.
+%$B@a(B(section)$B0J2<$N8+=P$7(B.
+%\PKN{report} ($B2$J8(B) $B$G$O(B |\section| $BEy$ND>8e$NCJMn2<$2$r$7$J$$$N$K(B
+%$BBP$7$F(B, \PKN{j-report} $B$G$O$9$k(B.
+%$B85$N(B \PKN{is-thesis} (v1.0) $B$G$O$9$k$h$&$K@_Dj$5$l$F$$$?$,(B,
+%$B$*$=$i$/2$J8$G$O$7$J$$$N$,IaDL$@$H;W$o$l$k$N$G(B,
+%$B$7$J$$@_Dj$KJQ99$7$?(B.
+%(|\@startsection| $B$NBh(B 4 $B0z?t$rIi$K$9$k$H!V$7$J$$!W$K$J$k(B.)
+%$B$^$?(B, $B@a(B, $B>.@a(B, $B>.!9@a$N8+=P$7$N;z$NBg$-$5$bN><T$G0[$J$j(B,
+%$BA0=R$N>O$HF1MM$K$3$l$b(B \PKN{j-report} $B$G$O%+%9%?%^%$%:2DG=(B
+%$B$H$J$C$F$$$k(B.
+%$B$3$l$K$D$$$F$O(B \PKN{j-report} $B$r0z$-7Q$0(B.
 %    \begin{macrocode}
 \newcommand\section{\@startsection {section}{1}{\z@}%
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
@@ -2178,26 +2178,26 @@
 %
 %\begin{macro}{\sectionfont}
 %|\sectionfont{|\meta{cmd1}|}{|\meta{cmd2}|}{|\meta{cmd3}|}|: \SpGlue
-%節(|\section|), \SpGlue 小節(|\subsection|), \SpGlue
-%小々節(|\subsubsection|)の見出しのフォントをそれぞれ\ 
-%\meta{cmd1}, \meta{cmd2}, \meta{cmd3} に設定する.
+%$B@a(B(|\section|), \SpGlue $B>.@a(B(|\subsection|), \SpGlue
+%$B>.!9@a(B(|\subsubsection|)$B$N8+=P$7$N%U%)%s%H$r$=$l$>$l(B\ 
+%\meta{cmd1}, \meta{cmd2}, \meta{cmd3} $B$K@_Dj$9$k(B.
 %    \begin{macrocode}
 \newcommand*\sectionfont[3]{%
    \gdef\sec@font{#1}\gdef\ssec@font{#2}\gdef\sssec@font{#3}}
 %    \end{macrocode}
 %\end{macro}
-%初期値は節が |\large\bfseries|,
-%小節と小々節が |\normalsize\bfseries|.
-%なお, \PKN{report} ではサイズが順に\ 
-%|\Large|, |\large|, |\normalsize| となっていた.
+%$B=i4|CM$O@a$,(B |\large\bfseries|,
+%$B>.@a$H>.!9@a$,(B |\normalsize\bfseries|.
+%$B$J$*(B, \PKN{report} $B$G$O%5%$%:$,=g$K(B\ 
+%|\Large|, |\large|, |\normalsize| $B$H$J$C$F$$$?(B.
 %    \begin{macrocode}
 \sectionfont{\large\bfseries}{\normalsize\bfseries}{\normalsize\bfseries}
 %    \end{macrocode}
 %
 %^^A----------------
-%\subsection{リスト}
+%\subsection{$B%j%9%H(B}
 %
-%この小節中の全ての設定は \PKN{report}のまま.
+%$B$3$N>.@aCf$NA4$F$N@_Dj$O(B \PKN{report}$B$N$^$^(B.
 %    \begin{macrocode}
 \if@twocolumn
   \setlength\leftmargini  {2em}
@@ -2223,21 +2223,21 @@
 \@itempenalty     -\@lowpenalty
 %    \end{macrocode}
 %
-%ここより 2 回目(で最後)の
-%基底フォントサイズ依存部分をはじめる.
-%まず |10pt| から.
+%$B$3$3$h$j(B 2 $B2sL\(B($B$G:G8e(B)$B$N(B
+%$B4pDl%U%)%s%H%5%$%:0MB8ItJ,$r$O$8$a$k(B.
+%$B$^$:(B |10pt| $B$+$i(B.
 %    \begin{macrocode}
 \if0\@ptsize\relax            %--------- 10pt
 %    \end{macrocode}
 %
-%まずは落穂拾い.
-%脚注関係の設定.
+%$B$^$:$OMnJf=&$$(B.
+%$B5SCm4X78$N@_Dj(B.
 %    \begin{macrocode}
 \setlength\footnotesep{6.65\p@}
 \setlength{\skip\footins}{9\p@ \@plus 4\p@ \@minus 2\p@}
 %    \end{macrocode}
 %
-%フロート関係の設定.
+%$B%U%m!<%H4X78$N@_Dj(B.
 %    \begin{macrocode}
 \setlength\floatsep    {12\p@ \@plus 2\p@ \@minus 2\p@}
 \setlength\textfloatsep{20\p@ \@plus 2\p@ \@minus 4\p@}
@@ -2252,7 +2252,7 @@
 \setlength\@dblfpbot{0\p@ \@plus 1fil}
 \setlength\partopsep{2\p@ \@plus 1\p@ \@minus 1\p@}
 %    \end{macrocode}
-%リストの設定に戻る.
+%$B%j%9%H$N@_Dj$KLa$k(B.
 %    \begin{macrocode}
 \def\@listi{\leftmargin\leftmargini
             \parsep 4\p@ \@plus2\p@ \@minus\p@
@@ -2274,9 +2274,9 @@
               \partopsep \p@ \@plus\z@ \@minus\p@
               \itemsep   \topsep}
 %    \end{macrocode}
-%以上で |10ot| の場合は終わり.
+%$B0J>e$G(B |10ot| $B$N>l9g$O=*$o$j(B.
 %
-%続いて |11pt| の場合.
+%$BB3$$$F(B |11pt| $B$N>l9g(B.
 %    \begin{macrocode}
 \else\if1\@ptsize\relax       %--------- 11pt
 \setlength\footnotesep{7.7\p@}
@@ -2314,7 +2314,7 @@
               \itemsep   \topsep}
 %    \end{macrocode}
 %
-%続いて |12pt| の場合.
+%$BB3$$$F(B |12pt| $B$N>l9g(B.
 %    \begin{macrocode}
 \else                         %--------- 12pt
 \setlength\footnotesep{8.4\p@}
@@ -2352,9 +2352,9 @@
               \itemsep   \topsep}
 \fi\fi                        %---------
 %    \end{macrocode}
-%以上で基底フォントサイズ依存部分は終了.
+%$B0J>e$G4pDl%U%)%s%H%5%$%:0MB8ItJ,$O=*N;(B.
 %
-%残りのリスト関係の設定.
+%$B;D$j$N%j%9%H4X78$N@_Dj(B.
 %    \begin{macrocode}
 \def\@listiv {\leftmargin\leftmarginiv
               \labelwidth\leftmarginiv
@@ -2383,11 +2383,11 @@
 %    \end{macrocode}
 %
 %\begin{environment}{description}
-%|description| の定義は \PKN{jsarticle} のそれに準じる.
-%ただし |\labelsep| は (1\,zw でなくて) 1\,em とする.
-%(|\descriptionlabel| の定義方法が異なるので注意せよ.)
+%|description| $B$NDj5A$O(B \PKN{jsarticle} $B$N$=$l$K=`$8$k(B.
+%$B$?$@$7(B |\labelsep| $B$O(B (1\,zw $B$G$J$/$F(B) 1\,em $B$H$9$k(B.
+%(|\descriptionlabel| $B$NDj5AJ}K!$,0[$J$k$N$GCm0U$;$h(B.)
 %\changes{v1.1a}{2005/02/24}
-%  {description の定義を変更.}
+%  {description $B$NDj5A$rJQ99(B.}
 %    \begin{macrocode}
 \newenvironment{description}
                {\list{}{\labelwidth\leftmargin \labelsep1em%
@@ -2399,9 +2399,9 @@
 %\end{environment}
 %
 %^^A----------------
-%\subsection{新しい環境の定義}
+%\subsection{$B?7$7$$4D6-$NDj5A(B}
 %
-%\qparag{謝辞}
+%\qparag{$B<U<-(B}
 %    \begin{macrocode}
 \newenvironment{acknowledge}
                {\begin{titlepage}
@@ -2414,20 +2414,20 @@
                {\end{titlepage}}
 %    \end{macrocode}
 %
-%\qparag{要旨}
-%v1.0 では段落下げの量は, 英文が 0\,em, 和文が 1\,em という
-%訳の分からない値になっていたが,
-%v1.1a でそれぞれ 1.5\,em と 1\,zw に変更した.
+%\qparag{$BMW;](B}
+%v1.0 $B$G$OCJMn2<$2$NNL$O(B, $B1QJ8$,(B 0\,em, $BOBJ8$,(B 1\,em $B$H$$$&(B
+%$BLu$NJ,$+$i$J$$CM$K$J$C$F$$$?$,(B,
+%v1.1a $B$G$=$l$>$l(B 1.5\,em $B$H(B 1\,zw $B$KJQ99$7$?(B.
 %\changes{v1.1a}{2005/02/24}
-%  {要旨環境中の段落下げの量の変更.}
+%  {$BMW;]4D6-Cf$NCJMn2<$2$NNL$NJQ99(B.}
 %\changes{v1.1c}{2005/02/27}
-%  {要旨出力方法の変更に合わせて要旨環境の定義を修正.}
+%  {$BMW;]=PNOJ}K!$NJQ99$K9g$o$;$FMW;]4D6-$NDj5A$r=$@5(B.}
 %
-%\noindent ※\quad
-%v1.1c において全面的に見直した.
-%詳細は \pageref{anc:abstract} ページ参照.
+%\noindent $B"((B\quad
+%v1.1c $B$K$*$$$FA4LLE*$K8+D>$7$?(B.
+%$B>\:Y$O(B \pageref{anc:abstract} $B%Z!<%8;2>H(B.
 %\changes{v1.3}{2009/01/22}
-%  {欧文行送りの変更に伴い, jabstract に `baselinestretch 設定を追加.}
+%  {$B2$J89TAw$j$NJQ99$KH<$$(B, jabstract $B$K(B `baselinestretch $B@_Dj$rDI2C(B.}
 %    \begin{macrocode}
 \newsavebox{\eabstractbox}%
 \newsavebox{\jabstractbox}%
@@ -2453,7 +2453,7 @@
      \end{center}\par}%
     {\par\egroup}
 %    \end{macrocode}
-%|english| 設定時の |jabstract| 環境.
+%|english| $B@_Dj;~$N(B |jabstract| $B4D6-(B.
 %    \begin{macrocode}
 \ifist@english
 \renewenvironment{jabstract}%
@@ -2462,8 +2462,8 @@
 \fi
 %    \end{macrocode}
 %
-%\qparag{韻文}
-%論文には関係ないと思うなかれ.
+%\qparag{$B1$J8(B}
+%$BO@J8$K$O4X78$J$$$H;W$&$J$+$l(B.
 %    \begin{macrocode}
 \newenvironment{verse}
                {\let\\\@centercr
@@ -2476,7 +2476,7 @@
                {\endlist}
 %    \end{macrocode}
 %
-%\qparag{引用}
+%\qparag{$B0zMQ(B}
 %    \begin{macrocode}
 \newenvironment{quotation}
                {\list{}{\listparindent 1.5em%
@@ -2493,7 +2493,7 @@
 %
 %\qparag{Titlepage}
 %\changes{v1.1c}{2005/02/27}
-%  {titlepage 環境の変更: carepage 時の対策.}
+%  {titlepage $B4D6-$NJQ99(B: carepage $B;~$NBP:v(B.}
 %    \begin{macrocode}
 \newenvironment{titlepage}
     {\ifist@carepage \cleardoublepage \fi
@@ -2510,8 +2510,8 @@
     }
 %    \end{macrocode}
 %
-%\qparag{付録}
-%これは環境じゃないけど.
+%\qparag{$BIUO?(B}
+%$B$3$l$O4D6-$8$c$J$$$1$I(B.
 %    \begin{macrocode}
 \newcommand\appendix{\par
   \setcounter{chapter}{0}%
@@ -2521,9 +2521,9 @@
 %    \end{macrocode}
 %
 %^^A----------------
-%\subsection{既存の環境のパラメタ設定}
+%\subsection{$B4{B8$N4D6-$N%Q%i%a%?@_Dj(B}
 %
-%全て \PKN{report} のまま.
+%$BA4$F(B \PKN{report} $B$N$^$^(B.
 %    \begin{macrocode}
 \setlength\arraycolsep{5\p@}
 \setlength\tabcolsep{6\p@}
@@ -2539,11 +2539,11 @@
 %    \end{macrocode}
 %
 %^^A----------------
-%\subsection{フロートの定義}
+%\subsection{$B%U%m!<%H$NDj5A(B}
 %
-%今では \PKN{report} と完全に同じにしている.
-%(v1.0 ではこの定義を \PKN{j-report} と同じにして,
-%別のパラメタ設定で \PKN{report} に合わせていた.)
+%$B:#$G$O(B \PKN{report} $B$H40A4$KF1$8$K$7$F$$$k(B.
+%(v1.0 $B$G$O$3$NDj5A$r(B \PKN{j-report} $B$HF1$8$K$7$F(B,
+%$BJL$N%Q%i%a%?@_Dj$G(B \PKN{report} $B$K9g$o$;$F$$$?(B.)
 %    \begin{macrocode}
 \newcounter{figure}[chapter]
 \renewcommand \thefigure
@@ -2573,7 +2573,7 @@
                {\end@dblfloat}
 %    \end{macrocode}
 %
-%\qparag{キャプション}
+%\qparag{$B%-%c%W%7%g%s(B}
 %    \begin{macrocode}
 \newlength\abovecaptionskip
 \newlength\belowcaptionskip
@@ -2592,7 +2592,7 @@
 %    \end{macrocode}
 %
 %^^A----------------
-%\subsection{旧式のフォント選択コマンド}
+%\subsection{$B5l<0$N%U%)%s%HA*Br%3%^%s%I(B}
 %
 %    \begin{macrocode}
 \DeclareOldFontCommand{\rm}{\normalfont\rmfamily}{\mathrm}
@@ -2607,9 +2607,9 @@
 %    \end{macrocode}
 %
 %^^A----------------
-%\subsection{相互参照}
+%\subsection{$BAj8_;2>H(B}
 %
-%\qparag{目次}
+%\qparag{$BL\<!(B}
 %    \begin{macrocode}
 \newcommand\@pnumwidth{1.55em}
 \newcommand\@tocrmarg{2.55em}
@@ -2664,7 +2664,7 @@
 \newcommand*\l@subparagraph{\@dottedtocline{5}{12em}{6em}}
 %    \end{macrocode}
 %
-%\qparag{図目次・表目次}
+%\qparag{$B?^L\<!!&I=L\<!(B}
 %    \begin{macrocode}
 \newcommand\listoffigures{%
     \if@twocolumn
@@ -2695,13 +2695,13 @@
 \let\l@table\l@figure
 %    \end{macrocode}
 %
-%\qparag{参考文献リスト}
-%学位論文では参考文献リストの見出し(つまり ``References'')が
-%目次に載るのが正しいらしいので |\addcontentsline| を加えた.
-%ちなみに v1.0 でそうならなかったのは,
-%\PKN{report}, \PKN{j-report} がそうでないから.
+%\qparag{$B;29MJ88%%j%9%H(B}
+%$B3X0LO@J8$G$O;29MJ88%%j%9%H$N8+=P$7(B($B$D$^$j(B ``References'')$B$,(B
+%$BL\<!$K:\$k$N$,@5$7$$$i$7$$$N$G(B |\addcontentsline| $B$r2C$($?(B.
+%$B$A$J$_$K(B v1.0 $B$G$=$&$J$i$J$+$C$?$N$O(B,
+%\PKN{report}, \PKN{j-report} $B$,$=$&$G$J$$$+$i(B.
 %\changes{v1.1a}{2005/02/24}
-%  {thebibliography 中に `addcontentsline 追加.}
+%  {thebibliography $BCf$K(B `addcontentsline $BDI2C(B.}
 %    \begin{macrocode}
 \newdimen\bibindent
 \setlength\bibindent{1.5em}
@@ -2729,7 +2729,7 @@
 \let\@openbib@code\@empty
 %    \end{macrocode}
 %
-%\qparag{索引}
+%\qparag{$B:w0z(B}
 %    \begin{macrocode}
 \newenvironment{theindex}
                {\if@twocolumn
@@ -2752,8 +2752,8 @@
 \newcommand\indexspace{\par \vskip 10\p@ \@plus5\p@ \@minus3\p@\relax}
 %    \end{macrocode}
 %
-%\qparag{脚注}
-%なぜここにあるの?
+%\qparag{$B5SCm(B}
+%$B$J$<$3$3$K$"$k$N(B?
 %    \begin{macrocode}
 \renewcommand\footnoterule{%
   \kern-3\p@
@@ -2767,14 +2767,14 @@
 %    \end{macrocode}
 %
 %^^A----------------
-%\subsection{単語}
+%\subsection{$BC18l(B}
 %
 %\begin{macro}{\contentsname}
 %\begin{macro}{\listfigurename}
 %\begin{macro}{\listtablename}
 %\begin{macro}{\bibname}
 %\begin{macro}{\indexname}
-%目次・図目次・表目次・参考文献一覧・目次の部に付される見出し.
+%$BL\<!!&?^L\<!!&I=L\<!!&;29MJ88%0lMw!&L\<!$NIt$KIU$5$l$k8+=P$7(B.
 %    \begin{macrocode}
 \newcommand\contentsname{Contents}
 \newcommand\listfigurename{List of Figures}
@@ -2789,7 +2789,7 @@
 %\end{macro}
 %\begin{macro}{\figurename}
 %\begin{macro}{\tablename}
-%図(|figure|), 表(|table|)のキャプションで用いられる.
+%$B?^(B(|figure|), $BI=(B(|table|)$B$N%-%c%W%7%g%s$GMQ$$$i$l$k(B.
 %    \begin{macrocode}
 \newcommand\figurename{Figure}
 \newcommand\tablename{Table}
@@ -2799,7 +2799,7 @@
 %\begin{macro}{\partname}
 %\begin{macro}{\chaptername}
 %\begin{macro}{\appendixname}
-%部(|\part|), 章(|\chapter|)および付録中の章の見出しで用いられる.
+%$BIt(B(|\part|), $B>O(B(|\chapter|)$B$*$h$SIUO?Cf$N>O$N8+=P$7$GMQ$$$i$l$k(B.
 %    \begin{macrocode}
 \newcommand\partname{Part}
 \newcommand\chaptername{Chapter}
@@ -2810,7 +2810,7 @@
 %\end{macro}
 %\begin{macro}{\eabstractname}
 %\begin{macro}{\jabstractname}
-%英文要旨(|eabstract|)および和文要旨(|jabstract|)の見出し.
+%$B1QJ8MW;](B(|eabstract|)$B$*$h$SOBJ8MW;](B(|jabstract|)$B$N8+=P$7(B.
 %    \begin{macrocode}
 \newcommand\eabstractname{Abstract}
 \newcommand\jabstractname{\ist@j@abst}
@@ -2824,11 +2824,11 @@
 %\begin{macro}{\jinterimname}
 %\begin{macro}{\thesisgrade}
 %\begin{macro}{\ist@whatscience}
-%表紙の中で用いられる語句.
-%v1.1f から |\jinterimname| を空白(|\quad|)から
-%「中間報告」に変更した.
-%中間報告(要旨提出)の様式には不明な点も多いのだが,
-%これが最も正しいことにしてしまおう.
+%$BI=;f$NCf$GMQ$$$i$l$k8l6g(B.
+%v1.1f $B$+$i(B |\jinterimname| $B$r6uGr(B(|\quad|)$B$+$i(B
+%$B!VCf4VJs9p!W$KJQ99$7$?(B.
+%$BCf4VJs9p(B($BMW;]Ds=P(B)$B$NMM<0$K$OITL@$JE@$bB?$$$N$@$,(B,
+%$B$3$l$,:G$b@5$7$$$3$H$K$7$F$7$^$*$&(B.
 %    \begin{macrocode}
 \if@seniorthesis
  \newcommand\ethesisname{A Senior Thesis}
@@ -2860,13 +2860,13 @@
 %\end{macro}
 %\end{macro}
 %
-%以下は各自で設定するもの.
+%$B0J2<$O3F<+$G@_Dj$9$k$b$N(B.
 %\begin{macro}{\etitle}
 %\begin{macro}{\jtitle}
-%標題.
-%|\@etitle| が英文標題を表し,
-%|\etitle{|\meta{str}|}| は |\@etitle| を \meta{str} に定義する.
-%他のコマンドも同様.
+%$BI8Bj(B.
+%|\@etitle| $B$,1QJ8I8Bj$rI=$7(B,
+%|\etitle{|\meta{str}|}| $B$O(B |\@etitle| $B$r(B \meta{str} $B$KDj5A$9$k(B.
+%$BB>$N%3%^%s%I$bF1MM(B.
 %    \begin{macrocode}
 \def\etitle#1{\gdef\@etitle{#1}}
 \def\jtitle#1{\gdef\@jtitle{#1}}
@@ -2875,7 +2875,7 @@
 %\end{macro}
 %\begin{macro}{\eauthor}
 %\begin{macro}{\jauthor}
-%著者名.
+%$BCx<TL>(B.
 %    \begin{macrocode}
 \def\eauthor#1{\gdef\@eauthor{#1}}
 \def\jauthor#1{\gdef\@jauthor{#1}}
@@ -2884,7 +2884,7 @@
 %\end{macro}
 %\begin{macro}{\esupervisor}
 %\begin{macro}{\jsupervisor}
-%指導教官名.
+%$B;XF36541L>(B.
 %    \begin{macrocode}
 \def\esupervisor#1{\gdef\@esupervisor{#1}}
 \def\jsupervisor#1{\gdef\@jsupervisor{#1}}
@@ -2892,14 +2892,14 @@
 %\end{macro}
 %\end{macro}
 %\begin{macro}{\supervisortitle}
-%指導教官の職名.
+%$B;XF36541$N?&L>(B.
 %    \begin{macrocode}
 \def\supervisortitle#1{\gdef\@supervisortitle{#1}}
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\@etitle}
 %\begin{macro}{\@jtitle}
-%これらの項目が未設定だとエラーにする.
+%$B$3$l$i$N9`L\$,L$@_Dj$@$H%(%i!<$K$9$k(B.
 %    \begin{macrocode}
 \def\@etitle{\ist@err@notdefd\etitle}
 \def\@jtitle{\ist@err@notdefd\jtitle}
@@ -2914,10 +2914,10 @@
 %
 %\begin{macro}{\@date}
 %\begin{macro}{\today}
-%日付が指定されてないとエラーにする.
-%ただし |\today| は有効である.
+%$BF|IU$,;XDj$5$l$F$J$$$H%(%i!<$K$9$k(B.
+%$B$?$@$7(B |\today| $B$OM-8z$G$"$k(B.
 %\changes{v1.1a}{2005/02/24}
-%  {\@date の初期値をエラー発生に変更.}
+%  {\@date $B$N=i4|CM$r%(%i!<H/@8$KJQ99(B.}
 %    \begin{macrocode}
 \def\@date{\ist@err@notdefd\@date}
 \def\today{\ifcase\month\or
@@ -2931,13 +2931,13 @@
 %\begin{macro}{\supervisortitleline}
 %\begin{macro}{\@supervisortitleline}
 %\begin{macro}{\thesupervisortitle}
-%指導教官の職名の行の全体.
-%この指定の中で |\@supervisortitle| を参照する必要が
-%あるので, これを |\thesupervisortitle| として表に出しておく.
-%この項目の初期値は ``|\@supervisortitle| of |\ist@whatscience|''
-%で, |\ist@whatscience| は ``Information Science'' (|senior|)
-%または ``Computer Science'' (|master|/|doctor|) としている.
-%本当はどうするのが正しいのだろう?
+%$B;XF36541$N?&L>$N9T$NA4BN(B.
+%$B$3$N;XDj$NCf$G(B |\@supervisortitle| $B$r;2>H$9$kI,MW$,(B
+%$B$"$k$N$G(B, $B$3$l$r(B |\thesupervisortitle| $B$H$7$FI=$K=P$7$F$*$/(B.
+%$B$3$N9`L\$N=i4|CM$O(B ``|\@supervisortitle| of |\ist@whatscience|''
+%$B$G(B, |\ist@whatscience| $B$O(B ``Information Science'' (|senior|)
+%$B$^$?$O(B ``Computer Science'' (|master|/|doctor|) $B$H$7$F$$$k(B.
+%$BK\Ev$O$I$&$9$k$N$,@5$7$$$N$@$m$&(B?
 %    \begin{macrocode}
 \newcommand\thesupervisortitle{\@supervisortitle}
 \newcommand*\supervisortitleline[1]{\gdef\@supervisortitleline{#1}}
@@ -2954,18 +2954,18 @@
 %\begin{macro}{\ist@j@doctor}
 %\begin{macro}{\ist@j@abst}
 %\begin{macro}{\ist@j@interim}
-%\qparag{和文語句}
-%欧文用 \TeX\ で通すという無理をするために,
-%ちょっと |\catcode| している.
-%気にしてはいけない.
+%\qparag{$BOBJ88l6g(B}
+%$B2$J8MQ(B \TeX\ $B$GDL$9$H$$$&L5M}$r$9$k$?$a$K(B,
+%$B$A$g$C$H(B |\catcode| $B$7$F$$$k(B.
+%$B5$$K$7$F$O$$$1$J$$(B.
 %    \begin{macrocode}
 \ifist@english \catcode`\.=14 \else \catcode`\.=9 \fi
-.\newcommand\ist@j@senior{卒業論文}
-.\newcommand\ist@j@master{修士論文}
-.\newcommand\ist@j@doctor{博士論文}
-.\newcommand\ist@j@abst{論文要旨}
-.\newcommand\ist@j@interim{中間報告}
-.\newcommand\ist@jparen[1]{（#1）}
+.\newcommand\ist@j@senior{$BB46HO@J8(B}
+.\newcommand\ist@j@master{$B=$;NO@J8(B}
+.\newcommand\ist@j@doctor{$BGn;NO@J8(B}
+.\newcommand\ist@j@abst{$BO@J8MW;](B}
+.\newcommand\ist@j@interim{$BCf4VJs9p(B}
+.\newcommand\ist@jparen[1]{$B!J(B#1$B!K(B}
 \catcode`\.=12\relax
 %    \end{macrocode}
 %\end{macro}
@@ -2975,9 +2975,9 @@
 %\end{macro}
 %
 %^^A----------------
-%\subsection{初期化}
+%\subsection{$B=i4|2=(B}
 %
-%\LaTeX\ のいくつかの命令を無効にする.
+%\LaTeX\ $B$N$$$/$D$+$NL?Na$rL58z$K$9$k(B.
 %    \begin{macrocode}
 \def\title{\ist@err@invalid\title}
 \def\author{\ist@err@invalid\author}
@@ -2985,16 +2985,16 @@
 \def\abstract{\ist@err@invalid\abstract}
 %    \end{macrocode}
 %
-%欧文 \TeX\ 使用時は |ist-en.clo| を読み込む.
+%$B2$J8(B \TeX\ $B;HMQ;~$O(B |ist-en.clo| $B$rFI$_9~$`(B.
 %    \begin{macrocode}
 \if e\ist@engine
   \input{ist-en.clo}
 \fi
 %    \end{macrocode}
 %
-%|\sloppy| の定義をかなり sloppy になるように直した.
-%|sloppy| オプションが指定されているならば |\sloppy| にする.
-%残りは \PKN{report} のまま.
+%|\sloppy| $B$NDj5A$r$+$J$j(B sloppy $B$K$J$k$h$&$KD>$7$?(B.
+%|sloppy| $B%*%W%7%g%s$,;XDj$5$l$F$$$k$J$i$P(B |\sloppy| $B$K$9$k(B.
+%$B;D$j$O(B \PKN{report} $B$N$^$^(B.
 %    \begin{macrocode}
 \setlength\columnsep{10\p@}
 \setlength\columnseprule{0\p@}
@@ -3020,8 +3020,8 @@
 %    \end{macrocode}
 %
 %^^A----------------
-%\subsection{終了}
-%お疲れ様でした. (誰にいってるの?)
+%\subsection{$B=*N;(B}
+%$B$*Hh$lMM$G$7$?(B. ($BC/$K$$$C$F$k$N(B?)
 %
 %    \begin{macrocode}
 %</!isten>
@@ -3029,33 +3029,33 @@
 %
 %
 %^^A========================================================
-%\section{クラスオプションファイル ist-en.clo}
+%\section{$B%/%i%9%*%W%7%g%s%U%!%$%k(B ist-en.clo}
 %\label{sec:Ist-en}
 %^^A--------------------------------------------------------
 %
 %\noindent
-%警告: この節の内容は, 読者の精神に影響を与えるような
-%表現を含みます.
+%$B7Y9p(B: $B$3$N@a$NFbMF$O(B, $BFI<T$N@:?@$K1F6A$rM?$($k$h$&$J(B
+%$BI=8=$r4^$_$^$9(B.
 %\par\medskip
 %
-%このソースをオプション `|isten|' 付きで \DCN{docstrip} で
-%処理すると, ファイル |ist-en.clo| が得られる.
-%これを用意しておくと, 欧文用の \LaTeX\ で
-%(表紙部と要旨に和文文字が入ったままの)論文のソースが
-%コンパイル可能となる
-%(|english| オプション指定時と同じ出力).
-%ただし, この機能は実験的なものであり,
-%必ずしも正しく動作する保証はない.
+%$B$3$N%=!<%9$r%*%W%7%g%s(B `|isten|' $BIU$-$G(B \DCN{docstrip} $B$G(B
+%$B=hM}$9$k$H(B, $B%U%!%$%k(B |ist-en.clo| $B$,F@$i$l$k(B.
+%$B$3$l$rMQ0U$7$F$*$/$H(B, $B2$J8MQ$N(B \LaTeX\ $B$G(B
+%($BI=;fIt$HMW;]$KOBJ8J8;z$,F~$C$?$^$^$N(B)$BO@J8$N%=!<%9$,(B
+%$B%3%s%Q%$%k2DG=$H$J$k(B
+%(|english| $B%*%W%7%g%s;XDj;~$HF1$8=PNO(B).
+%$B$?$@$7(B, $B$3$N5!G=$O<B83E*$J$b$N$G$"$j(B,
+%$BI,$:$7$b@5$7$/F0:n$9$kJ]>Z$O$J$$(B.
 %
-%\noindent ※ 制限事項:\quad
-%|\jauthor| 等のコマンドの場合, 以降に出現する
-%最初の ``|}| (+ 空白文字) + 改行'' の中の |}| を引数の
-%終わりを示す |}| と見なす.
-%これが実際と相違する場合には正しく動作しない.
-%特に SJIS の場合, 和文文字 2 バイト目の 7D$_{16}$ が |}| と
-%認識されるので注意.
-%|\begin{jabstract}| に関しては, 以降の最初の |\end{jabstract}| の
-%出現を終端とし, |verbatim| と同じ制限がかかる.
+%\noindent $B"((B $B@)8B;v9`(B:\quad
+%|\jauthor| $BEy$N%3%^%s%I$N>l9g(B, $B0J9_$K=P8=$9$k(B
+%$B:G=i$N(B ``|}| (+ $B6uGrJ8;z(B) + $B2~9T(B'' $B$NCf$N(B |}| $B$r0z?t$N(B
+%$B=*$o$j$r<($9(B |}| $B$H8+$J$9(B.
+%$B$3$l$,<B:]$HAj0c$9$k>l9g$K$O@5$7$/F0:n$7$J$$(B.
+%$BFC$K(B SJIS $B$N>l9g(B, $BOBJ8J8;z(B 2 $B%P%$%HL\$N(B 7D$_{16}$ $B$,(B |}| $B$H(B
+%$BG'<1$5$l$k$N$GCm0U(B.
+%|\begin{jabstract}| $B$K4X$7$F$O(B, $B0J9_$N:G=i$N(B |\end{jabstract}| $B$N(B
+%$B=P8=$r=*C<$H$7(B, |verbatim| $B$HF1$8@)8B$,$+$+$k(B.
 %
 %    \begin{macrocode}
 %<*isten>
