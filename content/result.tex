@@ -1,0 +1,19 @@
+\section{Experiment Testing}
+The experiment will be conducted with a number of existing proposed topic models as mentioned related work section above. We conduct the experiment with those baseline algorithms and evaluate them in terms of accuracy and running time. Some of the source code of competitive were provided by their authors in Github\footnote[1]{For instance, Correlated Topic Model (CTM), \href{https://github.com/blei-lab/ctm-c}{https://github.com/blei-lab/ctm-c}}. The outcome result will be extensively studied and conclude the insight behind the algorithms and methodologies. Detail to be stated in section \ref{AD}.
+\section{Dataset}To evaluate the performance of the model, we select the two most poplar data set in the context of topic model evaluation. 20NewsGroup and Reuter RCV1-v2 datasets. 20NewsGroup consist of 18,846 news group documents and the RCV1-v2 includes 10,000 documents in total. Both of the dataset will be preprocessed to remove stopwords and stemming before the evaluation. If desirable, it will also to be applied to NIST TREC dataset and NII NTCIR dateset for further application studies.
+\section{Quantitative Result}
+In this section, we evaluate the model with the following metric adopted from \cite{dieng_dynamic_2019}: Perplexity, Topic Coherence (TC), Topic Diversity (TD). %and Topic Quality (TQ).
+\paragraph{Perplexity}The proposed model will be evaluated with perplexity metric. The metric will examine how well the model can tackle with unseen data. It is equivalent algebraically to the inverse of the geometric mean per-word likelihood. Lower perplexity scores mean better.\begin{equation*}
+Perplexity(D_{test})=\exp{{-\frac{\sum_{d=1}^{M}\sum_{m=1}^{N_d}\log p(w_{dm})}{\sum_{d=1}^{M}N_d}}}
+\end{equation*}
+\paragraph{Topic Coherence}\begin{equation*}
+TC=\frac{1}{K}\sum_{k=1}^{K}\frac{1}{45}\sum_{i=1}^{10}\sum_{j=i+1}^{10}f(w_i^{(k)},w_j^{(k)})\end{equation*}
+where $\{w_1^{(k)},\cdots,w_{10}^{(k)}\}$ denotes top-10 most likely words in topic k. And function $f(\cdot,\cdot)$ is te normalized pointwise mutual information.\begin{equation*}
+f(w_i,w_j)=\frac{\log\frac{P(w_i,w_j)}{P(w_i)P(w_j)}}{-\log P(w_i,w_j)}\end{equation*}
+\paragraph{Topic Diversity}We combine coherence with a second metric, topic diversity. Then define topic diversity to be the percentage of unique words in the top 25 words of all topics. Diversity close to 0 indicates redundant topics; diversity close to 1 indicates more varied topics. We define the overall metric for the quality of a model’s topics as the product of its topic diversity and topic coherence.
+\begin{align*}
+TD=\frac{|A\cap B|}{|A \cup B|}
+\end{align*}
+where $ A $ and $ B $ are top words from two topics.
+% \paragraph{Topic Quality}
+\section{Qualitative Result}The proposed model will be evaluated with a number of specifically selected topic and examined with their performance separately. The result will be exhaustively compared with other existing models.

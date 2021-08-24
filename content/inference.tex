@@ -1,6 +1,29 @@
+\section{Inference}
+\subsection{Variational Inference}
+Given that posterior approximiation is not alway practical in real world application. Approximation method are necessary to be apply. Their are two main approach for the posterior approximation: Markov Chain Monte Carlo(MCMC) Variational Inference. Variational Inference is a method approximating the posterior in optimization fashion.
+\subsection{Stochastic Variational Inference}
+Stochastic Variational Inference (SVI) is a kind of approach. 
+Two main improvement are made by the SVI: stochastic optimization and noisy gradient. 
+\subsection{Autoencoding Variational Bayes (AEVB)}
+the latent variable is parameterized by neural network
+\begin{align*}
+z = \mathcal{N}(\mu_{\phi}(x_i), \sigma_{\phi}(x_i))
+\end{align*}
+\begin{align*}
+\mathcal{L}=\mathbb{E}_{z\sim\mathcal{N}(\mu_{\phi}(x_i),\sigma_\phi(x_i))}\left[\log p_\theta(x_i|z)\right]-D_{KL}\left(q_\phi(z|x_i)||p(z)\right)
+\end{align*}
+\subsection{Reparameterization trick}
+\begin{align*}
+z= \mu_{\phi}(x_i)+\epsilon\sigma_\phi(x_i)\text{, }\epsilon\sim\mathcal{N}(0,1)
+\end{align*}
+\begin{align*}
+\mathcal{L}=\mathbb{E}_{\epsilon\sim N(0,1)}\left[\log p_\theta(x_i|\mu_{\phi}(x_i)+\epsilon\sigma_\phi(x_i))\right]-D_{KL}\left(q_\phi(z|x_i)||p(z)\right)
+\end{align*}
+\section{Posterior Inference \& Parameter Estimation} Since the exact inference of the posterior is intractable in real application, we employed approximation scheme for the posterior inference. The popular approaches are Markov Chain Monte Carlo Method (MCMC) and Variational Inference (VI)\cite{blei_variational_2006,hoffman_stochastic_2013}. Gibbs sampling is one of the MCMC method and it is fast to compute the approximation and easy to the implementation. Then, Variational EM algorithm to be carried out for maximizing the likelihood over all word in corpus in the document. An alternative way to perform estimation is Monte Carlo method.
+
 To perform inference to the model. We first derive the equation for the method.
 % Marginal Likelihood
-\subsection{Marginal Likelihood}
+\section{Marginal Likelihood}
 \begin{align*}
 \mathcal{L}(\alpha,\rho)=\sum_{d=1}^{D}\log p(w_d|\alpha,\rho)=\sum_{d=1}^{D}\log p(w_d|\alpha)
 \end{align*}
@@ -11,11 +34,11 @@ p(w_d|\alpha)=\int p(\delta_d)\prod_{n=1}^{N_d}p(w_{dn}|\delta_d,\alpha)d\delta_
 p(w_{dn}|\delta_d,\alpha)=\sum_{k=1}^{K}\theta_{dk}\beta_{k,w_{dn}}
 \end{align*}
 % Inference Equation
-\subsection{ELBO \& Variational Inference}
+\section{ELBO \& Variational Inference}
 % Variational Inference
 % KL-divergence for the logistic normal distribution
 The KL divergence for the logistic normal distribution become the following
-\subsection{ELBO for LKJ}
+\section{ELBO for LKJ}
 Joint Distribution
 \begin{align*}
 p(W,Z,\eta,\Sigma|\beta,\mu,\gamma)&=P(W|Z)P(Z|\eta)P(\eta|\mu,\Sigma)\\

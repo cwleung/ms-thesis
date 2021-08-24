@@ -1,0 +1,98 @@
+In this section, we give short description on topic model techniques and several key components and terminologies related to LDA model.
+\section{Topic Modeling} Several topic modeling techniques include non-negative matrix factorization (NMF), Latent Semantic Aanlysis \cite{landauer_solution_1997}, probabilistic Latent Semantic Analysis (pLSA) \cite{hofmann_probabilistic_2013} and Latent Dirichlet Allocaiton (LDA)\cite{blei_latent_2003}.
+\section{Latent Dirichlet Allocation (LDA)} Latent Dirichlet Allocation\cite{blei_latent_2003} is a powerful tool in Latent Variable Model (LVM). It is found extensively useful in finding hidden topic model in a massive document set. The model is inspired by probabilistic semantic analysis (pLSA)\cite{hofmann_probabilistic_2013} and its naming was taken in a similar sense.
+In the following, the LDA model will be explain with graphical model approach. In the figure,This define a joint posterior distribution $p(\theta,z,\beta|w)$. \begin{itemize}
+\item $z_d$, $n$ is the per-word topic assignment.
+\item $\theta_d$ is the per-document topic proportion.
+\item $\theta_k$ is the per-corpus topic distribution.
+\end{itemize}
+The procedure for LDA as follows. \begin{enumerate}
+\item For each topic k$\in$\{1,...,K\}, draw a multinomial distribution $\beta_k$ from a Dirichlet distribution with parameter $\lambda$.
+\item For each document d$\in$\{1,...,M\}, draw a multinomial distribution $\theta_d$ from a Dirichlet distribution with parameter $\alpha$.
+\item For each word position n$\in$\{1,...,N\}, select a topic $z_n$ from the Multinomial distribution parameterized by $\theta_d$.
+\item Choose the observed word $w_n$ from the distribution $\theta_{z_n}$.
+\end{enumerate}
+The mathematical formulation for LDA as follows.
+\begin{itemize}
+\item Joint Distribution $p(\beta_{1:K},\theta_{1:D},z_{1:D},w_{1:D})$
+\begin{equation*}
+\prod_{i=1}^{K}p(\beta_i)\prod_{d=1}^{D}p(\theta_d)(\prod_{n=1}^{N}p(z_{d,n}|\theta_d)p(w_{d,n}|\beta_{1:K},z_{d,n}))
+\end{equation*} 
+\item conditioning on $w_{1:D}$
+\begin{equation*}
+p(\beta_{1:K},\theta_{1:D},z_{1:D}|w_{1:D})=\frac{p(\beta_{1:K},\theta_{1:D},z_{1:D},w_{1:D})}{p(w_{1:D})}
+\end{equation*}
+\end{itemize}
+\section{Correlated Topic Model}
+Correlated Topic Model (CTM)\cite{blei_correlated_2007} is an extension of LDA that utilize the correlation of latent topics, and relates the similar documents together. Instead of Dirichlet distribution, CTM applies multivariate logistic-normal distribution to model the word distribution. 
+The model contain $ K $ topics distribution as $ \beta_{1:K} $, 
+$ z_{n,d} $ is the topic assigned to the n-th topic and d-th document.
+$ \theta_d $ is the corresponding proportion a topic is distributed to d-th document.
+$ \mu $ and $ \Sigma $ are the corresponding mean and $ K \times K $ covariance matrix of the distribution between documents.
+According to the paper\cite{blei_correlated_2007}, the procedure as follows,
+\begin{enumerate}
+\item Draw $\eta_d|\{\mu,\Sigma\}~N(\mu,\Sigma)$
+\item For $ n \in \{1,\dots,N_d\} $:
+\begin{enumerate}
+\item Draw topic assignment $ Z_{d,n}|\eta_d $ from Mult($ f(\eta_d) $).
+\item Draw word $ W_{d,n}|\{z_{z,n},\beta_{1:K}\} $ from Mult($ \beta_{z_d,n} $).
+\end{enumerate}
+\end{enumerate}
+The posterior distribution of CTM given a topic $ w $ and a model $\{\beta{1:K},\mu,\Sigma\}$ as follows,
+\begin{equation*}
+\begin{array}{l}
+p(\eta,z|w,\beta_{1:K},\mu,\Sigma)
+=\frac{p(\eta|\mu,\Sigma)\prod_{n=1}^{N}p(z_n|\eta)p(w_n|z_n,\beta_{1:K})}{\int p(\eta|\mu,\Sigma)\prod_{n=1}^{N}\sum_{z_n=1}^{K}(z_n,\beta_{1:K})d\eta}
+\end{array}
+\end{equation*}
+at each iteration, it draws a real valued random vector from the distribution and then maps it to the K-1 dimension simplex to obtain a multinomial parameter. This defines characteristic of the logistic Normal distribution. And the covariance defines how much the documents are correlated. 
+%\section{Extensions of LDA} Dynamic Latent Dirichlet Allocation\cite{blei_probabilistic_2012} for continuous time data. Relational Latent Dirichlet Allocation \cite{chang_relational_nodate} . Supervised Latent Dirichlet Allocation \cite{mcauliffe_supervised_2008} includes labeled data which supposed to be helpful in several particular application areas such as movie review and sparse data prediction. Later LDA was extended to nonparametric version, hierarchical Latent Dirichlet Allocation (hLDA)\cite{teh_hierarchical_2006}, which follows a stochastic process called n-Chinese Restaurant Process (nCRP)\cite{teh_tutorial_nodate}. hLDA maintain a hierarchical structure of topic instead of flat structure in LDA.
+\section{LKJ Correlation Distribution}
+LKJ distribution is a distribution for modeling correlation matrix. The distribution is described as
+\begin{align*}
+f(C|\eta)=&2^{\sum_{k=1}^{K-1}(2(\eta-1)+K-k)(K-k)}\prod_{k=1}^{K-1}(B(\eta+(K-k-1)/2,\eta+(K-k-1)/2)^{K-k})(\det(C)^{\eta-1})
+\end{align*}
+When $ \eta=1 $ it is simply a uniform distribution allocated over the correlation matrix. If $ \eta>0 $, it is a modal correlation matrix. The density concentrated around center when the $ \eta $ value become larger.
+To apply it into normal distribution as covariance, we could apply the following transformation and turn it into covariance matrix.
+\begin{align*}
+\Sigma=diag(\sigma)\cdot C \cdot diag(\sigma)
+\end{align*}
+% Transformation
+Directly drawing correlation matrix from LKJ distribution is not practical in reality case. It is common to draw correlation matrix from factorized cholesky LKJ distribution instead, where the distribution is described as
+\begin{align*}
+LKJCholesky(L|\eta)&\propto|J|\det(LL^\top)^{(\eta-1)}\\
+&=\prod_{k=2}^{K}L_{kk}^{K-k+2\eta-2}
+\end{align*}
+The lower triangular matrix L is a Cholesky for the coorelation matrix iff $ L_{k,k}>0 $ 
+
+\section{Embedded Topic Model}
+Embedded Topic Model is one of the state-of-art approaches for topic model task. It takes word distribution $ \beta $ as a topic embedding for words. The word is drawn from the following equation,
+
+Similar to Word2Vec, the word distribution is a softmax function of the inner product of context matrix $ \rho $ and context embedding $ \alpha $.
+Embedding (Context Embedding)
+\section{Transformer}
+Transformer is the state-of-the-art neural network architecture and that has been applied in many domains, as one of the cornerstones research in Natural Language Processing. Original Transformer architecture is encoder-decoder structure. 
+\begin{figure}
+%\includegraphics[width=0.25\linewidth]{fig/transformer}
+\caption{Transformer Architecture}
+\label{fig:transformer}
+\end{figure}
+\subsection{Scaled Dot Product Attention}
+\begin{align*}
+\text{Attention}(Q,K,V) = \sigma\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\end{align*}
+\begin{align*}
+k_i, q_i\sim\mathcal{N}(0,\sigma)\rightarrow\text{Var}\left(\sum_{i=1}^{d_k}q_i\cdot k_i\right)=\sigma\cdot d_k
+\end{align*}
+\subsection{Multi-Head Attention}
+\begin{align*}
+\text{Multihead}(Q,K,V)=\text{Concat}(\text{head}_i,\dots,\text{head}_h)W^O \\
+\text{head}_i = \text{Attention}(QW_i^{Q}, KW_i^K,VW_i^V)
+\end{align*}
+\subsection{Positional Encoding}
+One drawback for Multi-Head Attention block is that it does not consider information about word positioning, 
+\[ PE_{(pos,i)} = \begin{cases} 
+\sin\left(\frac{pos}{10000^{i/d}model}\right) & \text{if }i \mod 2 = 0 \\
+\cos\left(\frac{pos}{10000^{(i-1)/d}model}\right) & \text{otherwise}
+       \end{cases}
+    \]

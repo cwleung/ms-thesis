@@ -1,4 +1,13 @@
-Related Works
+\section{Related Works}\label{AB}
+% #1 CTM
+Correlated Topic Model (CTM)\cite{blei_correlated_2007} is the original work that proposed to alleviate the problem LDA, which did not utilize the topic information between correlated topics. The proposed model replaced dirichlet distribution with a logistic-normal prior with covariance matrix to represent the relationship between topics.
+% #3 CGTM
+Xun \cite{he_efficient_2017} employed words embedding into Correlated Topic Model, the new correlated topic model as Correlated Gaussian Topic Model (CGTM). In their paper they make use of word embedding space and model the correlation between topics by calculation of similarity between words in the embedding space.
+% #2 CTMTE
+Similarly, He\cite{xun_correlated_nodate} proposed Correlated Topic Modeling with Topic Embedding (CTMTE), which transformed the topic distribution previously obtained into lower dimension topic embedding space. The correlation between topics were directly computed through the similarity calculation in the vector space. The paper stated it reduces the running time as a scalable framework into large applications.
+% #4 GATON
+Yang\cite{yang_graph_2020} introduced new topic model with Graph neural network techniques. The paper introduced Graph Attention TOpic Network (GATON) which hybridized the graph attention network (GAT) and amortized inference into application of topic modeling which supposed to reduce the require computation complexity.
+
 There have been a several of works focus on word embedding and topic model. Major of them combined statistical model and embedding approach to model topic distribution. In other words, representing a word by mapping every single word into continuous space
 -	Gaussian Topic Model models the topic using Gaussian distributions with latent means and covariances. 
 -	Correlated Topic model with embeddings the author combined the embedding method and correlated topic model. 

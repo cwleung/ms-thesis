@@ -3,6 +3,7 @@
 %-------------------
 
 \usepackage{amsmath,amssymb,amsfonts}
+\usepackage{hyperref}
 
 %-------------------
 \etitle{Correlated Topic Model with Transformer Embeddings}
@@ -34,23 +35,16 @@
 \mainmatter %% –{•¶
 \chapter{Introduction}
 \input{content/introduction}
-\section{Related Works}
 \input{content/relatedworks}
-\chapter{Background}
-\section{Topic Models}
-\subsection{Correlated Topic Model}
-\input{content/model/ctm}
-\subsection{Embedded Topic Model}
-\input{content/model/etm}
-\section{Embeddings}
-\section{Transformer}
-\input{content/model/transformer}
+\chapter{Background}\label{AA}
+\input{content/background}
 \chapter{Model Formulation}
 \section{Correlated Topic Model with Transformer Embeddings}
-\input{content/model/tetm}
+\input{content/model}
 \chapter{Inference and Estimation}
 \input{content/inference}
 \chapter{Results \& Evaluations}
+\input{content/result}
 \chapter{Conclusion}
 \input{content/conclusion}
 %-------------------
