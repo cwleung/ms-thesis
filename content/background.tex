@@ -1,5 +1,9 @@
 In this section, we give short description on topic model techniques and several key components and terminologies related to LDA model.
-\section{Topic Modeling} Several topic modeling techniques include non-negative matrix factorization (NMF), Latent Semantic Aanlysis \cite{landauer_solution_1997}, probabilistic Latent Semantic Analysis (pLSA) \cite{hofmann_probabilistic_2013} and Latent Dirichlet Allocaiton (LDA)\cite{blei_latent_2003}.
+\section{Topic Modeling} Several topic modeling techniques include non-negative matrix factorization (NMF), Latent Semantic Analysis \cite{landauer_solution_1997}, probabilistic Latent Semantic Analysis (pLSA) \cite{hofmann_probabilistic_2013} and Latent Dirichlet Allocation (LDA)\cite{blei_latent_2003}.
+
+\section{Word Embedding}
+% explain what is word embeddings
+
 \section{Latent Dirichlet Allocation (LDA)} Latent Dirichlet Allocation\cite{blei_latent_2003} is a powerful tool in Latent Variable Model (LVM). It is found extensively useful in finding hidden topic model in a massive document set. The model is inspired by probabilistic semantic analysis (pLSA)\cite{hofmann_probabilistic_2013} and its naming was taken in a similar sense.
 In the following, the LDA model will be explain with graphical model approach. In the figure,This define a joint posterior distribution $p(\theta,z,\beta|w)$. \begin{itemize}
 \item $z_d$, $n$ is the per-word topic assignment.
@@ -46,7 +50,6 @@ p(\eta,z|w,\beta_{1:K},\mu,\Sigma)
 \end{array}
 \end{equation*}
 at each iteration, it draws a real valued random vector from the distribution and then maps it to the K-1 dimension simplex to obtain a multinomial parameter. This defines characteristic of the logistic Normal distribution. And the covariance defines how much the documents are correlated. 
-%\section{Extensions of LDA} Dynamic Latent Dirichlet Allocation\cite{blei_probabilistic_2012} for continuous time data. Relational Latent Dirichlet Allocation \cite{chang_relational_nodate} . Supervised Latent Dirichlet Allocation \cite{mcauliffe_supervised_2008} includes labeled data which supposed to be helpful in several particular application areas such as movie review and sparse data prediction. Later LDA was extended to nonparametric version, hierarchical Latent Dirichlet Allocation (hLDA)\cite{teh_hierarchical_2006}, which follows a stochastic process called n-Chinese Restaurant Process (nCRP)\cite{teh_tutorial_nodate}. hLDA maintain a hierarchical structure of topic instead of flat structure in LDA.
 \section{LKJ Correlation Distribution}
 LKJ distribution is a distribution for modeling correlation matrix. The distribution is described as
 \begin{align*}
@@ -63,8 +66,11 @@ Directly drawing correlation matrix from LKJ distribution is not practical in re
 LKJCholesky(L|\eta)&\propto|J|\det(LL^\top)^{(\eta-1)}\\
 &=\prod_{k=2}^{K}L_{kk}^{K-k+2\eta-2}
 \end{align*}
-The lower triangular matrix L is a Cholesky for the coorelation matrix iff $ L_{k,k}>0 $ 
-
+The lower triangular matrix L is a Cholesky for the coorelation matrix iff $ L_{k,k}>0 $
+\begin{align*}
+\Sigma=diag(\sigma)\cdot LL^\top \cdot diag(\sigma)
+\end{align*}
+similarly, the transformation from LKJ Cholesky matrix to covariance matrix as above.
 \section{Embedded Topic Model}
 Embedded Topic Model is one of the state-of-art approaches for topic model task. It takes word distribution $ \beta $ as a topic embedding for words. The word is drawn from the following equation,
 
