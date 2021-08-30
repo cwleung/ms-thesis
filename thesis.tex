@@ -5,6 +5,15 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{hyperref}
 
+%\usepackage{color}
+%\usepackage{caption}
+%\usepackage{subcaption}
+%
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+\usepackage{algorithm2e}
+
 %-------------------
 \etitle{Correlated Topic Model with Transformer Embeddings}
 \jtitle{??????????????????????????}
@@ -14,7 +23,7 @@
 \esupervisor{Takano Akihiko}
 \jsupervisor{????}
 \supervisortitle{Professor} % Professor, etc.
-\date{August 23, 2021}
+\date{\today}
 
 %-------------------
 \begin{document}
@@ -28,25 +37,26 @@
 
 \frontmatter %% 前付け
 \tableofcontents % 目次
-%\listoffigures % 図目次
-%\listoftables % 表目次
+\listoffigures % 図目次
+\listoftables % 表目次
+\listofalgorithms
 %\lstlistoflistings % ソースコード目次
 %-------------------
 \mainmatter %% 本文
-\chapter{Introduction}
-\input{content/introduction}
-\input{content/relatedworks}
-\input{content/objective}
-\chapter{Background}\label{AA}
-\input{content/background}
-\chapter{Model Formulation}
+\chapter{Introduction}\label{ch1}
+\input{content/ch1/introduction}
+\input{content/ch1/relatedworks}
+\input{content/ch1/objective}
+\chapter{Background}\label{ch2}
+\input{content/ch2/background}
+\chapter{Model Formulation}\label{ch3}
 \section{Correlated Topic Model with Transformer Embeddings}
-\input{content/model}
-\chapter{Inference and Estimation}
-\input{content/inference}
-\chapter{Results \& Evaluations}
+\input{content/ch3/model}
+\chapter{Inference and Estimation}\label{ch4}
+\input{content/ch3/inference}
+\chapter{Results \& Evaluations}\label{ch5}
 \input{content/result}
-\chapter{Conclusion}
+\chapter{Conclusion}\label{ch6}
 \input{content/conclusion}
 %-------------------
 \bibliographystyle{plain} % 参考文献

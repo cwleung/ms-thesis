@@ -1,0 +1,44 @@
+\section{Related Works}\label{AB}
+%% Original models
+These topic models take bag-of-word assumption and model each document as an admixture of latent topics, which are multinomial distributions over words.
+% # NMF
+Nonnegative Matrix Factorization (NMF) \cite{bibid} uses singular value decomposition to construct latent topic and topic-word distribution from the document, which consist of document-topic distribution matrix and topic word distribution matrix.
+% # PLSA
+Probabilistic Latent Semantic Analysis (PLSA) \cite{hofmann_probabilistic_2013} is a probabilistic model assign every document in a single topic, and then assign word for every word position given the topic assignment.
+% # LDA
+Similar to PLSA, Latent Dirichlet Allocation (LDA) \cite{blei_latent_2003} advanced PLSA from the topic assumption documents, which every document consist of admixture of topic distribution.
+
+Some improvement exploit the correlation information between topics, which model the topic assignment with 
+
+Moreover, due to the  success of LDA. there have been a numbers of topic models proposed on top of the LDA model. Dynamic Latent Dirichlet Allocation\cite{blei_probabilistic_2012} was developed for continuous time data. Relational Latent Dirichlet Allocation \cite{chang_relational_nodate} . Supervised Latent Dirichlet Allocation \cite{mcauliffe_supervised_2008} includes labeled data which supposed to be helpful in several particular application areas such as movie review and sparse data prediction. Later LDA was extended to nonparametric version, hierarchical Latent Dirichlet Allocation (hLDA)\cite{teh_hierarchical_2006}, which follows a stochastic process called n-Chinese Restaurant Process (nCRP)\cite{teh_tutorial_nodate}. hLDA maintain a hierarchical structure of topic instead of flat structure in LDA. % pachinko LDA % 
+
+% # CTM
+Correlated Topic Model (CTM)\cite{blei_correlated_2007} is the original work that proposed to alleviate the problem LDA, which did not utilize the topic information between correlated topics. The proposed model replaced Dirichlet distribution with a logistic-normal prior with covariance matrix to represent the relationship between topics.
+% 
+
+%% Embedded Topic Models
+There have been a several of works focus on word embedding and topic model. Major of them combined statistical model and embedding approach to model topic distribution. In other words, representing a word by mapping every single word into continuous space.
+% # CGTM
+Xun \cite{he_efficient_2017} employed words embedding into Correlated Topic Model, the new correlated topic model as Correlated Gaussian Topic Model (CGTM). In their paper they make use of word embedding space and model the correlation between topics by calculation of similarity between words in the embedding space.
+% # CTMTE
+Similarly, He\cite{xun_correlated_nodate} proposed Correlated Topic Modeling with Topic Embedding (CTMTE), which transformed the topic distribution previously obtained into lower dimension topic embedding space. The correlation between topics were directly computed through the similarity calculation in the vector space. The paper stated it reduces the running time as a scalable framework into large applications.
+
+%% Amortized inference
+Amortized inference are common in implementing to topic models, specifically, a neural network architecture with encoder-decoder are used into topic model structure for model inference.
+% # AVITM
+Srivastava \cite{srivastava_autoencoding_2017} applied amortized variational inference to approximate the variational distribution of the model. Specifically, product of expert were used to collapse out the document-topic assignment parameter and simplify the inference process.
+% # ETM
+Dieng \cite{dieng_topic_2019} improve a model which on top of the ProdLDA topic model, implemented Word2Vec semantics to further improve the performance on topic coherence and predictive distribution.
+Some other attempts use graph techniques to model topic distributions.
+
+% Graph model
+% # GATON
+Yang\cite{yang_graph_2020} introduced new topic model with Graph neural network techniques. The paper introduced Graph Attention TOpic Network (GATON) which hybridized the graph attention network (GAT) and amortized inference into application of topic modeling which supposed to reduce the require computation complexity.
+% # GTM
+
+%% Bi-gram
+In past research, some considered bi-gram to take 
+% Wallach 06
+Wallach propopsed a topic model using bi-gram \cite{wallach_topic_2006}
+% Wang 07
+Wang \cite{wang_topical_2007} utilized the topic model to n-gram assumption
