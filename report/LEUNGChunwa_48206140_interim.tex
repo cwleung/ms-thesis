@@ -1,0 +1,35 @@
+\documentclass[master,interim,11pt]{iscs-thesis}
+% 論文の種類とフォントサイズをオプションに
+%-------------------
+\etitle{Correlated Topic Model with Transformer Embeddings}
+\jtitle{トランスフォーマーの埋め込みによる相関トピックモデル}
+%
+\eauthor{Chun Wa Leung}
+\jauthor{梁俊華}
+\esupervisor{Akihiko Takano}
+\jsupervisor{高野明彦}
+\supervisortitle{Professor} % Professor, etc.
+\date{\today}
+%-------------------
+\begin{document}
+\begin{eabstract}
+Topic Modeling is one of the most common information retrieval task in
+natural language processing. Such as latent Dirichlet allocation (LDA).
+However, as a classic statistical approach, which was not able to
+capture positional information from sequential input. At that point,
+traditional topic models perform poorly in generating words from large
+number of topics. In this research, we introduce Correlated Topic Model
+with Transformer Embeddings, a generative model where combine the
+advantage of using positional information of words and topic
+correlation. Specifically, transformer embedding maps topic words
+into latent space and further assign to its assigned topic. Moreover, we
+attempted to add a covariance prior to the topic model, LKJ correlation
+prior to logistic normal distribution, which aims to fit the correlation
+information from the data. The model was optimized using Stochastic
+Variational Inference (SVI). As result, our approach performs a better
+fit of the data than existing generative topic model and exhibit a
+better capability in obtaining high quality topics.
+\end{eabstract}
+\maketitle
+%-------------------
+\end{document}
