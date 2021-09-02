@@ -13,7 +13,7 @@
 %-------------------
 \begin{document}
 \begin{eabstract}
-Topic modeling is one of the most common information retrieval task in
+Topic Modeling is one of the most common information retrieval task in
 natural language processing. Such as latent Dirichlet allocation (LDA).
 However, as a classic statistical approach, which was not able to
 capture positional information from sequential input. At that point,
