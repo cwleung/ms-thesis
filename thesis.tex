@@ -1,10 +1,12 @@
-\documentclass[master,final,11pt]{iscs-thesis}
+\documentclass[master,11pt]{iscs-thesis}
 
 %-------------------
 
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{hyperref}
 
+\usepackage{tikz}
+\usetikzlibrary{bayesnet}
 %\usepackage{color}
 %\usepackage{caption}
 %\usepackage{subcaption}
@@ -12,29 +14,32 @@
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 
-\usepackage{algorithm2e}
+\usepackage[ruled]{algorithm2e}
 
 %-------------------
 \etitle{Correlated Topic Model with Transformer Embeddings}
 \jtitle{??????????????????????????}
 %
-\eauthor{Leung Chun Wa}
+\eauthor{Chun Wa Leung}
 \jauthor{???}
-\esupervisor{Takano Akihiko}
+\esupervisor{Akihiko Takano}
 \jsupervisor{????}
 \supervisortitle{Professor} % Professor, etc.
 \date{\today}
-
 %-------------------
 \begin{document}
 \begin{eabstract}
 \input{content/abstract}
 \end{eabstract}
+\begin{jabstract}
+\input{content/abstract}
+\end{jabstract}
 \maketitle
 %\begin{acknowledge}
 %Ack ack ack. 
 %\end{acknowledge}
-
+\switchinterim
+\switchenglish
 \frontmatter %% 前付け
 \tableofcontents % 目次
 \listoffigures % 図目次
@@ -43,6 +48,7 @@
 %\lstlistoflistings % ソースコード目次
 %-------------------
 \mainmatter %% 本文
+\titlepage
 \chapter{Introduction}\label{ch1}
 \input{content/ch1/introduction}
 \input{content/ch1/relatedworks}
@@ -50,7 +56,6 @@
 \chapter{Background}\label{ch2}
 \input{content/ch2/background}
 \chapter{Model Formulation}\label{ch3}
-\section{Correlated Topic Model with Transformer Embeddings}
 \input{content/ch3/model}
 \chapter{Inference and Estimation}\label{ch4}
 \input{content/ch3/inference}
@@ -59,7 +64,14 @@
 \chapter{Conclusion}\label{ch6}
 \input{content/conclusion}
 %-------------------
+\cite{wallach_rethinking_nodate}
 \bibliographystyle{plain} % 参考文献
 \bibliography{thesis} %
+%-------------------
+\appendix
+\chapter{Latent Dirichlet Allocation}
+\input{content/appendix/lda}
+\chapter{Transformer}
+\input{content/appendix/transformer}
 %-------------------
 \end{document}
