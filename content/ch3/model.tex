@@ -1,0 +1,110 @@
+In this chapter, we give a detailed explanation and procedure of LKJTM to be implemented.
+\section{Correlated Topic Model with Transformer Embeddings}
+The TETM utilizes the Transformer as embedding to the topic-word representations. To compare with the original topic model, the word-topic distribution $ \beta $ is the 
+First, the topic embedding embeds the vocabulary into L-dimensional space, which is by Transformer embedding. Second, the context embedding maps the embedding into K-dimensional space . 
+In the generative process, the LKJTM uses the topic embedding to form a per-topic vector to represent the meaning over the vocabulary. 
+% Graphical Model'
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\tikzstyle{main}=[circle, minimum size = 10mm, thick, draw =black!80, node distance = 16mm]
+\tikzstyle{connect}=[-latex, thick]
+\tikzstyle{box}=[rectangle, draw=black!100]
+  % sigma
+  \node[main] (sigma) [label=below:$\Sigma$] { };    
+  % mu
+  \node[main] (mu) [yshift=1cm, below=of sigma, label=below:$\mu$] { };
+  % gamma
+  \node[main] (gamma) [yshift=-1cm, above=of sigma, label=above:$\gamma$] { };
+  % eta
+  \node[main] (theta) [right=of sigma,label=below:$\theta$] { };
+  % z
+%  \node[main] (z) [right=of theta,label=below:z] {};
+  % beta
+  \node[main] (beta) [above=of theta,label=below:$\beta$] { };
+%  \node[main] (beta) [left=of psi,label=below:$\beta$] { };
+  \node[main, fill = black!10] (w) [right=of theta,label=below:w] { };
+  \path (gamma) edge [connect] (sigma)
+  		(sigma) edge [connect] (theta)
+  		(mu) edge [connect] (theta)
+        (theta) edge [connect] (w)
+%		(z) edge [connect] (w)
+		(beta) edge [connect] (w);
+%		(beta) edge [connect] (psi);
+  \node[rectangle, inner sep=4.4mm,draw=black!100, fit= (beta)] {};
+  \node[rectangle, inner sep=4.4mm, fit= (beta), label=below right:K, xshift=-5mm, yshift=18.5mm] {};
+  \node[rectangle, inner sep=0mm, fit= (w),label=below right:N, , xshift=0mm] {};
+  \node[rectangle, inner sep=4.4mm,draw=black!100, fit=  (w)] {};
+  \node[rectangle, inner sep=4.6mm, fit= (w),label=below right:D, xshift=0mm] {};
+  \node[rectangle, inner sep=9mm, draw=black!100, fit = (theta) (w)] {};
+\end{tikzpicture}
+\caption{Graphical model for LKJTM}
+\label{graph:lkjtm}
+\end{figure}
+
+% Generative process
+The generative process of the $ d^{th} $ document is the following:\\
+\begin{algorithm}[H]
+Initialize hyperparameters $ \gamma $, $ \mu $\\
+Sample Correlation Matrix $ L\sim \text{LKJChol}(\gamma)$\\
+\For{document d in D}{
+Sample topic distribution $ \theta_d\sim \mathcal{LN}(\mu,\sigma LL^\top\sigma) $\\
+\For{word position n in $ N_d $}{
+Sample word $ w_{d,n}\sim \sigma(\theta_d(\rho^\top\alpha)_{\cdot,w_{d,n}}) $
+}
+}
+\caption{Generative Process for LKJTM}
+\label{algorithm:lkjtm}
+\end{algorithm}
+From algorithm \ref{algorithm:lkjtm}, starting from step 1, the topic proportion $ \theta_d $ is drawn from the logistic-normal distribution $ \mathcal{LN}(\cdot) $ with zero mean and identical covariance.
+From Step 2-a, for each word position $ n $ in document $ d $, a topic assignment to word $ w_{dn} $ is drawn from categorical distribution $ Cat(\theta_d) $ parameterized by topic proportion $ \theta_d $
+Step 2-b, the model draw a word from embedding of the vocabulary $ \rho $ and the assigned topic embedding $ \alpha_{z_{dn}} $ to draw the observed word from the assigned topic, as given by $ z_{dn} $. The embedding is applied softmax function to make them topic distribution.
+The TETM likelihood uses a matrix of word embedding $ \rho $, a representation of the vocabulary in a lower dimensional space. In practice, it can either rely on previously fitted embeddings as part of the fitting procedure, it simultaneously finds topics and an embedding space.
+
+% TODO LKJ Correlation Distribution Formulation
+
+% TODO Transformer Embeddings
+% Transformer embeddings
+\section{Transformer Embeddings}
+Following the ETM architecture, we modify topic-word distribution as an embedding and put transformer embedding to work into it. 
+\begin{equation}\label{eq:transformer_embedding}
+\beta\sim\text{softmax}(\rho^\top\alpha)
+\end{equation}
+Equation \ref{eq:transformer_embedding}, 
+% Marginal Likelihood
+\section{Marginal Likelihood}
+The parameter $ \alpha $ is the topic embedding on the word embedding space of dimension K. We take a log marginal likelihood of the document,
+\begin{align*}
+\mathcal{L}(\alpha)=\sum_{d=1}^{D}\log p(w_d|\alpha)
+\end{align*}
+\begin{align*}
+p(w_d|\alpha)=\int p(\theta_d|\mu,\Sigma)\prod_{n=1}^{N_d}p(w_{dn}|\theta_d,\alpha)d\theta_d
+\end{align*}
+the conditional distribution $ p(w_{dn}|\theta_d,\alpha) $ marginalize out the the topic assignment $ z_{dn} $,
+\begin{align*}
+p(w_{dn}|\theta_d,\alpha)=\sum_{k=1}^{K}\theta_{dk}\beta_{k,w_{dn}}
+\end{align*}
+where $ \beta $ represent the topic-word distribution, composed of transformer embedding $ \rho $ and topic embedding $ \alpha $, in such case
+\begin{align*}
+\beta_{kv}=\text{softmax}(\rho^\top\alpha)_{v}.
+\end{align*}
+then we take the amortized inference to take out neural network for the representation,
+\begin{align*}
+p(w_{d}|N(\mu_\theta(w),\sigma_\theta(w)),\beta)=\mathbb{E}_{\theta\sim N(\mu_\theta(w),\sigma_\theta(w))}\left[w^\top\sigma(\beta\theta)\right]
+\end{align*}
+Reparametrization Trick $ \theta=\mu+\sigma^{1/2}\epsilon $\\
+\begin{align*}
+p(w_{d}|\mu_\theta(w)+\epsilon\sigma^{1/2}_\theta(w),\beta)=\mathbb{E}_{\epsilon\sim N(0,1)}\left[w_d^\top\sigma(\beta(\mu_\theta(w)+\epsilon\sigma^{1/2}_\theta(w)))\right]
+\end{align*}
+%% Joint Distribution
+\section{Joint Distribution}
+We give a description of the joint distribution, $ W,Z,\theta $ and $ \Sigma $ are variables and $ \beta, \mu $ and $ \gamma $ are latent variables. $ W $ is the word likelihood from the document collections, $ Z $ represents the topic-word assignment, $ \theta $ models the topic distribution for each document, and $ \Sigma $ is the covariance matrix which depends on the document-topic distribution $ \theta $.
+\begin{align*}
+p(W,Z,\theta,\Sigma|\beta,\mu,\gamma)&=P(W|Z)P(Z|\theta)P(\theta|\mu,\Sigma)\\
+&=p(\Sigma|\gamma)\prod_{d=1}^{D}P(\theta_d|\mu,\Sigma)\prod_{n=1}^{V}P(z_{d,n}|\theta_d)P(w_{d,n}|z_{d,n},\beta)
+\end{align*}
+by taking  log on the joint probability, we obtain a objective function for optimization
+\begin{align*}
+\log p(W,Z,\theta,\Sigma|\beta,\mu,\gamma)=&\sum_{d=1}^{D}\left[\log P(\theta_d|\mu,\Sigma)+\sum_{n=1}^{V}\left[\log P(z_{d,n}|\theta_d)+\log P(w_{d,n}|z_{d,n},\beta)\right]\right]\\
+&+\log p(\Sigma|\gamma)
+\end{align*}
