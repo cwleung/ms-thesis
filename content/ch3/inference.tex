@@ -2,7 +2,10 @@ In this chapter, we explore the detail for posterior inference and give specific
 \section{Posterior Inference}\label{ch4:1}
 Since the exact inference of the posterior is intractable in real application, we employed approximation scheme for the posterior inference. The popular approaches are Markov Chain Monte Carlo Method (MCMC) and Variational Inference(VI)\cite{blei_variational_2006,hoffman_stochastic_2013}. Gibbs sampling is one of the MCMC method and it is fast to compute the approximation and easy to the implementation. Then, Variational EM algorithm to be carried out for maximizing the likelihood over all word in corpus in the document. An alternative way to perform estimation is Monte Carlo method.
 \subsection{Variational Inference}
-Given that posterior approximiation is not alway practical in real world application. Approximation method are necessary to be apply. Their are two main approach for the posterior approximation: Markov Chain Monte Carlo(MCMC) Variational Inference. Variational Inference is a method approximating the posterior in optimization fashion.
+Given that posterior approximiation is not alway practical in real world application. Approximation method are necessary to be apply. Their are two main approach for the posterior approximation: Markov Chain Monte Carlo(MCMC) Variational Inference. Variational Inference is a method approximating the posterior in optimization fashion. To give a better intuition, let probability $ p(x) $ depending on a latent variable $ z $ such that $ p(x|z)=\int p(x|z)p(z)dz $. We can turn the following posterior inference problem into a optimization problem. Here we derive the bound and perform optimization,
+\begin{align*}
+content...
+\end{align*}
 \subsection{Stochastic Variational Inference}
 Stochastic Variational Inference (SVI)\cite{hoffman_stochastic_2013} is a scalable variant of variational inference, which enables mini-batching to split dataset and train for each epochs, then become a standard of optimization for probabilistic models.
 Two main improvement are made by the SVI: stochastic optimization and noisy gradient.
@@ -43,7 +46,7 @@ where $ \epsilon $ is a sample from normal distribution $ \mathcal{N}(0,1) $. an
 &-\sum_{d=1}^{D}\mathbb{E}_q[\log q(\theta_d|\lambda_d,\nu_d)]-\mathbb{E}_q[\log q(\Sigma|\phi)]
 \end{align}
 % TODO Monte Carlo Estimate
-The expectation log likelihood term in REPLACE can be efficiently appriximated by the Monte Carlo sampling method,
+The expectation log likelihood term in \ref{eq:elbo_1} can be efficiently appriximated by the Monte Carlo sampling method,
 \begin{align}\label{eq:elbo_2}
 \mathcal{L}\approx\frac{1}{S}\sum_{s=1}^{S}p(W|\theta^{(s)})
 \end{align}
@@ -84,7 +87,8 @@ L_{\text{CrossEntropy}}=-\frac{1}{V}\sum_{i=1}^{V}y_i\cdot\log(\hat{y_i})
 \end{align}
 % TODO algorithm for the optimization here
 \section{Optimization step}\label{ch4:3}
-In algorithm \ref{algorithm:lkjtm_obj}, first initialize the model and variational parameters. Then, for each epochs, we obtain the transformer embedding $ \rho $ from transformer. After that, the topic embedding $ \beta $ is computed by taking softmax of dot-product of $ \rho $ and $ \alpha $. Then a minibatch $ \mathcal{B} $ is selected for 
+In algorithm \ref{algorithm:lkjtm_obj}, first initialize the model and variational parameters. Then, for each epochs, we obtain the transformer embedding $ \rho $ from transformer. After that, the topic embedding $ \beta $ is computed by taking softmax of dot-product of $ \rho $ and $ \alpha $. Then a minibatch $ \mathcal{B} $ is selected from the document for optimization. The number of minibatch is the document collection divides minibatch size where $ \#\text{minibatch}=\frac{\mathcal{D}}{|\mathcal{B}|} $. For each minibatch, the model takes a document and sample lower Cholesky matrix from LKJ Cholesky distribution(description see section \ref{ch2:lkj}). A topic assignment for document d $ \theta_d $ is sampled from logistic-normal distribution $ \mathcal{LN}(\mu,\sigma LL^\top\sigma) $, where $ \mu $ is sampled from half-Cauchy distribution and covariance is a transformation from equation \ref{eq:lkj_trans}. For each word position n, a word is sampled from the softmax of dot-product of transformer embedding $ \rho $ and NN weight $ \alpha $. After the sampling process for the document collection, we estimate the ELBO loss $ L_{ELBO} $ for the topic model, and the cross entropy loss $ L_{CrossEntropy} $. Remind that the topic model and transformer take input differently. The topic model part takes bag-of-words input, a document-vocabulary matrix $ D\times V $ counting the occurrence of vocabulary v in document d. While transformer take sequence of document as input. 
+To calculate the loss of the model , we sum up the ELBO loss $ L_{ELBO} $ and cross entropy loss for transformer $ L_{CrossEntropy} $. Then a stochastic gradient is computed by backpropagation. a gradient step to . The process iterates until the maximum iteration is reached. 
 \\
 \begin{algorithm}[H]
 Initialize model and variational parameters\\
@@ -98,7 +102,7 @@ Compute $ \sigma_d=\text{NN}(x_d;\mu_\sigma) $\\
 Sample $ L\sim \text{LKJChol}(\gamma) $ \\
 Sample $\theta_d\sim\mathcal{LN}(\mu,\sigma LL^\top\sigma)$\\
 \ForEach{word position n in docuemnt $ N_d $}{
-Sample word $ w_{dn}\sim \sigma(\beta_{w_{dn}}\theta_{d}) $
+Sample word $ w_{dn}\sim \text{softmax}(\beta_{w_{dn}}\theta_{d}) $
 }
 }
 Estimate ELBO loss $ \text{L}_\text{ELBO}$ from Eq. \ref{eq:elbo_8}\\

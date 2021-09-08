@@ -5,6 +5,16 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{hyperref}
 
+\usepackage[%
+    font={small,sf},
+    labelfont=bf,
+    format=hang,    
+    format=plain,
+    margin=0pt,
+    width=0.8\textwidth,
+]{caption}
+\usepackage[list=true]{subcaption}
+
 \usepackage{tikz}
 \usetikzlibrary{bayesnet}
 %\usepackage{color}
@@ -18,12 +28,12 @@
 
 %-------------------
 \etitle{Correlated Topic Model with Transformer Embeddings}
-\jtitle{??????????????????????????}
+\jtitle{æ¢ä¿Šè¯}
 %
 \eauthor{Chun Wa Leung}
-\jauthor{???}
+\jauthor{æ¢ä¿Šè¯}
 \esupervisor{Akihiko Takano}
-\jsupervisor{????}
+\jsupervisor{æ¢ä¿Šè¯}
 \supervisortitle{Professor} % Professor, etc.
 \date{\today}
 %-------------------
@@ -40,14 +50,14 @@
 %\end{acknowledge}
 \switchinterim
 \switchenglish
-\frontmatter %% ‘O•t‚¯
-\tableofcontents % –ÚŸ
-\listoffigures % }–ÚŸ
-\listoftables % •\–ÚŸ
+\frontmatter %% Â‘OÂ•tÂ‚Â¯
+\tableofcontents % Â–ÃšÂÂŸ
+\listoffigures % Â}Â–ÃšÂÂŸ
+\listoftables % Â•\Â–ÃšÂÂŸ
 \listofalgorithms
-%\lstlistoflistings % ƒ\[ƒXƒR[ƒh–ÚŸ
+%\lstlistoflistings % Âƒ\Â[ÂƒXÂƒRÂ[ÂƒhÂ–ÃšÂÂŸ
 %-------------------
-\mainmatter %% –{•¶
+\mainmatter %% Â–{Â•Â¶
 \titlepage
 \chapter{Introduction}\label{ch1}
 \input{content/ch1/introduction}
@@ -65,13 +75,11 @@
 \input{content/conclusion}
 %-------------------
 \cite{wallach_rethinking_nodate}
-\bibliographystyle{plain} % Ql•¶Œ£
+\bibliographystyle{plain} % ÂQÂlÂ•Â¶ÂŒÂ£
 \bibliography{thesis} %
 %-------------------
 \appendix
 \chapter{Latent Dirichlet Allocation}
 \input{content/appendix/lda}
-\chapter{Transformer}
-\input{content/appendix/transformer}
 %-------------------
 \end{document}

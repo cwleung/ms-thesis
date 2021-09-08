@@ -3,6 +3,20 @@ In this chapter, we give a detailed explanation and procedure of LKJTM to be imp
 The TETM utilizes the Transformer as embedding to the topic-word representations. To compare with the original topic model, the word-topic distribution $ \beta $ is the 
 First, the topic embedding embeds the vocabulary into L-dimensional space, which is by Transformer embedding. Second, the context embedding maps the embedding into K-dimensional space . 
 In the generative process, the LKJTM uses the topic embedding to form a per-topic vector to represent the meaning over the vocabulary. 
+% LKJ Prior
+\section{LKJ correlation prior}
+\begin{algorithm}[H]
+Initialize hyperparameters $ \gamma $, $ \mu $\\
+Sample Correlation Matrix $ L\sim \text{LKJChol}(\gamma)$\\
+\For{document d in D}{
+Sample topic distribution $ \theta_d\sim \mathcal{LN}(\mu,\sigma LL^\top\sigma) $\\
+\For{word position n in $ N_d $}{
+Sample word $ w_{d,n}\sim \sigma(\theta_d(\rho^\top\alpha)_{\cdot,w_{d,n}}) $
+}
+}
+\caption{Generative Process for LKJ correlation prior}
+\label{algorithm:lkjtm}
+\end{algorithm}
 % Graphical Model'
 \begin{figure}
 \centering

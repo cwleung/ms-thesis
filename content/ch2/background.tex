@@ -110,4 +110,34 @@ Draw word $ w_{d,n}\sim \sigma(\rho^\top\alpha)_{z_{dn}} $
 \end{algorithm}
 Although ETM can maintain for Word2Vec training as the embedding for topic modeling, it cannot capture 
 \section{Transformer} \label{ch2:transformer}
-Transformer\cite{vaswani_attention_nodate} is a popular neural network architecture in natural language processing. To briefly explain Transformer, it is an stacked encoder-decoder architecture. The component that makes transformer stands out of other architectures it the attention mechanism. The attention mechanism 
+Transformer\cite{vaswani_attention_nodate} is a popular neural network architecture in natural language processing. To briefly explain Transformer, it is an stacked encoder-decoder architecture. The component that makes transformer stands out of other architectures it the attention mechanism. In this section we only cover the main components of transformer. The details for transformer can be reviewed in author's blog post\footnote{\url{https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html}}.
+\subsection{Scaled Dot Product Attention}
+\begin{align*}
+\text{Attention}(Q,K,V) = \sigma\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\end{align*}
+\begin{align*}
+k_i, q_i\sim\mathcal{N}(0,\sigma)\rightarrow\text{Var}\left(\sum_{i=1}^{d_k}q_i\cdot k_i\right)=\sigma\cdot d_k
+\end{align*}
+\section{Multi-head attention}
+To obtain a big value from a sentence, extending the attention mechanism to multiple head instead of one could 
+\begin{align*}
+h_i&=Attn(QW_i^Q,KW_i^K,VW_i^V)\\
+\text{MHA(Q,K,V)}&=(h_1,\cdots,h_h)W^O
+\end{align*}
+\begin{figure}
+%\includegraphics[width=0.25\linewidth]{fig/transformer}
+\caption{Transformer Architecture}
+\label{fig:transformer_arch}
+\end{figure}
+%\subsection{Multi-Head Attention}
+%\begin{align*}
+%\text{Multihead}(Q,K,V)=\text{Concat}(\text{head}_i,\dots,\text{head}_h)W^O \\
+%\text{head}_i = \text{Attention}(QW_i^{Q}, KW_i^K,VW_i^V)
+%\end{align*}
+\subsection{Positional Encoding}
+One drawback for Multi-Head Attention block is that it does not consider information about word positioning, 
+\[ PE_{(pos,i)} = \begin{cases} 
+\sin\left(\frac{pos}{10000^{i/d}model}\right) & \text{if }i \mod 2 = 0 \\
+\cos\left(\frac{pos}{10000^{(i-1)/d}model}\right) & \text{otherwise}
+       \end{cases}
+    \]
