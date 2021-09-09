@@ -1618,7 +1618,7 @@ http://www.slideshare.net/{ChristopherMoody}3/word2vec-},
 }
 
 @article{barnard_modeling_2000,
-	title = {{MODELING} {COVARIANCE} {MATRICES} {IN} {TERMS} {OF} {STANDARD} {DEVIATIONS} {AND} {CORRELATIONS}, {WITH} {APPLICATION} {TO} {SHRINKAGE}},
+	title = {Modeling covariance matrices in terms of standard deviations and correlations, with application to shrinkage},
 	abstract = {The covariance matrix plays an important role in statistical inference, yet modeling a covariance matrix is often a diﬃcult task in practice due to its dimensionality and the non-negative deﬁnite constraint. In order to model a covariance matrix eﬀectively, it is typically broken down into components based on modeling considerations or mathematical convenience. Decompositions that have received recent research attention include variance components, spectral decomposition, Cholesky decomposition, and matrix logarithm. In this paper we study a statistically motivated decomposition which appears to be relatively unexplored for the purpose of modeling. We model a covariance matrix in terms of its corresponding standard deviations and correlation matrix. We discuss two general modeling situations where this approach is useful: shrinkage estimation of regression coeﬃcients, and a general location-scale model for both categorical and continuous variables. We present some simple choices for priors in terms of standard deviations and the correlation matrix, and describe a straightforward computational strategy for obtaining the posterior of the covariance matrix. We apply our method to real and simulated data sets in the context of shrinkage estimation.},
 	pages = {31},
 	author = {Barnard, John and {McCulloch}, Robert and Meng, Xiao-Li},
@@ -1942,7 +1942,7 @@ http://www.slideshare.net/{ChristopherMoody}3/word2vec-},
 	author = {Wang, Xuerui and {McCallum}, Andrew and Wei, Xing},
 	date = {2007-10},
 	note = {{ISSN}: 2374-8486},
-	keywords = {Artificial neural networks, Biological neural networks, Context modeling, Data mining, Information retrieval, Natural language processing, Neuroscience, Sampling methods, Text mining, Vocabulary},
+	keywords = {Vocabulary, Context modeling, Data mining, Artificial neural networks, Biological neural networks, Information retrieval, Natural language processing, Neuroscience, Sampling methods, Text mining},
 	file = {IEEE Xplore Abstract Record:C\:\\Users\\HP-\\Google Drive\\Temp\\Zotero\\storage\\KYXQFWVF\\4470313.html:text/html;IEEE Xplore Full Text PDF:C\:\\Users\\HP-\\Google Drive\\Temp\\Zotero\\storage\\YTCM8LPV\\Wang et al. - 2007 - Topical N-Grams Phrase and Topic Discovery, with .pdf:application/pdf}
 }
 
@@ -2032,7 +2032,7 @@ http://www.slideshare.net/{ChristopherMoody}3/word2vec-},
 	langid = {english},
 	eprinttype = {arxiv},
 	eprint = {1812.03973},
-	keywords = {Computer Science - Machine Learning, Computer Science - Programming Languages, Statistics - Machine Learning},
+	keywords = {Statistics - Machine Learning, Computer Science - Machine Learning, Computer Science - Programming Languages},
 	file = {Tran et al. - 2019 - Bayesian Layers A Module for Neural Network Uncer.pdf:C\:\\Users\\HP-\\Google Drive\\Temp\\Zotero\\storage\\2XTBF2UF\\Tran et al. - 2019 - Bayesian Layers A Module for Neural Network Uncer.pdf:application/pdf}
 }
 
@@ -2180,7 +2180,7 @@ Publisher: Nature Publishing Group},
 	date = {2014-05-01},
 	eprinttype = {arxiv},
 	eprint = {1312.6114},
-	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+	keywords = {Statistics - Machine Learning, Computer Science - Machine Learning},
 	file = {arXiv Fulltext PDF:C\:\\Users\\HP-\\Google Drive\\Temp\\Zotero\\storage\\EJASH3VA\\Kingma and Welling - 2014 - Auto-Encoding Variational Bayes.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\HP-\\Google Drive\\Temp\\Zotero\\storage\\3QL4NXES\\1312.html:text/html}
 }
 
@@ -2209,4 +2209,66 @@ Publisher: Nature Publishing Group},
 	date = {2017-10-28},
 	langid = {english},
 	file = {Full Text PDF:C\:\\Users\\HP-\\Google Drive\\Temp\\Zotero\\storage\\AE4UGZ9H\\Paszke et al. - 2017 - Automatic differentiation in PyTorch.pdf:application/pdf;Snapshot:C\:\\Users\\HP-\\Google Drive\\Temp\\Zotero\\storage\\7EIM6QZP\\forum.html:text/html}
+}
+
+@article{li_enhancing_nodate,
+	title = {Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on Time Series Forecasting},
+	abstract = {Time series forecasting is an important problem across many domains, including predictions of solar plant energy output, electricity consumption, and trafﬁc jam situation. In this paper, we propose to tackle such forecasting problem with Transformer [1]. Although impressed by its performance in our preliminary study, we found its two major weaknesses: (1) locality-agnostics: the point-wise dotproduct self-attention in canonical Transformer architecture is insensitive to local context, which can make the model prone to anomalies in time series; (2) memory bottleneck: space complexity of canonical Transformer grows quadratically with sequence length L, making directly modeling long time series infeasible. In order to solve these two issues, we ﬁrst propose convolutional self-attention by producing queries and keys with causal convolution so that local context can be better incorporated into attention mechanism. Then, we propose {LogSparse} Transformer with only O(L(log L)2) memory cost, improving forecasting accuracy for time series with ﬁne granularity and strong long-term dependencies under constrained memory budget. Our experiments on both synthetic data and realworld datasets show that it compares favorably to the state-of-the-art.},
+	pages = {11},
+	author = {Li, Shiyang and Jin, Xiaoyong and Xuan, Yao and Zhou, Xiyou and Chen, Wenhu and Wang, Yu-Xiang and Yan, Xifeng},
+	langid = {english},
+	file = {Li et al. - Enhancing the Locality and Breaking the Memory Bot.pdf:C\:\\Users\\HP-\\Google Drive\\Temp\\Zotero\\storage\\KYJPTJKU\\Li et al. - Enhancing the Locality and Breaking the Memory Bot.pdf:application/pdf}
+}
+
+@article{zerveas_transformer-based_2020,
+	title = {A Transformer-based Framework for Multivariate Time Series Representation Learning},
+	url = {http://arxiv.org/abs/2010.02803},
+	abstract = {In this work we propose for the ﬁrst time a transformer-based framework for unsupervised representation learning of multivariate time series. Pre-trained models can be potentially used for downstream tasks such as regression and classiﬁcation, forecasting and missing value imputation. By evaluating our models on several benchmark datasets for multivariate time series regression and classiﬁcation, we show that our modeling approach represents the most successful method employing unsupervised learning of multivariate time series presented to date; it is also the ﬁrst unsupervised approach shown to exceed the current state-of-the-art performance of supervised methods. It does so by a signiﬁcant margin, even when the number of training samples is very limited, while offering computational efﬁciency. Finally, we demonstrate that unsupervised pre-training of our transformer models offers a substantial performance beneﬁt over fully supervised learning, even without leveraging additional unlabeled data, i.e., by reusing the same data samples through the unsupervised objective.},
+	journaltitle = {{arXiv}:2010.02803 [cs]},
+	author = {Zerveas, George and Jayaraman, Srideepika and Patel, Dhaval and Bhamidipaty, Anuradha and Eickhoff, Carsten},
+	urldate = {2021-09-08},
+	date = {2020-12-08},
+	langid = {english},
+	eprinttype = {arxiv},
+	eprint = {2010.02803},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Machine Learning},
+	file = {Zerveas et al. - 2020 - A Transformer-based Framework for Multivariate Tim.pdf:C\:\\Users\\HP-\\Google Drive\\Temp\\Zotero\\storage\\9JMDJG4X\\Zerveas et al. - 2020 - A Transformer-based Framework for Multivariate Tim.pdf:application/pdf}
+}
+
+@article{zerveas_transformer-based_2020-1,
+	title = {A Transformer-based Framework for Multivariate Time Series Representation Learning},
+	url = {http://arxiv.org/abs/2010.02803},
+	abstract = {In this work we propose for the ﬁrst time a transformer-based framework for unsupervised representation learning of multivariate time series. Pre-trained models can be potentially used for downstream tasks such as regression and classiﬁcation, forecasting and missing value imputation. By evaluating our models on several benchmark datasets for multivariate time series regression and classiﬁcation, we show that our modeling approach represents the most successful method employing unsupervised learning of multivariate time series presented to date; it is also the ﬁrst unsupervised approach shown to exceed the current state-of-the-art performance of supervised methods. It does so by a signiﬁcant margin, even when the number of training samples is very limited, while offering computational efﬁciency. Finally, we demonstrate that unsupervised pre-training of our transformer models offers a substantial performance beneﬁt over fully supervised learning, even without leveraging additional unlabeled data, i.e., by reusing the same data samples through the unsupervised objective.},
+	journaltitle = {{arXiv}:2010.02803 [cs]},
+	author = {Zerveas, George and Jayaraman, Srideepika and Patel, Dhaval and Bhamidipaty, Anuradha and Eickhoff, Carsten},
+	urldate = {2021-09-08},
+	date = {2020-12-08},
+	langid = {english},
+	eprinttype = {arxiv},
+	eprint = {2010.02803},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Machine Learning},
+	file = {Zerveas et al. - 2020 - A Transformer-based Framework for Multivariate Tim.pdf:C\:\\Users\\HP-\\Google Drive\\Temp\\Zotero\\storage\\X5FLGUC2\\Zerveas et al. - 2020 - A Transformer-based Framework for Multivariate Tim.pdf:application/pdf}
+}
+
+@book{__2015,
+	title = {トピックモデル},
+	url = {https://ci.nii.ac.jp/ncid/BB18367469},
+	abstract = {トピックモデル = Topic models 岩田具治著 （{MLP機械学習プロフェッショナルシリーズ}） 講談社, 2015.4},
+	publisher = {講談社},
+	author = {{岩田具治}},
+	urldate = {2021-09-09},
+	date = {2015},
+	langid = {japanese},
+	file = {Snapshot:C\:\\Users\\HP-\\Google Drive\\Temp\\Zotero\\storage\\QAE7GPL2\\BB18367469.html:text/html}
+}
+
+@book{__2015-1,
+	title = {トピックモデルによる統計的潜在意味解析},
+	url = {https://ci.nii.ac.jp/ncid/BB18301879},
+	abstract = {トピックモデルによる統計的潜在意味解析 佐藤一誠著 （自然言語処理シリーズ, 8） コロナ社, 2015.4},
+	publisher = {コロナ社},
+	author = {{佐藤一誠(数理情報学)} and {奥村学}},
+	urldate = {2021-09-09},
+	date = {2015},
+	langid = {japanese}
 }

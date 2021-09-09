@@ -1,19 +1,42 @@
-In this section, we give short description on topic model techniques and several key components and terminologies related to LDA model. In section \ref{ch2:tm}, we formulate the problem description of topic modeling. In \ref{ch2:we}, we give description to word embedding. In section \ref{ch2:ctm}, we explain the algorithm of Correlated topic model(CTM). Then,  section \ref{ch2:lkj} will give the definition for LKJ correlation distribution. Section \ref{ch2:etm} will cover the Embedded Topic Model(ETM). Finally, section \ref{ch2:transformer} will give introduction to transformer embedding that we are used in the model.
-\section{Topic Modeling} \label{ch2:tm} Several topic modeling techniques include non-negative matrix factorization (NMF) \cite{lee_learning_1999}, Latent Semantic Analysis \cite{landauer_solution_1997}, probabilistic Latent Semantic Analysis (pLSA) \cite{hofmann_probabilistic_2013} and Latent Dirichlet Allocation (LDA)\cite{blei_latent_2003}.
+In this section, we give short description on topic model techniques and several key components and terminologies related to LDA model. In section \ref{ch2:tm}, we formulate the problem description of topic modeling. In \ref{ch2:we}, we give description to word embedding. In section \ref{ch2:ctm}, we explain the algorithm of Correlated topic model(CTM). Then,  section \ref{ch2:lkj} will give the definition for LKJ correlation distribution. Section \ref{ch2:etm} will cover the Embedded Topic Model(ETM). Finally, section \ref{ch2:transformer} will give introduction to transformer embedding that we are used in the model. Several topic modeling techniques include non-negative matrix factorization (NMF) \cite{lee_learning_1999}, Latent Semantic Analysis \cite{landauer_solution_1997}, probabilistic Latent Semantic Analysis (pLSA) \cite{hofmann_probabilistic_2013} and Latent Dirichlet Allocation (LDA)\cite{blei_latent_2003}.
+\section{Problem definition}\label{ch2:tm} Massive data sets in internet has made the task of understanding data by accessing them one-by-one became not humanly possible. The raise of topic modeling gives possibility to summarize a given set of document collections. To describe topic modeling intuitively, for a document collection $ d=\{1\cdots D\} $ and define a number of topic $ K $, the model outputs topic-word distribution $\beta\in\mathbb{R}^{K\times V}$, where $ K $ is number of topics and $ V $ is number of vocabularies in document set. For $ \{\beta_{k,1},\beta_{k,2},\cdots,\beta_{k,V}\}^{K}_{k=1} $, each $ \{\beta_{k,v}\}^{K}_{k=1} $ resulting the expression power vocabulary v could represent in topic k. The higher value a vocabulary obtained in tuple $ \{\beta_{k,v}\}^{V}_{v=1} $, the high representation power that the word is related to a latent topic. Practically, we capture top-m words from topic model for each topic k. For a set of top-m words obtained from topic k in descending order, defined as $ \{\beta_{k,v_m}\}^{M}_{m=1} $ where $ \beta_{k,v_1}\succeq\cdots\succeq\beta_{k,v_m}\succeq\cdots\succeq\beta_{k,v_M} $.
+\section{Bag-of-word assumption} 
+% Define the document
+Suppose we have a collection of documents $ \in\mathbb{R}^{} $. The document and vocabularies
+% Define BOW representation
+Specifically, Topic model is a generative model that the probability based on Bag-of-words(BOWs) assumptions. Bag-of-words(BOWs) is a assumption that all words in the document are considered are independently distributed. To represent BOW, let a document collection $ W=(w_1,w_2,\cdots,w_D),d\in\{1\dots D\} $ documents, where $ w_d $ is a single document $ d $ contain words $ w_d=(w_{d1},w_{d2},\cdots,w_{dN_d}), n\in\{1\dots N_d\} $ word position, where $ w_{dn} $ is a single word in document $ d $ at position $ n $.
+In equation \ref{eq:bow}, we take unigram model as an example\cite{__2015}, 
+\begin{align}\label{eq:bow}
+p(W|\phi)=\prod_{d=1}^{D}p(w_d|\phi)=\prod_{d=1}^{D}\prod_{n=1}^{N_d}p(w_{dn}|\phi)=\prod_{d=1}^{D}\prod_{n=1}^{N_d}\phi_{w_{dn}}=\prod_{v=1}^{V}\phi^{N_v}_{v}
+\end{align}
+% conversion to vocabularies
+For sake of convenience, due to documents contain different size of words. It is not feasible to construct matrix representation for modeling. For the reason, we can exchange the representation for BOW from iterating the word occurrence for each word position to iterating the word occurrence in a vocabulary set. In this way, we can define a matrix for BOW: $ W\in\mathbb{R}^{D\times V} $, with D rows of document and V rows of vocabulary count. Formally, for every document $ W=(w_{d1},w_{d2},\cdots,w_{dV}), v\in\{1,\cdots,V\} $ vocabularies, $ w_{dv} $ is the occurrence of a vocabulary v in document d.
 
 \section{Word Embedding} \label{ch2:we}
 % explain what is word embeddings
-Word embedding\cite{bengio_neural_nodate} is a kind of representation for words from document collections using a vector formulation. The nature of word embedding is that, the words that having similar meaning have a close distance(in most case euclidean distance), and vice versa. For instance, continuous bag-of-words(CBOW) \cite{mikolov_distributed_nodate} is a kind of word embeddings converting bag-of-word in to a vector of n-dimension continuous space, which contains the following formulation
+Word embedding\cite{bengio_neural_nodate} is a kind of representation for words from document collections using a vector formulation. The nature of word embedding is that, the words that having similar meaning have a close distance(in most case euclidean distance), and vice versa. For instance, continuous bag-of-words(CBOW) \cite{mikolov_distributed_nodate} is a kind of word embeddings converting bag-of-word in to a vector of n-dimension continuous space, which contains the following formulation,
 \begin{align*}
 w\sim\text{softmax}(\rho^\top\alpha)
 \end{align*}
-where $ \rho $ is the embedding matrix $ L\times V $  which maps $ V $ vocabularies into $ L $ dimension of continuous vector space. And $ \alpha $ is the context embedding, 
+where $ \rho\in\mathbb{R}^{L\times V} $ is the embedding matrix which a function $ f:\mathbb{R}^V\mapsto\mathbb{R}^{L} $ maps $ V $ vocabularies into $ L $ dimension of continuous vector space. And $ \alpha $ is the context embedding, which conveniently convert the latent dimension L to a custom dimension of continuous embedding space $ \mathbb{R}^{N} $ as $ \tilde{f}:\mathbb{R}^L\mapsto\mathbb{R}^{N} $.
 \section{Correlated Topic Model} \label{ch2:ctm}
 Correlated Topic Model (CTM)\cite{blei_correlated_2007} is an extension of LDA\cite{blei_latent_2003} that utilize the correlation of latent topics, and relates the similar documents together. Instead of Dirichlet distribution, CTM applies multivariate logistic-normal distribution to model the word distribution.
 
-The model contain $ K $ topics distribution as $ \beta_{1:K} $, $ z_{n,d} $ is the topic assigned to the n-th topic and d-th document.$ \theta_d $ is the corresponding proportion a topic is distributed to d-th document.$ \mu $ and $ \Sigma $ are the corresponding mean and $ K \times K $ covariance matrix of the distribution between documents.
-
-\begin{figure}
+The model contain $ K $ topics distribution as $ \beta_{1:K} $, $ z_{n,d} $ is the topic assigned to the n-th topic and d-th document.$ \theta_d $ is the corresponding proportion a topic is distributed to d-th document.$ \mu $ and $ \Sigma $ are the corresponding mean and $ K \times K $ covariance matrix of the distribution between documents.\\
+\begin{algorithm}[H]
+Initialize $ \mu, \Sigma $\\
+\For{document d in D}{
+Sample a topic distribution $ \eta_d\sim\mathcal{N}(\mu,\Sigma) $\\
+\For{word position n in $ N_d $}{
+Sample a topic assignment $ z_{dn}\sim \text{Mult}(f(\eta_d)) $\\
+Sample a word $ w_{dn}\sim \text{Mult}(\beta_{z_d,n}) $
+}
+}
+\label{algorithm:ctm}
+\caption{Generative Process for CTM}
+\end{algorithm}
+From Algorithm \ref{algorithm:ctm}, the parametrization $ \mu, \Sigma $ are initialized. For each document d in document collection D, a topic distribution $ \eta_d $ is drawn from normal distribution parametrized $ \mu,\Sigma $. Then for each word position n in $ N $ words in doucment d, a topic assignment $ z_{dn} $ is drawn from multinomial distribution parametrized $ f(\eta_d) $, where the transformation $ f(\eta) $ represents the softmax function maps the sample draw from normal distribution to topic proportion $ \theta $, a topic distribution which points on the K-1 simplex. Finally, a word is sampled from multinomial distribution $ Mult(\beta_{z_d,n}) $.
+\begin{figure}[h]
 \centering
 \begin{tikzpicture}
 \tikzstyle{main}=[circle, minimum size = 10mm, thick, draw =black!80, node distance = 16mm]
@@ -44,20 +67,6 @@ The model contain $ K $ topics distribution as $ \beta_{1:K} $, $ z_{n,d} $ is t
 \caption{Graphical representation for CTM}
 \label{graph:ctm}
 \end{figure}
-\begin{algorithm}[H]
-Initialize $ \mu, \Sigma $\\
-\For{document d in D}{
-Sample a topic distribution $ \eta_d\sim\mathcal{N}(\mu,\Sigma) $\\
-\For{word position n in $ N_d $}{
-Sample a topic assignment $ z_{dn}\sim \text{Mult}(f(\eta_d)) $\\
-Sample a word $ w_{dn}\sim \text{Mult}(\beta_{z_d,n}) $
-}
-}
-\label{algorithm:ctm}
-\caption{Generative Process for CTM}
-\end{algorithm}
-From Algorithm \ref{algorithm:ctm}, the parametrization $ \mu, \Sigma $ are initialized. For each document d in document collection D, a topic distribution $ \eta_d $ is drawn from normal distribution parametrized $ \mu,\Sigma $. Then for each word position n in $ N $ words in doucment d, a topic assignment $ z_{dn} $ is drawn from multinomial distribution parametrized $ f(\eta_d) $, where the transformation $ f(\eta) $ represents the softmax function maps the sample draw from normal distribution to topic proportion $ \theta $, a topic distribution which points on the K-1 simplex. Finally, a word is sampled from multinomial distribution $ Mult(\beta_{z_d,n}) $.
-
 From figure \ref{graph:ctm} we can see, word and topic-word assignment are in the word and document plate $ N\times D $. The document topic proportion $ \eta $ is on the document plate D. Specifically, the topic word proportion $ \beta $ is on the topic plate K, which is specified as word distribution selected by topic assignment z. 
 
 \paragraph{Mathematical Formulation} The joint distribution for CTM is described as follows,
@@ -75,7 +84,7 @@ LKJ distribution \cite{lewandowski_generating_2009} is a distribution for modeli
 f(C|\eta)=&2^{\sum_{k=1}^{K-1}(2(\eta-1)+K-k)(K-k)}\times\\
 &\prod_{k=1}^{K-1}(B(\eta+(K-k-1)/2,\eta+(K-k-1)/2)^{K-k})(\det(C)^{\eta-1})
 \end{align}
-When $ \eta=1 $ it is simply a uniform distribution allocated over the correlation matrix. If $ \eta>0 $, it is a modal correlation matrix. The density concentrated around center when the $ \eta $ value become larger.
+$ B(\cdot,\cdot) $ is beta distribution, and K is the number of variable in correlation matrix. $ \eta $ is concentration parameter for LKJ distribution. When $ \eta=1 $ it is simply a uniform distribution allocated over the correlation matrix. If $ \eta>0 $, it is a modal correlation matrix. The density concentrated around center when the $ \eta $ value become larger.
 To apply it into normal distribution as covariance, we could apply transformation equation \ref{eq:lkj_trans} and turn it into covariance matrix\cite{barnard_modeling_2000}.
 \begin{align}\label{eq:lkj_trans}
 \Sigma=diag(\sigma)\cdot C \cdot diag(\sigma)
@@ -110,7 +119,11 @@ Draw word $ w_{d,n}\sim \sigma(\rho^\top\alpha)_{z_{dn}} $
 \end{algorithm}
 Although ETM can maintain for Word2Vec training as the embedding for topic modeling, it cannot capture 
 \section{Transformer} \label{ch2:transformer}
-Transformer\cite{vaswani_attention_nodate} is a popular neural network architecture in natural language processing. To briefly explain Transformer, it is an stacked encoder-decoder architecture. The component that makes transformer stands out of other architectures it the attention mechanism. In this section we only cover the main components of transformer. The details for transformer can be reviewed in author's blog post\footnote{\url{https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html}}.
+Transformer\cite{vaswani_attention_nodate} is a popular neural network architecture in natural language processing. To briefly explain Transformer, it is an stacked encoder-decoder architecture. The component that makes transformer stands out of other architectures it the mutli-head self-attention mechanism. 
+
+In this section we only cover the main components of transformer. The details for transformer can be reviewed in author's blog post\footnote{\url{https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html}}.
+
+To define Transformer,
 \subsection{Scaled Dot Product Attention}
 \begin{align*}
 \text{Attention}(Q,K,V) = \sigma\left(\frac{QK^T}{\sqrt{d_k}}\right)V
@@ -141,3 +154,5 @@ One drawback for Multi-Head Attention block is that it does not consider informa
 \cos\left(\frac{pos}{10000^{(i-1)/d}model}\right) & \text{otherwise}
        \end{cases}
     \]
+    
+For the decoder part, we only consider autoregressive Transformer-decoder in the remaining research.
