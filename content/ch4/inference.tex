@@ -10,7 +10,7 @@
 &-\sum_{d=1}^{D}\mathbb{E}_q[\log q(\theta_d|\lambda_d,\nu_d)]-\mathbb{E}_q[\log q(\Sigma|\phi)]
 \end{align}
 % TODO Monte Carlo Estimate
-The expectation log likelihood term in \ref{eq:elbo_1} can be efficiently approximated by the Monte Carlo sampling method,
+The expectation log likelihood term in \ref{eq:elbo_1} can be efficiently appriximated by the Monte Carlo sampling method,
 \begin{align}\label{eq:elbo_2}
 \mathcal{L}\approx\frac{1}{S}\sum_{s=1}^{S}p(W|\theta^{(s)})
 \end{align}

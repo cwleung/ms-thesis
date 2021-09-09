@@ -11,15 +11,30 @@ p(W|\phi)=\prod_{d=1}^{D}p(w_d|\phi)=\prod_{d=1}^{D}\prod_{n=1}^{N_d}p(w_{dn}|\p
 \end{align}
 % conversion to vocabularies
 For sake of convenience, due to documents contain different size of words. It is not feasible to construct matrix representation for modeling. For the reason, we can exchange the representation for BOW from iterating the word occurrence for each word position to iterating the word occurrence in a vocabulary set. In this way, we can define a matrix for BOW: $ W\in\mathbb{R}^{D\times V} $, with D rows of document and V rows of vocabulary count. Formally, for every document $ W=(w_{d1},w_{d2},\cdots,w_{dV}), v\in\{1,\cdots,V\} $ vocabularies, $ w_{dv} $ is the occurrence of a vocabulary v in document d.
-
-\section{Word Embedding} \label{ch2:we}
-% explain what is word embeddings
-Word embedding\cite{bengio_neural_nodate} is a kind of representation for words from document collections using a vector formulation. The nature of word embedding is that, the words that having similar meaning have a close distance(in most case euclidean distance), and vice versa. For instance, continuous bag-of-words(CBOW) \cite{mikolov_distributed_nodate} is a kind of word embeddings converting bag-of-word in to a vector of n-dimension continuous space, which contains the following formulation,
-\begin{align*}
-w\sim\text{softmax}(\rho^\top\alpha)
-\end{align*}
-where $ \rho\in\mathbb{R}^{L\times V} $ is the embedding matrix which a function $ f:\mathbb{R}^V\mapsto\mathbb{R}^{L} $ maps $ V $ vocabularies into $ L $ dimension of continuous vector space. And $ \alpha $ is the context embedding, which conveniently convert the latent dimension L to a custom dimension of continuous embedding space $ \mathbb{R}^{N} $ as $ \tilde{f}:\mathbb{R}^L\mapsto\mathbb{R}^{N} $.
-\section{Correlated Topic Model} \label{ch2:ctm}
+\section{LKJ Correlation Distribution} \label{ch2:lkj}
+LKJ distribution \cite{lewandowski_generating_2009} is a distribution for modeling correlation matrix. The distribution is described as equation \ref{eq:lkj}
+\begin{align} \label{eq:lkj}
+f(C|\eta)=&2^{\sum_{k=1}^{K-1}(2(\eta-1)+K-k)(K-k)}\times\\
+&\prod_{k=1}^{K-1}(B(\eta+(K-k-1)/2,\eta+(K-k-1)/2)^{K-k})(\det(C)^{\eta-1})
+\end{align}
+$ B(\cdot,\cdot) $ is beta distribution, and K is the number of variable in correlation matrix. $ \eta $ is concentration parameter for LKJ distribution. When $ \eta=1 $ it is simply a uniform distribution allocated over the correlation matrix. If $ \eta>0 $, it is a modal correlation matrix. The density concentrated around center when the $ \eta $ value become larger.
+To apply it into normal distribution as covariance, we could apply transformation equation \ref{eq:lkj_trans} and turn it into covariance matrix\cite{barnard_modeling_2000}.
+\begin{align}\label{eq:lkj_trans}
+\Sigma=diag(\sigma)\cdot C \cdot diag(\sigma)
+\end{align}
+% Transformation
+Directly drawing correlation matrix from LKJ distribution is not practical in reality case. It is common to draw correlation matrix from factorized Cholesky LKJ distribution instead, where the probability density function is described as equation \ref{eq:lkj_chol}
+\begin{align} \label{eq:lkj_chol}
+\text{LKJChol}(L|\eta)&\propto|J|\det(LL^\top)^{(\eta-1)}\\
+&=\prod_{k=2}^{K}L_{kk}^{K-k+2\eta-2}
+\end{align}
+The lower triangular matrix L is a Cholesky factorization for the correlation matrix iff $ L_{k,k}>0 $
+\begin{align}
+\Sigma=\text{diag}(\sigma)\cdot LL^\top \cdot \text{diag}(\sigma)
+\end{align}
+similarly, the transformation from LKJ Cholesky matrix to covariance matrix as equation \ref{eq:lkj_trans}.
+\section{Topic Models}
+\subsection{Correlated Topic Model} \label{ch2:ctm}
 Correlated Topic Model (CTM)\cite{blei_correlated_2007} is an extension of LDA\cite{blei_latent_2003} that utilize the correlation of latent topics, and relates the similar documents together. Instead of Dirichlet distribution, CTM applies multivariate logistic-normal distribution to model the word distribution.
 
 The model contain $ K $ topics distribution as $ \beta_{1:K} $, $ z_{n,d} $ is the topic assigned to the n-th topic and d-th document.$ \theta_d $ is the corresponding proportion a topic is distributed to d-th document.$ \mu $ and $ \Sigma $ are the corresponding mean and $ K \times K $ covariance matrix of the distribution between documents.\\
@@ -78,29 +93,7 @@ and the ELBO is defined as,
 \mathcal{L}\geq&\sum_{d=1}^{D}\mathbb{E}_{q_d}\left[\log p(\eta_d,z_d,w_d|\mu,\Sigma,\beta_{1:K})\right]-\sum_{i=1}^{K}\log\text{KL}(q(\eta_i|\lambda_i,\nu_i^2)|p(\eta_d|\mu,\Sigma))\\
 &-\sum_{n=1}^{N}\log\text{KL}(q(z_n|\phi_n)||p(z_n|\eta_d))
 \end{align*}
-\section{LKJ Correlation Distribution} \label{ch2:lkj}
-LKJ distribution \cite{lewandowski_generating_2009} is a distribution for modeling correlation matrix. The distribution is described as equation \ref{eq:lkj}
-\begin{align} \label{eq:lkj}
-f(C|\eta)=&2^{\sum_{k=1}^{K-1}(2(\eta-1)+K-k)(K-k)}\times\\
-&\prod_{k=1}^{K-1}(B(\eta+(K-k-1)/2,\eta+(K-k-1)/2)^{K-k})(\det(C)^{\eta-1})
-\end{align}
-$ B(\cdot,\cdot) $ is beta distribution, and K is the number of variable in correlation matrix. $ \eta $ is concentration parameter for LKJ distribution. When $ \eta=1 $ it is simply a uniform distribution allocated over the correlation matrix. If $ \eta>0 $, it is a modal correlation matrix. The density concentrated around center when the $ \eta $ value become larger.
-To apply it into normal distribution as covariance, we could apply transformation equation \ref{eq:lkj_trans} and turn it into covariance matrix\cite{barnard_modeling_2000}.
-\begin{align}\label{eq:lkj_trans}
-\Sigma=diag(\sigma)\cdot C \cdot diag(\sigma)
-\end{align}
-% Transformation
-Directly drawing correlation matrix from LKJ distribution is not practical in reality case. It is common to draw correlation matrix from factorized Cholesky LKJ distribution instead, where the probability density function is described as equation \ref{eq:lkj_chol}
-\begin{align} \label{eq:lkj_chol}
-\text{LKJChol}(L|\eta)&\propto|J|\det(LL^\top)^{(\eta-1)}\\
-&=\prod_{k=2}^{K}L_{kk}^{K-k+2\eta-2}
-\end{align}
-The lower triangular matrix L is a Cholesky factorization for the correlation matrix iff $ L_{k,k}>0 $
-\begin{align}
-\Sigma=\text{diag}(\sigma)\cdot LL^\top \cdot \text{diag}(\sigma)
-\end{align}
-similarly, the transformation from LKJ Cholesky matrix to covariance matrix as equation \ref{eq:lkj_trans}.
-\section{Embedded Topic Model} \label{ch2:etm}
+\subsection{Embedded Topic Model} \label{ch2:etm}
 Embedded Topic Model \cite{dieng_topic_2019} is one of the state-of-art approaches for topic model task. It takes word distribution $ \beta $ as a topic embedding for words. % explain the algorithm
 Similar to Word2Vec\cite{mikolov_distributed_nodate}, the word distribution is a softmax function of the inner product of context matrix $ \rho $ and context embedding $ \alpha $. Specifically, the algorithm   equation \ref{eq:etm_embedding}
 \begin{equation}\label{eq:etm_embedding}
@@ -118,20 +111,28 @@ Draw word $ w_{d,n}\sim \sigma(\rho^\top\alpha)_{z_{dn}} $
 \caption{Generative Process for ETM}
 \end{algorithm}
 Although ETM can maintain for Word2Vec training as the embedding for topic modeling, it cannot capture 
-\section{Transformer} \label{ch2:transformer}
+\section{Representation learning}
+\subsection{Word Embedding} \label{ch2:we}
+% explain what is word embeddings
+Word embedding\cite{bengio_neural_nodate} is a kind of representation for words from document collections using a vector formulation. The nature of word embedding is that, the words that having similar meaning have a close distance(in most case euclidean distance), and vice versa. For instance, continuous bag-of-words(CBOW) \cite{mikolov_distributed_nodate} is a kind of word embeddings converting bag-of-word in to a vector of n-dimension continuous space, which contains the following formulation,
+\begin{align*}
+w\sim\text{softmax}(\rho^\top\alpha)
+\end{align*}
+where $ \rho\in\mathbb{R}^{L\times V} $ is the embedding matrix which a function $ f:\mathbb{R}^V\mapsto\mathbb{R}^{L} $ maps $ V $ vocabularies into $ L $ dimension of continuous vector space. And $ \alpha $ is the context embedding, which conveniently convert the latent dimension L to a custom dimension of continuous embedding space $ \mathbb{R}^{N} $ as $ \tilde{f}:\mathbb{R}^L\mapsto\mathbb{R}^{N} $.
+\subsection{Transformer} \label{ch2:transformer}
 Transformer\cite{vaswani_attention_nodate} is a popular neural network architecture in natural language processing. To briefly explain Transformer, it is an stacked encoder-decoder architecture. The component that makes transformer stands out of other architectures it the mutli-head self-attention mechanism. 
 
 In this section we only cover the main components of transformer. The details for transformer can be reviewed in author's blog post\footnote{\url{https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html}}.
 
 To define Transformer,
-\subsection{Scaled Dot Product Attention}
+\subsubsection{Scaled Dot Product Attention}
 \begin{align*}
 \text{Attention}(Q,K,V) = \sigma\left(\frac{QK^T}{\sqrt{d_k}}\right)V
 \end{align*}
 \begin{align*}
 k_i, q_i\sim\mathcal{N}(0,\sigma)\rightarrow\text{Var}\left(\sum_{i=1}^{d_k}q_i\cdot k_i\right)=\sigma\cdot d_k
 \end{align*}
-\section{Multi-head attention}
+\subsubsection{Multi-head attention}
 To obtain a big value from a sentence, extending the attention mechanism to multiple head instead of one could 
 \begin{align*}
 h_i&=Attn(QW_i^Q,KW_i^K,VW_i^V)\\
@@ -147,7 +148,7 @@ h_i&=Attn(QW_i^Q,KW_i^K,VW_i^V)\\
 %\text{Multihead}(Q,K,V)=\text{Concat}(\text{head}_i,\dots,\text{head}_h)W^O \\
 %\text{head}_i = \text{Attention}(QW_i^{Q}, KW_i^K,VW_i^V)
 %\end{align*}
-\subsection{Positional Encoding}
+\subsubsection{Positional Encoding}
 One drawback for Multi-Head Attention block is that it does not consider information about word positioning, 
 \[ PE_{(pos,i)} = \begin{cases} 
 \sin\left(\frac{pos}{10000^{i/d}model}\right) & \text{if }i \mod 2 = 0 \\
@@ -156,3 +157,54 @@ One drawback for Multi-Head Attention block is that it does not consider informa
     \]
     
 For the decoder part, we only consider autoregressive Transformer-decoder in the remaining research.
+In this chapter, we explore the detail for posterior inference and give specification to how we . In section \ref{ch4:1}, we give definition to the variational inference method that we use to posterior approximation. Then a detailed derivation for the evidence lower bound(ELBO) of our proposed model will be given in section\ref{ch4:2}. Finally, section \ref{ch4:3} will demonstrate the algorithm that to optimization process of the LKJTM.
+\section{Posterior Inference}\label{ch4:1}
+Since the exact inference of the posterior is intractable in real application, we employed approximation scheme for the posterior inference. The popular approaches are Markov Chain Monte Carlo Method (MCMC) and Variational Inference(VI)\cite{blei_variational_2006,hoffman_stochastic_2013}. Gibbs sampling is one of the MCMC method and it is fast to compute the approximation and easy to the implementation. Then, Variational EM algorithm to be carried out for maximizing the likelihood over all word in corpus in the document. An alternative way to perform estimation is Monte Carlo method.
+\subsection{Variational Inference}
+Given that posterior approximiation is not alway practical in real world application. Approximation method are necessary to be apply. Their are two main approach for the posterior approximation: Markov Chain Monte Carlo(MCMC) Variational Inference. Variational Inference is a method approximating the posterior in optimization fashion. To give a better intuition, let probability $ p(x) $ depending on a latent variable $ z $ such that $ p(x|z)=\int p(x|z)p(z)dz $. We can turn the following posterior inference problem into a optimization problem. Here we derive the bound and perform optimization,
+\begin{align*}
+content...
+\end{align*}
+\subsection{Stochastic Variational Inference}
+Stochastic Variational Inference (SVI)\cite{hoffman_stochastic_2013} is a scalable variant of variational inference, which enables mini-batching to split dataset and train for each epochs, then become a standard of optimization for probabilistic models.
+Two main improvement are made by the SVI: stochastic optimization and noisy gradient.
+% TODO Collapsing parameters
+\subsection{Collapsing Parameters}
+In original LDA model, the parameter z is responsible for sampling topic assignment for each word position in every single document. Collapsing parameters\cite{srivastava_autoencoding_2017} introduced to reduce the latent variable $ z $ in the generative process in hence to speed up computation.
+\begin{align}\label{eq:cp}
+w_d\sim\prod_{n=1}^{N_d}\text{Cat}(\sigma(\beta_{w_{dn}}\theta_d))
+\end{align}
+The trick in equation \ref{eq:cp} rewrite the original LDA word drawing process, and hence define a new evidence lower bound for the topic model.
+% TODO Blei's notes
+\subsection{Autoencoding Variational Bayes (AEVB)}
+Generally when we optimize a variational parameter, it is neceasary to derive a ELBO　and then derive the optimization step for gradient descent. While amortized inference latent variable z is parameterized by two inference network  $ \mu_{\phi(x),\sigma_{\phi}(x)} $ .
+% TODO UCLA notes
+\begin{align}
+z = \mathcal{N}(\mu_{\phi}(x_i), \sigma_{\phi}(x_i))
+\end{align}
+\begin{align}
+\mathcal{L}=\mathbb{E}_{z\sim\mathcal{N}(\mu_{\phi}(x_i),\sigma_\phi(x_i))}\left[\log p_\theta(x_i|z)\right]-D_{KL}\left(q_\phi(z|x_i)||p(z)\right)
+\end{align}
+\subsection{Reparameterization trick}
+The drawback of amortized inference is that, sampling from normal distribution parameterizing $ \mu_{\phi(x),\sigma_{\phi}(x)} $ could lead to high variance outcome and hamper the inference performance. For the reason, taking reparamterization trick\cite{kingma_auto-encoding_2014} to transform as equation \ref{eq:rt},
+\begin{align}\label{eq:rt}
+z= \mu_{\phi}(x_i)+\epsilon\sigma_\phi(x_i)\text{, }\epsilon\sim\mathcal{N}(0,1)
+\end{align}
+where $ \epsilon $ is a sample from normal distribution $ \mathcal{N}(0,1) $. and so the modified ELBO becomes equation \ref{eq:elbo_rt},
+\begin{align}\label{eq:elbo_rt}
+\mathcal{L}=\mathbb{E}_{\epsilon\sim N(0,1)}\left[\log p_\theta(x_i|\mu_{\phi}(x_i)+\epsilon\sigma_\phi(x_i))\right]-D_{KL}\left(q_\phi(z|x_i)||p(z)\right)
+\end{align}
+\section{Evaluation metrics}
+\subsection{Perplexity}The proposed model will be evaluated with perplexity metric. The metric will examine how well the model can tackle with unseen data. It is equivalent algebraically to the inverse of the geometric mean per-word likelihood. Lower perplexity scores mean better.\begin{equation*}
+\text{Perplexity}(D_{test})=\exp{{-\frac{\sum_{d=1}^{M}\sum_{m=1}^{N_d}\log p(w_{dm})}{\sum_{d=1}^{M}N_d}}}
+\end{equation*}
+\subsection{Topic Coherence}Topic Coherence\cite{mimno_optimizing_2011} measures the quality of the topic 
+\begin{equation*}
+TC=\frac{1}{K}\sum_{k=1}^{K}\frac{1}{45}\sum_{i=1}^{10}\sum_{j=i+1}^{10}f(w_i^{(k)},w_j^{(k)})\end{equation*}
+where $\{w_1^{(k)},\cdots,w_{10}^{(k)}\}$ denotes top-10 most likely words in topic k. And function $f(\cdot,\cdot)$ is te normalized pointwise mutual information.\begin{equation*}
+f(w_i,w_j)=\frac{\log\frac{P(w_i,w_j)}{P(w_i)P(w_j)}}{-\log P(w_i,w_j)}\end{equation*}
+\subsection{Topic Diversity} In order to compare how the words each topic are differentiate the others. We applied the Topic Diversity metric \cite{dieng_topic_2019}. Topic Diversity (TD) to be the percentage of unique words in the top 25 words of all topics. Diversity close to 0 indicates redundant topics; diversity close to 1 indicates more varied topics. We define the overall metric for the quality of a model’s topics as the product of its topic diversity and topic coherence.
+\begin{align*}
+TD=\frac{|A\cap B|}{|A \cup B|}
+\end{align*}
+where $ A $ and $ B $ are top-k words from two topics. 

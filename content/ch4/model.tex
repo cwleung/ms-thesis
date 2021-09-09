@@ -3,16 +3,57 @@ In this chapter, we give a detailed explanation and procedure of LKJTM to be imp
 The TETM utilizes the Transformer as embedding to the topic-word representations. To compare with the original topic model, the word-topic distribution $ \beta $ is the 
 First, the topic embedding embeds the vocabulary into L-dimensional space, which is by Transformer embedding. Second, the context embedding maps the embedding into K-dimensional space . 
 In the generative process, the LKJTM uses the topic embedding to form a per-topic vector to represent the meaning over the vocabulary. 
+% Graphical Model'
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\tikzstyle{main}=[circle, minimum size = 10mm, thick, draw =black!80, node distance = 16mm]
+\tikzstyle{connect}=[-latex, thick]
+\tikzstyle{box}=[rectangle, draw=black!100]
+  % sigma
+  \node[main] (sigma) [label=below:$\Sigma$] { };    
+  % mu
+  \node[main] (mu) [yshift=1cm, below=of sigma, label=below:$\mu$] { };
+  % gamma
+  \node[main] (gamma) [yshift=-1cm, above=of sigma, label=above:$\gamma$] { };
+  % eta
+  \node[main] (theta) [right=of sigma,label=below:$\theta$] { };
+  % z
+%  \node[main] (z) [right=of theta,label=below:z] {};
+  % beta
+  \node[main] (beta) [above=of theta,label=below:$\beta$] { };
+%  \node[main] (beta) [left=of psi,label=below:$\beta$] { };
+  \node[main, fill = black!10] (w) [right=of theta,label=below:w] { };
+  \path (gamma) edge [connect] (sigma)
+  		(sigma) edge [connect] (theta)
+  		(mu) edge [connect] (theta)
+        (theta) edge [connect] (w)
+%		(z) edge [connect] (w)
+		(beta) edge [connect] (w);
+%		(beta) edge [connect] (psi);
+  \node[rectangle, inner sep=4.4mm,draw=black!100, fit= (beta)] {};
+  \node[rectangle, inner sep=4.4mm, fit= (beta), label=below right:K, xshift=-5mm, yshift=18.5mm] {};
+  \node[rectangle, inner sep=0mm, fit= (w),label=below right:N, , xshift=0mm] {};
+  \node[rectangle, inner sep=4.4mm,draw=black!100, fit=  (w)] {};
+  \node[rectangle, inner sep=4.6mm, fit= (w),label=below right:D, xshift=0mm] {};
+  \node[rectangle, inner sep=9mm, draw=black!100, fit = (theta) (w)] {};
+\end{tikzpicture}
+\caption{Graphical model for LKJTM}
+\label{graph:lkjtm}
+\end{figure}
+
 % Generative process
 The generative process of the $ d^{th} $ document is the following:\\
 \begin{algorithm}[H]
+Initialize hyperparameters $ \gamma $, $ \mu $\\
+Sample Correlation Matrix $ L\sim \text{LKJChol}(\gamma)$\\
 \For{document d in D}{
-Sample topic distribution $ \theta_d\sim \mathcal{LN}(0,I) $\\
+Sample topic distribution $ \theta_d\sim \mathcal{LN}(\mu,\sigma LL^\top\sigma) $\\
 \For{word position n in $ N_d $}{
 Sample word $ w_{d,n}\sim \sigma(\theta_d(\rho^\top\alpha)_{\cdot,w_{d,n}}) $
 }
 }
-\caption{Generative Process for TETM}
+\caption{Generative Process for LKJTM}
 \label{algorithm:lkjtm}
 \end{algorithm}
 From algorithm \ref{algorithm:lkjtm}, starting from step 1, the topic proportion $ \theta_d $ is drawn from the logistic-normal distribution $ \mathcal{LN}(\cdot) $ with zero mean and identical covariance.
