@@ -8,13 +8,12 @@ Probabilistic Latent Semantic Analysis (PLSA) \cite{hofmann_probabilistic_2013} 
 % # LDA
 Similar to PLSA, Latent Dirichlet Allocation (LDA) \cite{blei_latent_2003} advanced PLSA from the topic assumption documents, which every document consist of admixture of topic distribution.
 
-Some improvement exploit the correlation information between topics, which model the topic assignment with 
+Some improvement exploit the correlation information between topics, which model the topic assignment with multivariate distribution to parameterize the relation between topics with mean and covariance.
 
-Moreover, due to the  success of LDA. there have been a numbers of topic models proposed on top of the LDA model. Dynamic Latent Dirichlet Allocation\cite{blei_probabilistic_2012} was developed for continuous time data. Relational Latent Dirichlet Allocation \cite{chang_relational_nodate} . Supervised Latent Dirichlet Allocation \cite{mcauliffe_supervised_2008} includes labeled data which supposed to be helpful in several particular application areas such as movie review and sparse data prediction. Later LDA was extended to nonparametric version, hierarchical Latent Dirichlet Allocation (hLDA)\cite{teh_hierarchical_2006}, which follows a stochastic process called n-Chinese Restaurant Process (nCRP)\cite{teh_tutorial_nodate}. hLDA maintain a hierarchical structure of topic instead of flat structure in LDA. % pachinko LDA % 
+Moreover, due to the success of LDA. there have been a numbers of topic models proposed on top of the LDA model. Dynamic Latent Dirichlet Allocation\cite{blei_probabilistic_2012} was developed for continuous time data. Relational Latent Dirichlet Allocation \cite{chang_relational_nodate} . Supervised Latent Dirichlet Allocation \cite{mcauliffe_supervised_2008} includes labeled data which supposed to be helpful in several particular application areas such as movie review and sparse data prediction. Later LDA was extended to nonparametric version, hierarchical Latent Dirichlet Allocation (hLDA)\cite{teh_hierarchical_2006}, which follows a stochastic process called n-Chinese Restaurant Process (nCRP)\cite{teh_tutorial_nodate}. hLDA maintain a hierarchical structure of topic instead of flat structure in LDA. % pachinko LDA % 
 
 % # CTM
 Correlated Topic Model (CTM)\cite{blei_correlated_2007} is the original work that proposed to alleviate the problem LDA, which did not utilize the topic information between correlated topics. The proposed model replaced Dirichlet distribution with a logistic-normal prior with covariance matrix to represent the relationship between topics.
-% 
 
 %% Embedded Topic Models
 There have been a several of works focus on word embedding and topic model. Major of them combined statistical model and embedding approach to model topic distribution. In other words, representing a word by mapping every single word into continuous space.
@@ -35,17 +34,17 @@ Some other attempts use graph techniques to model topic distributions.
 % # GATON
 Yang\cite{yang_graph_2020} introduced new topic model with Graph neural network techniques. The paper introduced Graph Attention TOpic Network (GATON) which hybridized the graph attention network (GAT) and amortized inference into application of topic modeling which supposed to reduce the require computation complexity.
 % # GTM
-Gerlach\cite{gerlach_network_2018} proposed
+%Gerlach\cite{gerlach_network_2018} proposed
 %% Bi-gram
-In past research, some considered bi-gram to take 
+In past research, some considered n-gram to model the word pattern under a sentence structure which results a better prediction.
 % Wallach 06
-Wallach propopsed a topic model using bi-gram \cite{wallach_topic_2006}
+Wallach \cite{wallach_topic_2006} proposed a topic model using bi-gram information from the data set to yield a better performance in topic interpretibility.
 % Wang 07
-Wang \cite{wang_topical_2007} utilized the topic model to n-gram assumption
+Wang \cite{wang_topical_2007} extends the topic model to n-gram assumption with similar approach.
 
 % Times Series model
-Hening\cite{hennig_kernel_2012} proposed Kernel topic model, 
-Tomasi\cite{tomasi_stochastic_nodate} implemented a time-series correlated topic model using Wishart process and Gaussian process, 
+Hening\cite{hennig_kernel_2012} proposed Kernel topic model, which the model is equipped the gaussian process with kernel covariance as the hyperparameter of Dirichlet prior for document-topic proportion.
+Tomasi\cite{tomasi_stochastic_nodate} implemented a time-series correlated topic model, using Gaussian process to model for modeling the hyperparameter of topic-word proportion and the mean for document-topic proportion, along with using Wishart process for parametrising the covariance matrix.
 % Gaussian Process
 % deep Gaussian processes (Dai et al., 2015)
 % stochastic variational sparse GP formulation (Hensman et al., 2013)

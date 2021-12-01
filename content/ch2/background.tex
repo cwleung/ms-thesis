@@ -120,7 +120,7 @@ w\sim\text{softmax}(\rho^\top\alpha)
 \end{align*}
 where $ \rho\in\mathbb{R}^{L\times V} $ is the embedding matrix which a function $ f:\mathbb{R}^V\mapsto\mathbb{R}^{L} $ maps $ V $ vocabularies into $ L $ dimension of continuous vector space. And $ \alpha $ is the context embedding, which conveniently convert the latent dimension L to a custom dimension of continuous embedding space $ \mathbb{R}^{N} $ as $ \tilde{f}:\mathbb{R}^L\mapsto\mathbb{R}^{N} $.
 \subsection{Transformer} \label{ch2:transformer}
-Transformer\cite{vaswani_attention_nodate} is a popular neural network architecture in natural language processing. To briefly explain Transformer, it is an stacked encoder-decoder architecture. The component that makes transformer stands out of other architectures it the mutli-head self-attention mechanism. 
+Transformer\cite{vaswani_attention_nodate} is a popular neural network architecture in natural language processing. To briefly explain transformer, it is an stacked encoder-decoder architecture. The component that makes transformer stands out of other architectures it the mutli-head self-attention mechanism. 
 
 In this section we only cover the main components of transformer. The details for transformer can be reviewed in author's blog post\footnote{\url{https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html}}.
 
@@ -200,10 +200,10 @@ radial basis function kernel (namely RBF kernel)
 \begin{align*}
 k(x,x')=\sigma^2\exp\left(-\frac{||x-x'||^2}{2l^2}\right)
 \end{align*}
-\paragraph{Matern Kernel}
-\begin{align*}
-k_{\text{Matern}}(x_1,x_2)=\frac{2^{1-\nu}}{\Gamma(\nu)}(\sqrt{2\nu}d)^{\nu}K_\nu(\sqrt{2\nu}d)
-\end{align*}
+%\paragraph{Matern Kernel}
+%\begin{align*}
+%k_{\text{Matern}}(x_1,x_2)=\frac{2^{1-\nu}}{\Gamma(\nu)}(\sqrt{2\nu}d)^{\nu}K_\nu(\sqrt{2\nu}d)
+%\end{align*}
 $ d $ is the Mab distance between variables $ x_1 $ and $ x_2 $, where $ \Theta $ manage the scale of the distance
 $ \nu $ is the 
 $ K_\nu $ is a modified Bessel function.
