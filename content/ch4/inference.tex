@@ -43,12 +43,6 @@ so the ELBO then becomes \ref{eq:elbo_8}
 \tilde{\mathcal{L}}=&\sum_{d=1}^{D}\left[-\frac{1}{2}\left(tr(\sigma_1^{-1}\sigma_0)+(\mu_1-\mu_0)\Sigma_1^{-1}(\mu_1-\mu_0)-K+\log\frac{|\sigma_1|}{|\sigma_0|}\right)\right]\\
 &+\mathbb{E}_{\epsilon\sim\mathcal{N}(0,I)}\left[w_d^\top\log\sigma(\beta(\mu_0+\sigma_0^{1/2}\epsilon))\right]-KL(q(\Sigma)||p(\Sigma|\gamma))
 \end{align}
-% TODO Transformer Loss
-\subsection{Transformer Loss}
-It is suggested that using cross entropy loss for transformer training. In equation \ref{eq:crossentropy}, . It is worth mention that, the 
-\begin{align}\label{eq:crossentropy}
-L_{\text{CrossEntropy}}=-\frac{1}{V}\sum_{i=1}^{V}y_i\cdot\log(\hat{y_i})
-\end{align}
 % TODO algorithm for the optimization here
 \subsection{Optimization step}\label{ch4:3}
 In algorithm \ref{algorithm:lkjtm_obj}, first initialize the model and variational parameters. Then, for each epochs, we obtain the transformer embedding $ \rho $ from transformer. After that, the topic embedding $ \beta $ is computed by taking softmax of dot-product of $ \rho $ and $ \alpha $. Then a minibatch $ \mathcal{B} $ is selected from the document for optimization. The number of minibatch is the document collection divides minibatch size where $ \#\text{minibatch}=\frac{\mathcal{D}}{|\mathcal{B}|} $. For each minibatch, the model takes a document and sample lower Cholesky matrix from LKJ Cholesky distribution(description see section \ref{ch2:lkj}). A topic assignment for document d $ \theta_d $ is sampled from logistic-normal distribution $ \mathcal{LN}(\mu,\sigma LL^\top\sigma) $, where $ \mu $ is sampled from half-Cauchy distribution and covariance is a transformation from equation \ref{eq:lkj_trans}. For each word position n, a word is sampled from the softmax of dot-product of transformer embedding $ \rho $ and NN weight $ \alpha $. After the sampling process for the document collection, we estimate the ELBO loss $ L_{ELBO} $ for the topic model, and the cross entropy loss $ L_{CrossEntropy} $. Remind that the topic model and transformer take input differently. The topic model part takes bag-of-words input, a document-vocabulary matrix $ D\times V $ counting the occurrence of vocabulary v in document d. While transformer take sequence of document as input. 

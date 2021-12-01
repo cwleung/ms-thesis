@@ -124,25 +124,38 @@ Transformer\cite{vaswani_attention_nodate} is a popular neural network architect
 
 In this section we only cover the main components of transformer. The details for transformer can be reviewed in author's blog post\footnote{\url{https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html}}.
 
-To define Transformer,
-\subsubsection{Scaled Dot Product Attention}
-\begin{align*}
-\text{Attention}(Q,K,V) = \sigma\left(\frac{QK^T}{\sqrt{d_k}}\right)V
-\end{align*}
-\begin{align*}
-k_i, q_i\sim\mathcal{N}(0,\sigma)\rightarrow\text{Var}\left(\sum_{i=1}^{d_k}q_i\cdot k_i\right)=\sigma\cdot d_k
-\end{align*}
-\subsubsection{Multi-head attention}
-To obtain a big value from a sentence, extending the attention mechanism to multiple head instead of one could 
-\begin{align*}
-h_i&=Attn(QW_i^Q,KW_i^K,VW_i^V)\\
-\text{MHA(Q,K,V)}&=(h_1,\cdots,h_h)W^O
-\end{align*}
-\begin{figure}
-%\includegraphics[width=0.25\linewidth]{fig/transformer}
-\caption{Transformer Architecture}
-\label{fig:transformer_arch}
-\end{figure}
+To define Transformer, equation \ref{eq:scale-dot} denotes the scaled dot product that transformer use to calculate attention score. $ Q\in\mathbb{R}^{T\times d_k} $,  $ K\in\mathbb{R}^{T\times d_k} $ and $ V\in\mathbb{R}^{T\times d_v} $ are the query, key, value term vector used to calculate the context vector. S represents the sequence length and $ d_k $ and $ d_v $ the dimension for the key and value respectively. $ \frac{1}{\sqrt{d_k}} $ is used to scale down attention matrix in which to maintain a proper variance for the attention scores.
+\begin{align}\label{eq:scale-dot}
+\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\end{align}
+Weight matrices $ W_i^Q\in\mathbb{R}^{d_{model}\times d_k} $, $ W_i^K\in\mathbb{R}^{d_{model}\times d_k} $ and $ W_	i^V\in\mathbb{R}^{d_{model}\times d_k} $  for query, key and value are parameters to be learned. The scaled dot-product attention computes a sequence of vector outputs. $ W^O\in\mathbb{R}^{hd_v\times d_{model}} $, where $ d_{model} $ is the dimension of key-value pair multiplies number of head.
+\begin{align}
+\text{Multihead(Q,K,V)}&=\text{concat}(h_1,\cdots,h_h)W^O\\
+h_i&=\text{Attention}(QW_i^Q,KW_i^K,VW_i^V)
+\end{align}
+% Layer Norm
+The sub-layer multi-head self-attention is connected to the fully-connected feed-forward network. The outputs of each sub-layer are added to the original output with residual connection applying Layer Normalization as eq. \ref{eq:layernorm}.
+\begin{align}\label{eq:layernorm}
+x=\text{LayerNorm}(x+\text{Sublayers}(x))
+\end{align}
+%Transformer\cite{vaswani_attention_nodate} is a popular neural network architecture in natural language processing. To briefly explain Transformer, it is an stacked encoder-decoder architecture. The component that makes transformer stands out of other architectures it the mutli-head self-attention mechanism. 
+%
+%In this section we only cover the main components of transformer. The details for transformer can be reviewed in author's blog post\footnote{\url{https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html}}.
+%
+%To define Transformer,
+%\subsubsection{Scaled Dot Product Attention}
+%\begin{align*}
+%\text{Attention}(Q,K,V) = \sigma\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+%\end{align*}
+%\begin{align*}
+%k_i, q_i\sim\mathcal{N}(0,\sigma)\rightarrow\text{Var}\left(\sum_{i=1}^{d_k}q_i\cdot k_i\right)=\sigma\cdot d_k
+%\end{align*}
+%\subsubsection{Multi-head attention}
+%To obtain a big value from a sentence, extending the attention mechanism to multiple head instead of one could 
+%\begin{align*}
+%h_i&=Attn(QW_i^Q,KW_i^K,VW_i^V)\\
+%\text{MHA(Q,K,V)}&=(h_1,\cdots,h_h)W^O
+%\end{align*}
 %\subsection{Multi-Head Attention}
 %\begin{align*}
 %\text{Multihead}(Q,K,V)=\text{Concat}(\text{head}_i,\dots,\text{head}_h)W^O \\
@@ -158,13 +171,93 @@ One drawback for Multi-Head Attention block is that it does not consider informa
     
 For the decoder part, we only consider autoregressive Transformer-decoder in the remaining research.
 In this chapter, we explore the detail for posterior inference and give specification to how we . In section \ref{ch4:1}, we give definition to the variational inference method that we use to posterior approximation. Then a detailed derivation for the evidence lower bound(ELBO) of our proposed model will be given in section\ref{ch4:2}. Finally, section \ref{ch4:3} will demonstrate the algorithm that to optimization process of the LKJTM.
+\section{Time Series model}
+\subsection{Gaussian Process (GP)}
+Gaussian Process is a versatile algorithm which is commonly used for both supervised and unsupervised learning problems including regression, classification and clustering. It has been demonstrated a strong pursuit on times-series and reinforcement learning problems. A Gaussian Process $ \mathcal{GP}(\cdot,\cdot) $ is denoted by following, where m is the mean and k stands for a kernel for covariance function,
+\begin{align*}
+f\sim\mathcal{GP}(m,k)
+\end{align*}
+For a set of input $ x_1,\dots,x_N $, the joint probability density function $ p(f(x_1),\dots,f(x_N)) $ is a normal distribution condition on mean vector $ m(X) $ and covariance matrix $ k(x,x') $ which is a positive semidefinite matrix. In most case the mean vector are specified with zero mean (m(X)=0).
+\begin{align*}
+p(f(X))=\mathcal{N}(m(X),k(X,X))
+\end{align*}
+%\begin{align*}
+%q(f(X))=\int q(f(X)|u)q(u)du
+%\end{align*}
+In particular, in Gaussian Process regression task, a output variable $ y_i $ denoted $ y_i\sim f(x_i)+\epsilon $ where $ \epsilon $ is a Gaussian noise. Therefore, given a set of training input and target, 
+\begin{align*}
+p(f)=\mathcal{N}(f|0,K)
+\end{align*}
+\begin{align*}
+p(y_i|f)=\mathcal{N}(y;f,\sigma_\epsilon^2I)
+\end{align*}
+\begin{align*}
+p(y)=\mathcal{N}(y|0,K+\sigma_\epsilon^2I)
+\end{align*}
+For a Gaussian Process, is defined as follows
+To simply define the Gaussian Process model, here 
+radial basis function kernel (namely RBF kernel)
+\begin{align*}
+k(x,x')=\sigma^2\exp\left(-\frac{||x-x'||^2}{2l^2}\right)
+\end{align*}
+\paragraph{Matern Kernel}
+\begin{align*}
+k_{\text{Matern}}(x_1,x_2)=\frac{2^{1-\nu}}{\Gamma(\nu)}(\sqrt{2\nu}d)^{\nu}K_\nu(\sqrt{2\nu}d)
+\end{align*}
+$ d $ is the Mab distance between variables $ x_1 $ and $ x_2 $, where $ \Theta $ manage the scale of the distance
+$ \nu $ is the 
+$ K_\nu $ is a modified Bessel function.
+The ELBO for GP is derived from \cite{hensman_gaussian_nodate}, as
+\begin{align*}
+\log p(y)\geq\mathbb{E}_{q(f)}[\log p(y|f)]-KL[q(u)||p(u)]
+\end{align*}
+where the variational distribution is $ q(f)\approx\int p(f|u)q(u)du $
+\subsection{Gaussian Process Latent Variable Model (GPLVM)}
+Gaussian Process Latent Variable Model \cite{lawrence_gaussian_nodate,titsias_bayesian_nodate} is a dimension reduction method turn high dimensional data into low-dimension space. Formally, given a latent variable $ X\in\mathbb{R}^{N\times Q} $, and high dimensional real valued observations $ Y\in\mathbb{R}^{N\times D} $, the model induce high dimensional from a low-dimensional mapping $ \mathcal{X}\rightarrow\mathcal{Y} $ such that $ Q<<D $.
+\begin{align*}
+p(X)=\prod_{n=1}^{N}\mathcal{N}(x_n;0,I_Q)
+\end{align*}
+\begin{align*}
+p(f|X,\theta)=\prod_{d=1}^{D}\mathcal{GP}(f_d;0,K_d)
+\end{align*}
+\begin{align*}
+p(Y|f,X)=\prod_{i=1}^{N}\prod_{i=1}^{D}\mathcal{N}(y_{n,d};f_d(x_n),\sigma_y^2)
+\end{align*}
+The model can be learnt using point estimation, MAP estimation, or variational inference. Here we discuss the variational inference method. The latent variable ELBO is given by,
+\begin{align*}
+\mathcal{L}=&\sum_{n,d}\mathbb{E}_{q_\phi(x_n)}\mathbb{E}_{p(f_d|u_d,x_n)q_{\lambda}(u_d)}\left[\log\mathcal{N}(y_{n,d};f_d(x_d),\sigma_y^2)\right]\\
+&-\sum_{n}\text{KL}(q_{\phi}(x_n)||p(x_n))-\sum_{d}\text{KL}(q_\lambda(u_d)||p(u_d|Z))
+\end{align*}
+the $ \phi $ is the local variational parameters, $ \lambda $ is the global variational parameters, $ \theta $ is the kernel hyperparameters and $ \sigma^y $ is the likelihood noise.
+% TODO add time
+\subsection{Dynamic Topic Model}
+Dynamic Topic Model \cite{blei_dynamic_2006} is a model enables to capture topic information from time-series data set. The model utilize documents from different time and generates the corresponding topic-word representation.
+
+% Generative process
+The generative process of the $ d^{th} $ document is the following:\\
+\begin{algorithm}[H]
+Draw topc embedding $ \alpha_k^t\sim\mathcal{N}(\alpha_k^{t-1},\gamma^2I) $\\
+Sample topc proportion $ \theta_{t_d}\sim\mathcal{LN}(\eta_{t_d},\xi^2I) $\\
+\For{word position n in $ N_d $}{
+Sample word $ w_{d,n}\sim\text{Cat}(\sigma(\rho^\top\alpha_{z_{d_n}}^{t_d})) $
+}
+\caption{Generative Process for DTM}
+\label{algorithm:dtm}
+\end{algorithm}
+
 \section{Posterior Inference}\label{ch4:1}
 Since the exact inference of the posterior is intractable in real application, we employed approximation scheme for the posterior inference. The popular approaches are Markov Chain Monte Carlo Method (MCMC) and Variational Inference(VI)\cite{blei_variational_2006,hoffman_stochastic_2013}. Gibbs sampling is one of the MCMC method and it is fast to compute the approximation and easy to the implementation. Then, Variational EM algorithm to be carried out for maximizing the likelihood over all word in corpus in the document. An alternative way to perform estimation is Monte Carlo method.
 \subsection{Variational Inference}
-Given that posterior approximiation is not alway practical in real world application. Approximation method are necessary to be apply. Their are two main approach for the posterior approximation: Markov Chain Monte Carlo(MCMC) Variational Inference. Variational Inference is a method approximating the posterior in optimization fashion. To give a better intuition, let probability $ p(x) $ depending on a latent variable $ z $ such that $ p(x|z)=\int p(x|z)p(z)dz $. We can turn the following posterior inference problem into a optimization problem. Here we derive the bound and perform optimization,
+Given that posterior approximiation is not alway practical in real world application. Approximation method are necessary to be apply. Their are two main approach for the posterior approximation: Markov Chain Monte Carlo(MCMC) Variational Inference. Variational Inference is a method approximating the posterior in optimization fashion. To give a better intuition, let probability $ p(x) $ depending on a latent variable $ z $ such that $ p(x|z)=\int p(x|z)p(z)dz $. We can turn the following posterior inference problem into a optimization problem. Here we derive the bound and perform optimization, by doing some calculation, we can obtain the following lower bound for the likelihood $ \mathcal{L}_i(p,q_i) $
 \begin{align*}
-content...
+\log p(x_i)\geq\mathbb{E}_{z\sim q_i(z))}[\log p(x_i|z)+\log p(z)]+\mathbb{E}_{z\sim q_i(z))}[\log q_i(z)]=\mathcal{L}_i(p,q_i)
 \end{align*}
+then by deriving the KL-divergence, we can obtain the log probability $ \log p(x_i) $ is the likelihood-term minus the KL-divergence of $ q_i(z) $ and $ p(z|x_i) $.
+\begin{align*}
+D_{KL}(q_i(z)||p(z|x_i))&=-\mathcal{L}_i(p,q_i)+\log p(x_i)\\
+\mathcal{L}_i(p,q_i)&=\log p(x_i)-D_{KL}(q_i(z)||p(z|x_i))
+\end{align*}
+with this derivation, we turn a posterior approximation problem into a optimization problem by maximizing the evidence lower bound(ELBO).
 \subsection{Stochastic Variational Inference}
 Stochastic Variational Inference (SVI)\cite{hoffman_stochastic_2013} is a scalable variant of variational inference, which enables mini-batching to split dataset and train for each epochs, then become a standard of optimization for probabilistic models.
 Two main improvement are made by the SVI: stochastic optimization and noisy gradient.
@@ -201,7 +294,7 @@ where $ \epsilon $ is a sample from normal distribution $ \mathcal{N}(0,1) $. an
 \subsection{Topic Coherence}Topic Coherence\cite{mimno_optimizing_2011} measures the quality of the topic 
 \begin{equation*}
 TC=\frac{1}{K}\sum_{k=1}^{K}\frac{1}{45}\sum_{i=1}^{10}\sum_{j=i+1}^{10}f(w_i^{(k)},w_j^{(k)})\end{equation*}
-where $\{w_1^{(k)},\cdots,w_{10}^{(k)}\}$ denotes top-10 most likely words in topic k. And function $f(\cdot,\cdot)$ is te normalized pointwise mutual information.\begin{equation*}
+where $\{w_1^{(k)},\cdots,w_{10}^{(k)}\}$ denotes top-10 most likely words in topic k. And function $f(\cdot,\cdot)$ is te normalized point-wise mutual information.\begin{equation*}
 f(w_i,w_j)=\frac{\log\frac{P(w_i,w_j)}{P(w_i)P(w_j)}}{-\log P(w_i,w_j)}\end{equation*}
 \subsection{Topic Diversity} In order to compare how the words each topic are differentiate the others. We applied the Topic Diversity metric \cite{dieng_topic_2019}. Topic Diversity (TD) to be the percentage of unique words in the top 25 words of all topics. Diversity close to 0 indicates redundant topics; diversity close to 1 indicates more varied topics. We define the overall metric for the quality of a model’s topics as the product of its topic diversity and topic coherence.
 \begin{align*}

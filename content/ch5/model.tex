@@ -1,0 +1,69 @@
+In most of the real-life cases, the context (or formally topic information), that to be mentioned in the media such as news and documents are changing over time. Also, the word meaning and slang at the time may not valid on other span of time.
+In this chapter, we expand the embedded topic model to deal with times-series task, namely Dynamic Transformer embedded topic model. The model utilizes the time information 
+\section{Model description}
+\paragraph{}The TETM utilizes the Transformer as embedding to the topic-word representations. To compare with the original topic model, the word-topic distribution $ \beta $ is the 
+First, the topic embedding embeds the vocabulary into L-dimensional space, which is by Transformer embedding. Second, the context embedding maps the embedding into K-dimensional space . 
+In the generative process, the LKJTM uses the topic embedding to form a per-topic vector to represent the meaning over the vocabulary. 
+% Graphical model for the DTM
+% Embedding
+\paragraph{}
+To express the way word embedding to be applied in our model, $ \rho\in\mathbb{R}^{V\times L} $ is the Transformer embedding in the model. $ \rho_v $ is a vector represents the embedding of vocabulary on n-th index.
+% Time variables
+To explain the way our model capture time-related information from document set, we here discuss variables change over time. The topic embedding $ \{\alpha^{(t)}_k\}^{T}_{t=1}\in\mathbb{R}^{L} $ is a vector distributed at specific k topic.
+% theta, eta
+Topic proportion $ \theta_d $ is same as typical topic model, which a simply a vector represent proportion for each topic on document d.
+The latent variable $ \eta $ decide the topic proportion holds on each timestamp ranged between $ 1, \dots, T $. 
+% word vector training process $\tilde{w}$
+\subsection{Time-dependent variables}
+% alpha
+The topic-word proportion is contributed 
+$ p(\alpha^{t}|\alpha^{t-1})=\mathcal{N}(\alpha_{t-1},\gamma^2I) $\\
+% eta, theta
+The generation for document-topic proportion is a state-space Markov model. The $ \eta_{1:T}\in\mathbb{R}^{K} $ is a Gaussian process latent variable model that contributes the topic proportion mean for variable $ \theta $. $ \eta_t\sim\mathcal{GPLVM}(0,\mathcal{K}_{\theta}) $ 
+% zero mean, rbf kernel
+$ \theta_t|\eta_t\sim\mathcal{LN}(\eta_{t-1},\xi^2I) $ 
+\subsection{Amortized variational distribution}
+% Generative process
+The generative process is as following:\\
+\begin{algorithm}[H]
+Initialize hyperparameters\\
+Draw topic embedding $ \alpha_{1:K}^{(1:T)}\sim\mathcal{N}(\alpha_k^{(t-1)},\gamma^2I) $\\
+Draw topic proportion mean $ \eta_{1:T}\sim\mathcal{GP}-\mathcal{LVM}(0,\mathcal{K_\theta}) $\\
+\For{document d in D}{
+Sample topc proportion $ \theta_{t_d}\sim\mathcal{LN}(\eta_{t_d},\xi^2I) $\\
+%Sample topic distribution $ \theta_d\sim \mathcal{LN}(\mu,\sigma LL^\top\sigma) $\\
+\For{word position n in $ N_d $}{
+Sample word $ w_{d,n}\sim\text{Cat}(\theta\sigma(\rho^\top\alpha^{(t_d)})_{z_{d_n}}) $
+%Sample word $ w_{d,n}\sim \sigma(\theta_d(\rho^\top\alpha)_{\cdot,w_{d,n}}) $
+}
+}
+\caption{Generative Process for DTM}
+\label{algorithm:ldtm}
+\end{algorithm}
+From algorithm \ref{algorithm:ldtm}, first the model draws a topic embedding $ \alpha_{1:K}^{1:T} $ from normal distribution at time $ 1,\dots,T $. At time step 0, the topic embedding initialized at $ \mathcal{N}(0,I) $.
+% topic proportion
+Then a topic mean $ \eta_t\in\mathbb{R}^{K} $ over timestamps is generated from the Gaussian Process latent variable model(GPLVM), which performs inference a dimensions of topic K from number of vocabularies V dimension. Specifically, taking bag-of-word by time $ w_t $, which is collected by categorizing the document by time and group them into word count matrix by timestamp. And then a normalization is performed to make sure the words in different timestamp are in same proportion.
+% sample topic proportion
+For each document, draw a topic proportion $ \theta_{d} $ from logistic-normal distribution $ \mathcal{LN}(\cdot,\cdot) $ condition on topic mean $ \eta_{t_d} $ at the timestamp t of document d, and the variance $ \xi^2I $.
+% for word
+After that, for each word position n in $ N_d $, a word is drawn from the dot-product of word embedding $ \rho $ and topic embedding $ \alpha^{(t_d)}_{d} $ at timestamp $ t_d $. 
+\subsection{Joint Distribution}
+To describe the joint distribution for the model, equation \ref{eq:dtetm_joint}
+\begin{align}\label{eq:dtetm_joint}
+p(w,\theta,\eta,\alpha)=\prod_{d=1}^{D}\prod_{n=1}^{N_d}p(w_{d,n}|\theta_d,\alpha^{(t_d)})\prod_{d=1}^{D}p(\theta_d|\eta_{t_d},w_d)\prod_{t=1}^{T}p(\eta_t|w_t)\prod_{k=1}^{K}\prod_{t=1}^{T}p(\alpha_k^{(t)})
+\end{align}
+For the bag-of-word input, we have V vocabularies over D documents. A number of K topics are defined to be introduced in the model. Each document is labeled a timestamp t over a time span between $ 1,\dots,T $.
+\begin{enumerate}
+\item $\theta_d\in\mathbb{R}^{D\times K}$ is the topic proportion for document d.
+\item $\eta_{t_d}\in\mathbb{R}$ is the topic proportion at time t of document d.	
+\item $ w_d \in\mathbb{R}^{V}$ is the bag-of-word of distribution at document d.
+\item $ w_t \in\mathbb{R}^{V}$ is the bag-of-word of distribution at time t, which we arranged the documents in different timestamp and group them into bag-of-word representation in dimension $ \mathbb{R}^{V\times T} $
+\item $\alpha_k^{(t)}\in\mathbb{R}^{V}$ is the topic embedding for topic k at time t. The topic embedding demonstrates the vocabulary representations on the specific time stamp for the document.
+\item $ \rho\in\mathbb{R}^{W\times L} $ is the transformer embedding that maps the words into L dimension of continuous latent space. 
+\end{enumerate}
+\begin{enumerate}
+\item $ p(w_{d,n}|\theta_d,\alpha^{(t_d)}) $
+\item $ p(\theta_d|\eta_{t_d},w_d) $
+\item $ p(\eta_t|w_t) $
+\item $ p(\alpha_k^{(t)}) $
+\end{enumerate}

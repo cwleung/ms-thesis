@@ -30,6 +30,13 @@ Following the ETM architecture, we modify topic-word distribution as an embeddin
 \beta\sim\text{softmax}(\rho^\top\alpha)
 \end{equation}
 Equation \ref{eq:transformer_embedding}, 
+%% Joint Distribution
+\subsection{Joint Distribution}
+We give a description of the joint distribution, $ W,Z,\theta $ and $ \Sigma $ are variables and $ \beta, \mu $ and $ \gamma $ are latent variables. $ W $ is the word likelihood from the document collections, $ Z $ represents the topic-word assignment, $ \theta $ models the topic distribution for each document, and $ \Sigma $ is the covariance matrix which depends on the document-topic distribution $ \theta $.
+\begin{align*}
+p(w,\theta,\alpha)=\prod_{d=1}^{D}\int p(\theta_d)\prod_{i=1}^{N_d}p(w|\theta_d,\alpha)d\theta_d
+\end{align*}
+by taking  log on the joint probability, we obtain a objective function for optimization
 % Marginal Likelihood
 \subsection{Marginal Likelihood}
 The parameter $ \alpha $ is the topic embedding on the word embedding space of dimension K. We take a log marginal likelihood of the document,
@@ -54,16 +61,4 @@ p(w_{d}|N(\mu_\theta(w),\sigma_\theta(w)),\beta)=\mathbb{E}_{\theta\sim N(\mu_\t
 Reparametrization Trick $ \theta=\mu+\sigma^{1/2}\epsilon $\\
 \begin{align*}
 p(w_{d}|\mu_\theta(w)+\epsilon\sigma^{1/2}_\theta(w),\beta)=\mathbb{E}_{\epsilon\sim N(0,1)}\left[w_d^\top\sigma(\beta(\mu_\theta(w)+\epsilon\sigma^{1/2}_\theta(w)))\right]
-\end{align*}
-%% Joint Distribution
-\subsection{Joint Distribution}
-We give a description of the joint distribution, $ W,Z,\theta $ and $ \Sigma $ are variables and $ \beta, \mu $ and $ \gamma $ are latent variables. $ W $ is the word likelihood from the document collections, $ Z $ represents the topic-word assignment, $ \theta $ models the topic distribution for each document, and $ \Sigma $ is the covariance matrix which depends on the document-topic distribution $ \theta $.
-\begin{align*}
-p(W,Z,\theta,\Sigma|\beta,\mu,\gamma)&=P(W|Z)P(Z|\theta)P(\theta|\mu,\Sigma)\\
-&=p(\Sigma|\gamma)\prod_{d=1}^{D}P(\theta_d|\mu,\Sigma)\prod_{n=1}^{V}P(z_{d,n}|\theta_d)P(w_{d,n}|z_{d,n},\beta)
-\end{align*}
-by taking  log on the joint probability, we obtain a objective function for optimization
-\begin{align*}
-\log p(W,Z,\theta,\Sigma|\beta,\mu,\gamma)=&\sum_{d=1}^{D}\left[\log P(\theta_d|\mu,\Sigma)+\sum_{n=1}^{V}\left[\log P(z_{d,n}|\theta_d)+\log P(w_{d,n}|z_{d,n},\beta)\right]\right]\\
-&+\log p(\Sigma|\gamma)
 \end{align*}

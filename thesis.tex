@@ -15,12 +15,14 @@
 ]{caption}
 \usepackage[list=true]{subcaption}
 
+\usepackage{xcolor,soul}
+\sethlcolor{lightgray}
+
 \usepackage{tikz}
 \usetikzlibrary{bayesnet}
 %\usepackage{color}
 %\usepackage{caption}
 %\usepackage{subcaption}
-%
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 
@@ -28,12 +30,12 @@
 
 %-------------------
 \etitle{Correlated Topic Model with Transformer Embeddings}
-\jtitle{梁俊華}
+\jtitle{}
 %
 \eauthor{Chun Wa Leung}
-\jauthor{梁俊華}
+\jauthor{梁　俊華}
 \esupervisor{Akihiko Takano}
-\jsupervisor{梁俊華}
+\jsupervisor{高野　明彦}
 \supervisortitle{Professor} % Professor, etc.
 \date{\today}
 %-------------------
@@ -46,10 +48,8 @@
 \end{jabstract}
 \maketitle
 \begin{acknowledge}
-Thank you very much
+I would like to thank professor Takano for guiding me along the master thesis.
 \end{acknowledge}
-\switchinterim
-\switchenglish
 \frontmatter %% Ot¯
 \tableofcontents % Ú
 \listoffigures % }Ú
@@ -65,18 +65,18 @@ Thank you very much
 \input{content/ch1/objective}
 \chapter{Background}\label{ch2}
 \input{content/ch2/background}
-\chapter{Topic Model with Transformer Embeddings}\label{ch3}
-\input{content/ch3/model}
-\input{content/ch3/inference}
-\input{content/ch3/result}
+%\chapter{Topic Model with Transformer Embeddings}\label{ch3}
+%\input{content/ch3/model}
+%\input{content/ch3/inference}
+%\input{content/ch3/result}
 \chapter{LKJ Prior Correlated Topic Model with Transformer Embeddings}\label{ch4}
 \input{content/ch4/model}
 \input{content/ch4/inference}
 \input{content/ch4/result}
-%\chapter{Correlated Topic Model with Transformer Embeddings}\label{ch5}
-%\input{content/ch5/model}
-%\input{content/ch5/inference}
-%\input{content/ch5/result}
+\chapter{Dynamic Topic Model with Transformer Embeddings}\label{ch5}
+\input{content/ch5/model}
+\input{content/ch5/inference}
+\input{content/ch5/result}
 \chapter{Conclusions}\label{ch6}
 \input{content/ch6/conclusion}
 %-------------------
@@ -89,4 +89,3 @@ Thank you very much
 %\input{content/appendix/lda}
 %-------------------
 \end{document}
-the 
