@@ -224,6 +224,10 @@ p(f|X,\theta)=\prod_{d=1}^{D}\mathcal{GP}(f_d;0,K_d)
 p(Y|f,X)=\prod_{i=1}^{N}\prod_{i=1}^{D}\mathcal{N}(y_{n,d};f_d(x_n),\sigma_y^2)
 \end{align*}
 The model can be learnt using point estimation, MAP estimation, or variational inference. Here we discuss the variational inference method. The latent variable ELBO is given by,
+The variational distribution for GPLVM is given as eq. \ref{ch2:gplvm_var}. x is the latent variable, f is the function for the covariance 
+\begin{align}\label{ch2:gplvm_var}
+q(x,f)=\int q(x)q(f|u)q(u)du
+\end{align}
 \begin{align*}
 \mathcal{L}=&\sum_{n,d}\mathbb{E}_{q_\phi(x_n)}\mathbb{E}_{p(f_d|u_d,x_n)q_{\lambda}(u_d)}\left[\log\mathcal{N}(y_{n,d};f_d(x_d),\sigma_y^2)\right]\\
 &-\sum_{n}\text{KL}(q_{\phi}(x_n)||p(x_n))-\sum_{d}\text{KL}(q_\lambda(u_d)||p(u_d|Z))
@@ -237,14 +241,16 @@ Dynamic Topic Model \cite{blei_dynamic_2006} is a model enables to capture topic
 The generative process of the $ d^{th} $ document is the following:\\
 \begin{algorithm}[H]
 Draw topc embedding $ \alpha_k^t\sim\mathcal{N}(\alpha_k^{t-1},\gamma^2I) $\\
-Sample topc proportion $ \theta_{t_d}\sim\mathcal{LN}(\eta_{t_d},\xi^2I) $\\
+Sample topc proportion $ \theta_{t_d}\sim\mathcal{N}(\eta_{t_d},\xi^2I) $\\
 \For{word position n in $ N_d $}{
+Sample topic $ z_{d,n}\sim\text{Mult}(\theta_{t_d}) $\\
 Sample word $ w_{d,n}\sim\text{Cat}(\sigma(\rho^\top\alpha_{z_{d_n}}^{t_d})) $
 }
 \caption{Generative Process for DTM}
 \label{algorithm:dtm}
 \end{algorithm}
-
+$\alpha_k^{t-1}$ is the mean of current time $ t $ which take the value previous time step $ t-1 $.
+$ \gamma^2 $ and $ \xi^2 $ is the variance for the prior.
 \section{Posterior Inference}\label{ch4:1}
 Since the exact inference of the posterior is intractable in real application, we employed approximation scheme for the posterior inference. The popular approaches are Markov Chain Monte Carlo Method (MCMC) and Variational Inference(VI)\cite{blei_variational_2006,hoffman_stochastic_2013}. Gibbs sampling is one of the MCMC method and it is fast to compute the approximation and easy to the implementation. Then, Variational EM algorithm to be carried out for maximizing the likelihood over all word in corpus in the document. An alternative way to perform estimation is Monte Carlo method.
 \subsection{Variational Inference}
@@ -270,11 +276,12 @@ w_d\sim\prod_{n=1}^{N_d}\text{Cat}(\sigma(\beta_{w_{dn}}\theta_d))
 The trick in equation \ref{eq:cp} rewrite the original LDA word drawing process, and hence define a new evidence lower bound for the topic model.
 % TODO Blei's notes
 \subsection{Autoencoding Variational Bayes (AEVB)}
-Generally when we optimize a variational parameter, it is neceasary to derive a ELBO　and then derive the optimization step for gradient descent. While amortized inference latent variable z is parameterized by two inference network  $ \mu_{\phi(x),\sigma_{\phi}(x)} $ .
+Generally when we optimize a variational parameter, it is neceasary to derive a ELBO　and then derive the optimization step for gradient descent. While amortized inference latent variable z is parameterized by two inference network  $ \mu_{\phi(x)},\sigma_{\phi}(x) $ .
 % TODO UCLA notes
 \begin{align}
 z = \mathcal{N}(\mu_{\phi}(x_i), \sigma_{\phi}(x_i))
 \end{align}
+After deriving the ELBO, we obtain the following likelihood term.
 \begin{align}
 \mathcal{L}=\mathbb{E}_{z\sim\mathcal{N}(\mu_{\phi}(x_i),\sigma_\phi(x_i))}\left[\log p_\theta(x_i|z)\right]-D_{KL}\left(q_\phi(z|x_i)||p(z)\right)
 \end{align}
