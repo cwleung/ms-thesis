@@ -1,5 +1,23 @@
 In most of the real-life cases, the context (or formally topic information), that to be mentioned in the media such as news and documents are changing over time. Also, the word meaning and slang at the time may not valid on other span of time.
-In this chapter, we expand the embedded topic model to deal with times-series task, namely Dynamic Transformer embedded topic model. The model utilizes the time information 
+% explain previous chapter not work
+In previous chapter \ref{ch4}, we have implemented a topic model that could capture high-quality topic words. However, the model cannot not distinct the difference of topic representation and the topic-word relation along the time of model.
+% this chapter
+In this chapter, we expand the embedded topic model to deal with times-series task, namely Dynamic Transformer embedded topic model. The model utilizes the time information.
+\section{Introduction}
+Most of the existing topic models are designed for handle unified document set, and such no time specified information are assumed forehand. 
+% d-lda
+Dynamic Topic Model(DTM)\cite{blei_dynamic_2006} is a extended version from LDA, which a state-space model introduce latent variable to control the model parameters and proportion over time stamp $ 1\dots T $. However, the model does not handle correlation information for topics obtained.
+% dctm
+Dynamic Correlated Topic Model(DCTM)\cite{tomasi_stochastic_nodate} have considered the correlation information between topics though out the time. The author proposed . However, the model estimate the mean of the prior distribution of document-topic proportion with bag-of-words per-document, which may miss out to explore the time-topic relation from exploiting the input of bag-of-word per-time period.
+% detm
+Dynamic Embedded Topic Model(DETM)\cite{dieng_dynamic_2019} constructed a times-series Embedded Topic Model by constructing the state-space model to guide the latent variables that control the mean for topic-proportion prior and the topic-word proportion. Likewise, the model does not consider correlation information. Besides, our model refines the word embedding quality on the latent space and hence improves overall topic-word predictive performance.
+\section{Related works}
+Moreover, time-series model is one of the most practical for real application in topic modeling, which it is essential to extract keywords along the time line. In chapter \ref{ch5} we will explore and implement . As an introductory, here we discuss the related works in advance.
+Blei \cite{blei_dynamic_2006} extended a time-series topic model on top of LDA, namely dynamic topic model(DTM). The model assumes the prior for topic-word proportion is an Markov state-space model along time t. The posterior is approximated with variational bayes and Kalman filter inference.
+Hening\cite{hennig_kernel_2012} proposed Kernel topic model, which the model is equipped the gaussian process with kernel covariance as the hyperparameter of Dirichlet prior for document-topic proportion.
+Tomasi\cite{tomasi_stochastic_nodate} implemented a time-series correlated topic model, using Gaussian process to model for modeling the hyperparameter of topic-word proportion and the mean for document-topic proportion, along with using Wishart process for parametrising the covariance matrix.
+% # ETM
+Dieng\cite{dieng_topic_2019} improve a model which on top of the ProdLDA topic model, implemented Word2Vec semantics to further improve the performance on topic coherence and predictive distribution. And respectively, the same author\cite{dieng_dynamic_2019} extended the dynamic embedded topic model from previous embedded topic model. The model perform inference on posterior by deriving variational lower bound and amortized inference. The model take assume of topic-word proportion and document topic proportion as a Markov state-space model.
 \section{Model description}
 \paragraph{}The TETM utilizes the Transformer as embedding to the topic-word representations. To compare with the original topic model, the word-topic distribution $ \beta $ is the 
 First, the topic embedding embeds the vocabulary into L-dimensional space, which is by Transformer embedding. Second, the context embedding maps the embedding into K-dimensional space . 
@@ -29,12 +47,13 @@ The generative process is as following:\\
 \begin{algorithm}[H]
 Initialize hyperparameters\\
 Draw topic embedding $ \alpha_{1:K}^{(1:T)}\sim\mathcal{N}(\alpha_k^{(t-1)},\gamma^2I) $\\
-Draw topic proportion mean $ \eta_{1:T}\sim\mathcal{GP}(0,\mathcal{K_\theta}) $\\
+Draw topic proportion mean $ \eta_{1:T}\sim\mathcal{N}(f_{1:T}(x_n),\sigma_y^2I) $\\
+Sample correlation lower triangular matrix $ L\sim \text{LKJChol}(\gamma)$\\
 \For{document d in D}{
-Sample topc proportion $ \theta_{t_d}\sim\mathcal{LN}(\eta_{t_d},I) $\\
+Sample topc proportion $ \theta_{t_d}\sim\mathcal{LN}(\eta_{t_d},LL^\top) $\\
 %Sample topic distribution $ \theta_d\sim \mathcal{LN}(\mu,\sigma LL^\top\sigma) $\\
 \For{word position n in $ N_d $}{
-Sample word $ w_{d,n}\sim\text{Cat}(\theta\sigma(\rho^\top\alpha^{(t_d)})_{z_{d_n}}) $
+Sample word $ w_{d,n}\sim\text{Cat}(\theta_d\sigma(\rho^\top\alpha^{(t_d)}) $
 %Sample word $ w_{d,n}\sim \sigma(\theta_d(\rho^\top\alpha)_{\cdot,w_{d,n}}) $
 }
 }
@@ -51,7 +70,7 @@ After that, for each word position n in $ N_d $, a word is drawn from the dot-pr
 \subsection{Joint Distribution}
 To describe the joint distribution for the model, equation \ref{eq:dtetm_joint}
 \begin{align}\label{eq:dtetm_joint}
-p(w,\theta,\eta,\alpha)=\prod_{d=1}^{D}\prod_{n=1}^{N_d}p(w_{d,n}|\theta_d,\alpha^{(t_d)})\prod_{d=1}^{D}p(\theta_d|\eta_{t_d},w_d)\prod_{t=1}^{T}p(\eta_t|w_t)\prod_{k=1}^{K}\prod_{t=1}^{T}p(\alpha_k^{(t)})
+p(W,\theta,\eta,\alpha)=\prod_{d=1}^{D}\left[p(\theta_d|\eta_{t_d},w_d)\prod_{n=1}^{N_d}p(w_{d,n}|\theta_d,\alpha^{(t_d)})\right]\prod_{t=1}^{T}\left[p(\eta_t|w_t,\Sigma_{t_d})p(\Sigma_{t_d}|\gamma_{t_d})\prod_{k=1}^{K}p(\alpha_k^{(t)})\right]
 \end{align}
 For the bag-of-word input, we have V vocabularies over D documents. A number of K topics are defined to be introduced in the model. Each document is labeled a timestamp t over a time span between $ 1,\dots,T $.
 % variables for each elements
@@ -61,9 +80,9 @@ $ w_d \in\mathbb{R}^{V}$ is the bag-of-word of distribution at document d.
 $ w_t \in\mathbb{R}^{V}$ is the bag-of-word of distribution at time t, which we arranged the documents in different timestamp and group them into bag-of-word representation in dimension $ \mathbb{R}^{V\times T} $. In particular, $ w_t $ is normalized to attain the same ratio of tokens on each single time stamp.
 $\alpha_k^{(t)}\in\mathbb{R}^{V}$ is the topic embedding for topic k at time t. The topic embedding demonstrates the vocabulary representations on the specific time stamp for the document.
 $ \rho\in\mathbb{R}^{W\times L} $ is the transformer embedding that maps the words into L dimension of continuous latent space. 
-%\begin{enumerate}
-%\item $ p(w_{d,n}|\theta_d,\alpha^{(t_d)}) $
-%\item $ p(\theta_d|\eta_{t_d},w_d) $
-%\item $ p(\eta_t|w_t) $
-%\item $ p(\alpha_k^{(t)}) $
-%\end{enumerate}
+\begin{enumerate}
+\item $ p(w_{d,n}|\theta_d,\alpha^{(t_d)})=((\rho^\top\alpha^{(t_d)})\theta_d)_{d,n} $
+\item $ p(\theta_d|\eta_{t_d},w_d)=\mathcal{LN}(\eta_{t_d},\Sigma) $
+\item $ p(\eta_t|w_t)=\mathcal{N}(0,\mathcal{K}_\theta) $
+\item $ p(\alpha_k^{(t)}|\alpha_k^{(t-1)})=\mathcal{N}(\alpha_k^{(t-1)},\xi^2I) $
+\end{enumerate}

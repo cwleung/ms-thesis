@@ -14,7 +14,7 @@ We compare the model performance with a numbers of rivals. We take Latent Dirich
 % LDA
 LDA model with mean-field inference \footnote{Adopted from \textmd{scikit-learn} library}
 % ProdLDA
-ProdLDA, a topic model learning using amortized inference 
+ProdLDA, a topic model learning using amortized inference to approximate the document-topic proportion.
 % ETM
 ETM model, a topic model built on top of ProdLDA model, uses dot-product of word embedding and topic embedding to represent the topic-word distribution $ \beta $.
 \subsection{Algorithmic Settings}
@@ -166,3 +166,5 @@ To clearly demonstrate the representation for , we applied t-SNE to map the topi
 \caption{Visualization \#Topics:50}
 \label{fig:tsne50t25w0}
 \end{figure}
+\subsection{Discussion}
+The result exhibits our model has a outstanding performance on obtaining high quality topic words over various of predefined topic numbers. In two of the metric we compared, topic coherence and topic diversity, 

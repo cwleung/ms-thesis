@@ -12,7 +12,7 @@ p(W|\phi)=\prod_{d=1}^{D}p(w_d|\phi)=\prod_{d=1}^{D}\prod_{n=1}^{N_d}p(w_{dn}|\p
 % conversion to vocabularies
 For sake of convenience, due to documents contain different size of words. It is not feasible to construct matrix representation for modeling. For the reason, we can exchange the representation for BOW from iterating the word occurrence for each word position to iterating the word occurrence in a vocabulary set. In this way, we can define a matrix for BOW: $ W\in\mathbb{R}^{D\times V} $, with D rows of document and V rows of vocabulary count. Formally, for every document $ W=(w_{d1},w_{d2},\cdots,w_{dV}), v\in\{1,\cdots,V\} $ vocabularies, $ w_{dv} $ is the occurrence of a vocabulary v in document d.
 \section{LKJ Correlation Distribution} \label{ch2:lkj}
-LKJ distribution \cite{lewandowski_generating_2009} is a distribution for modeling correlation matrix. The distribution is described as equation \ref{eq:lkj}
+LKJ distribution \cite{lewandowski_generating_2009} is a distribution for modeling correlation matrix. The distribution is described as equation \ref{eq:lkj}\footnote{\url{https://distribution-explorer.github.io/multivariate_continuous/lkj.html}}
 \begin{align} \label{eq:lkj}
 f(C|\eta)=&2^{\sum_{k=1}^{K-1}(2(\eta-1)+K-k)(K-k)}\times\\
 &\prod_{k=1}^{K-1}(B(\eta+(K-k-1)/2,\eta+(K-k-1)/2)^{K-k})(\det(C)^{\eta-1})
@@ -20,7 +20,7 @@ f(C|\eta)=&2^{\sum_{k=1}^{K-1}(2(\eta-1)+K-k)(K-k)}\times\\
 $ B(\cdot,\cdot) $ is beta distribution, and K is the number of variable in correlation matrix. $ \eta $ is concentration parameter for LKJ distribution. When $ \eta=1 $ it is simply a uniform distribution allocated over the correlation matrix. If $ \eta>0 $, it is a modal correlation matrix. The density concentrated around center when the $ \eta $ value become larger.
 To apply it into normal distribution as covariance, we could apply transformation equation \ref{eq:lkj_trans} and turn it into covariance matrix\cite{barnard_modeling_2000}.
 \begin{align}\label{eq:lkj_trans}
-\Sigma=diag(\sigma)\cdot C \cdot diag(\sigma)
+\Sigma=\text{diag}(\sigma)\cdot C \cdot \text{diag}(\sigma)
 \end{align}
 % Transformation
 Directly drawing correlation matrix from LKJ distribution is not practical in reality case. It is common to draw correlation matrix from factorized Cholesky LKJ distribution instead, where the probability density function is described as equation \ref{eq:lkj_chol}
@@ -213,27 +213,30 @@ The ELBO for GP is derived from \cite{hensman_gaussian_nodate}, as
 \end{align*}
 where the variational distribution is $ q(f)\approx\int p(f|u)q(u)du $
 \subsection{Gaussian Process Latent Variable Model (GPLVM)}
-Gaussian Process Latent Variable Model \cite{lawrence_gaussian_nodate,titsias_bayesian_nodate} is a dimension reduction method turn high dimensional data into low-dimension space. Formally, given a latent variable $ X\in\mathbb{R}^{N\times Q} $, and high dimensional real valued observations $ Y\in\mathbb{R}^{N\times D} $, the model induce high dimensional from a low-dimensional mapping $ \mathcal{X}\rightarrow\mathcal{Y} $ such that $ Q<<D $.
+Gaussian Process Latent Variable Model \cite{lawrence_gaussian_nodate,titsias_bayesian_nodate} is a dimension reduction method turn high dimensional data into low-dimension space. Formally, given a latent variable $ X\in\mathbb{R}^{N\times Q} $, and high dimensional real valued observations $ Y\in\mathbb{R}^{N\times D} $, the model induce high dimensional from a low-dimensional mapping $ \mathcal{X}\rightarrow\mathcal{Y} $ such that $ Q<<D $.　The prior latent variable X is defined at a standard normal distribution. 
 \begin{align*}
 p(X)=\prod_{n=1}^{N}\mathcal{N}(x_n;0,I_Q)
 \end{align*}
+
 \begin{align*}
 p(f|X,\theta)=\prod_{d=1}^{D}\mathcal{GP}(f_d;0,K_d)
 \end{align*}
 \begin{align*}
 p(Y|f,X)=\prod_{i=1}^{N}\prod_{i=1}^{D}\mathcal{N}(y_{n,d};f_d(x_n),\sigma_y^2)
 \end{align*}
-The model can be learnt using point estimation, MAP estimation, or variational inference. Here we discuss the variational inference method. The latent variable ELBO is given by,
-The variational distribution for GPLVM is given as eq. \ref{ch2:gplvm_var}. x is the latent variable, f is the function for the covariance 
+Here we discuss the variational inference method for the inference process. The variational distribution for GPLVM is given as eq. \ref{ch2:gplvm_var} according to GP sparse approximation in \cite{lawrence_learning_2007}. In the formulation, $ x  $ is the latent variable, $ f_d $ is the latent function for the covariance 
+where variational distribution for $ q(X)=\sum_{n=1}^{N}\mathcal{N}(x_n;m_n,S_n) $ for each $ n^{th} $ row on $ x $, and $ q(u_d)=\mathcal{N}(u_d|0,K_{MM}) $
 \begin{align}\label{ch2:gplvm_var}
-q(x,f)=\int q(x)q(f|u)q(u)du
+q(\{f_d,u_d\}^{D}_{d=1},X) = \prod_{i=1}^{N}q(x_n)\prod_{d=1}^{D}p(f_d|u_d,X)q(u_d)
 \end{align}
-\begin{align*}
-\mathcal{L}=&\sum_{n,d}\mathbb{E}_{q_\phi(x_n)}\mathbb{E}_{p(f_d|u_d,x_n)q_{\lambda}(u_d)}\left[\log\mathcal{N}(y_{n,d};f_d(x_d),\sigma_y^2)\right]\\
+The latent variable ELBO is given by,
+\begin{align}
+\mathcal{L}=&\sum_{n,d}\mathbb{E}_{q_\phi(x_n)}\mathbb{E}_{p(f_d|u_d,x_n)q_{\lambda}(u_d)}\left[\log\mathcal{N}(y_{n,d};f_d(x_n),\sigma_y^2)\right]\\
 &-\sum_{n}\text{KL}(q_{\phi}(x_n)||p(x_n))-\sum_{d}\text{KL}(q_\lambda(u_d)||p(u_d|Z))
-\end{align*}
+\end{align}
 the $ \phi $ is the local variational parameters, $ \lambda $ is the global variational parameters, $ \theta $ is the kernel hyperparameters and $ \sigma^y $ is the likelihood noise.
-% TODO add time
+% TODO sparse variational inference
+to avoid heaving computation of X inside the conditional probability $ p(f_d|X) $, inducing input has been introduced \cite{lawrence_learning_2007} to replace the X with inducing variables $ u_d\in\mathbb{R}^M $, which conditioning on inducing input locations $ z\in\mathbb{R}^{M\times Q} $, 
 \subsection{Dynamic Topic Model}
 Dynamic Topic Model \cite{blei_dynamic_2006} is a model enables to capture topic information from time-series data set. The model utilize documents from different time and generates the corresponding topic-word representation.
 
@@ -244,7 +247,7 @@ Draw topc embedding $ \alpha_k^t\sim\mathcal{N}(\alpha_k^{t-1},\gamma^2I) $\\
 Sample topc proportion $ \theta_{t_d}\sim\mathcal{N}(\eta_{t_d},\xi^2I) $\\
 \For{word position n in $ N_d $}{
 Sample topic $ z_{d,n}\sim\text{Mult}(\theta_{t_d}) $\\
-Sample word $ w_{d,n}\sim\text{Cat}(\sigma(\rho^\top\alpha_{z_{d_n}}^{t_d})) $
+Sample word $ w_{d,n}\sim\text{Cat}(\sigma(\rho^\top\alpha_{z_{d_n}}^{(t_d)})) $
 }
 \caption{Generative Process for DTM}
 \label{algorithm:dtm}
@@ -255,14 +258,14 @@ $ \gamma^2 $ and $ \xi^2 $ is the variance for the prior.
 Since the exact inference of the posterior is intractable in real application, we employed approximation scheme for the posterior inference. The popular approaches are Markov Chain Monte Carlo Method (MCMC) and Variational Inference(VI)\cite{blei_variational_2006,hoffman_stochastic_2013}. Gibbs sampling is one of the MCMC method and it is fast to compute the approximation and easy to the implementation. Then, Variational EM algorithm to be carried out for maximizing the likelihood over all word in corpus in the document. An alternative way to perform estimation is Monte Carlo method.
 \subsection{Variational Inference}
 Given that posterior approximiation is not alway practical in real world application. Approximation method are necessary to be apply. Their are two main approach for the posterior approximation: Markov Chain Monte Carlo(MCMC) Variational Inference. Variational Inference is a method approximating the posterior in optimization fashion. To give a better intuition, let probability $ p(x) $ depending on a latent variable $ z $ such that $ p(x|z)=\int p(x|z)p(z)dz $. We can turn the following posterior inference problem into a optimization problem. Here we derive the bound and perform optimization, by doing some calculation, we can obtain the following lower bound for the likelihood $ \mathcal{L}_i(p,q_i) $
-\begin{align*}
+\begin{align}
 \log p(x_i)\geq\mathbb{E}_{z\sim q_i(z))}[\log p(x_i|z)+\log p(z)]+\mathbb{E}_{z\sim q_i(z))}[\log q_i(z)]=\mathcal{L}_i(p,q_i)
-\end{align*}
+\end{align}
 then by deriving the KL-divergence, we can obtain the log probability $ \log p(x_i) $ is the likelihood-term minus the KL-divergence of $ q_i(z) $ and $ p(z|x_i) $.
-\begin{align*}
-D_{KL}(q_i(z)||p(z|x_i))&=-\mathcal{L}_i(p,q_i)+\log p(x_i)\\
-\mathcal{L}_i(p,q_i)&=\log p(x_i)-D_{KL}(q_i(z)||p(z|x_i))
-\end{align*}
+\begin{align}
+KL(q_i(z)||p(z|x_i))&=-\mathcal{L}_i(p,q_i)+\log p(x_i)\\
+\mathcal{L}_i(p,q_i)&=\log p(x_i)-KL(q_i(z)||p(z|x_i))
+\end{align}
 with this derivation, we turn a posterior approximation problem into a optimization problem by maximizing the evidence lower bound(ELBO).
 \subsection{Stochastic Variational Inference}
 Stochastic Variational Inference (SVI)\cite{hoffman_stochastic_2013} is a scalable variant of variational inference, which enables mini-batching to split dataset and train for each epochs, then become a standard of optimization for probabilistic models.
@@ -283,7 +286,7 @@ z = \mathcal{N}(\mu_{\phi}(x_i), \sigma_{\phi}(x_i))
 \end{align}
 After deriving the ELBO, we obtain the following likelihood term.
 \begin{align}
-\mathcal{L}=\mathbb{E}_{z\sim\mathcal{N}(\mu_{\phi}(x_i),\sigma_\phi(x_i))}\left[\log p_\theta(x_i|z)\right]-D_{KL}\left(q_\phi(z|x_i)||p(z)\right)
+\mathcal{L}=\mathbb{E}_{z\sim\mathcal{N}(\mu_{\phi}(x_i),\sigma_\phi(x_i))}\left[\log p_\theta(x_i|z)\right]-KL\left(q_\phi(z|x_i)||p(z)\right)
 \end{align}
 \subsection{Reparameterization trick}
 The drawback of amortized inference is that, sampling from normal distribution parameterizing $ \mu_{\phi(x),\sigma_{\phi}(x)} $ could lead to high variance outcome and hamper the inference performance. For the reason, taking reparamterization trick\cite{kingma_auto-encoding_2014} to transform as equation \ref{eq:rt},
@@ -292,19 +295,19 @@ z= \mu_{\phi}(x_i)+\epsilon\sigma_\phi(x_i)\text{, }\epsilon\sim\mathcal{N}(0,1)
 \end{align}
 where $ \epsilon $ is a sample from normal distribution $ \mathcal{N}(0,1) $. and so the modified ELBO becomes equation \ref{eq:elbo_rt},
 \begin{align}\label{eq:elbo_rt}
-\mathcal{L}=\mathbb{E}_{\epsilon\sim N(0,1)}\left[\log p_\theta(x_i|\mu_{\phi}(x_i)+\epsilon\sigma_\phi(x_i))\right]-D_{KL}\left(q_\phi(z|x_i)||p(z)\right)
+\mathcal{L}=\mathbb{E}_{\epsilon\sim N(0,1)}\left[\log p_\theta(x_i|\mu_{\phi}(x_i)+\epsilon\sigma_\phi(x_i))\right]-KL\left(q_\phi(z|x_i)||p(z)\right)
 \end{align}
 \section{Evaluation metrics}
-\subsection{Perplexity}The proposed model will be evaluated with perplexity metric. The metric will examine how well the model can tackle with unseen data. It is equivalent algebraically to the inverse of the geometric mean per-word likelihood. Lower perplexity scores mean better.\begin{equation*}
+\subsection{Perplexity}The proposed model will be evaluated with perplexity metric. The metric will examine how well the model can tackle with unseen data. It is equivalent algebraically to the inverse of the geometric mean per-word likelihood. Lower perplexity scores mean better.\begin{equation}
 \text{Perplexity}(D_{test})=\exp{{-\frac{\sum_{d=1}^{M}\sum_{m=1}^{N_d}\log p(w_{dm})}{\sum_{d=1}^{M}N_d}}}
-\end{equation*}
+\end{equation}
 \subsection{Topic Coherence}Topic Coherence\cite{mimno_optimizing_2011} measures the quality of the topic 
-\begin{equation*}
-TC=\frac{1}{K}\sum_{k=1}^{K}\frac{1}{45}\sum_{i=1}^{10}\sum_{j=i+1}^{10}f(w_i^{(k)},w_j^{(k)})\end{equation*}
-where $\{w_1^{(k)},\cdots,w_{10}^{(k)}\}$ denotes top-10 most likely words in topic k. And function $f(\cdot,\cdot)$ is te normalized point-wise mutual information.\begin{equation*}
-f(w_i,w_j)=\frac{\log\frac{P(w_i,w_j)}{P(w_i)P(w_j)}}{-\log P(w_i,w_j)}\end{equation*}
+\begin{equation}
+TC=\frac{1}{K}\sum_{k=1}^{K}\frac{1}{45}\sum_{i=1}^{10}\sum_{j=i+1}^{10}f(w_i^{(k)},w_j^{(k)})\end{equation}
+where $\{w_1^{(k)},\cdots,w_{10}^{(k)}\}$ denotes top-10 most likely words in topic k. And function $f(\cdot,\cdot)$ is te normalized point-wise mutual information.\begin{equation}
+f(w_i,w_j)=\frac{\log\frac{P(w_i,w_j)}{P(w_i)P(w_j)}}{-\log P(w_i,w_j)}\end{equation}
 \subsection{Topic Diversity} In order to compare how the words each topic are differentiate the others. We applied the Topic Diversity metric \cite{dieng_topic_2019}. Topic Diversity (TD) to be the percentage of unique words in the top 25 words of all topics. Diversity close to 0 indicates redundant topics; diversity close to 1 indicates more varied topics. We define the overall metric for the quality of a model’s topics as the product of its topic diversity and topic coherence.
-\begin{align*}
+\begin{align}
 TD=\frac{|A\cap B|}{|A \cup B|}
-\end{align*}
+\end{align}
 where $ A $ and $ B $ are top-k words from two topics. 

@@ -1,4 +1,4 @@
-\section{Related Works}\label{ch1:3}
+\section{Literature Review}\label{ch1:3}
 %% Original models
 These topic models take bag-of-word assumption and model each document as an admixture of latent topics, which are multinomial distributions over words.
 % # NMF
@@ -12,25 +12,13 @@ Some improvement exploit the correlation information between topics, which model
 
 Moreover, due to the success of LDA. there have been a numbers of topic models proposed on top of the LDA model. Dynamic Latent Dirichlet Allocation\cite{blei_probabilistic_2012} was developed for continuous time data. Relational Latent Dirichlet Allocation \cite{chang_relational_nodate} . Supervised Latent Dirichlet Allocation \cite{mcauliffe_supervised_2008} includes labeled data which supposed to be helpful in several particular application areas such as movie review and sparse data prediction. Later LDA was extended to nonparametric version, hierarchical Latent Dirichlet Allocation (hLDA)\cite{teh_hierarchical_2006}, which follows a stochastic process called n-Chinese Restaurant Process (nCRP)\cite{teh_tutorial_nodate}. hLDA maintain a hierarchical structure of topic instead of flat structure in LDA. % pachinko LDA % 
 
-% # CTM
-Correlated Topic Model (CTM)\cite{blei_correlated_2007} is the original work that proposed to alleviate the problem LDA, which did not utilize the topic information between correlated topics. The proposed model replaced Dirichlet distribution with a logistic-normal prior with covariance matrix to represent the relationship between topics.
-
-%% Embedded Topic Models
-There have been a several of works focus on word embedding and topic model. Major of them combined statistical model and embedding approach to model topic distribution. In other words, representing a word by mapping every single word into continuous space.
-% # CGTM
-Xun \cite{xun_correlated_2017} employed words embedding into Correlated Topic Model, the new correlated topic model as Correlated Gaussian Topic Model (CGTM). In their paper they make use of word embedding space and model the correlation between topics by calculation of similarity between words in the embedding space.
-% # CTMTE
-Similarly, He\cite{he_efficient_2017} proposed Correlated Topic Modeling with Topic Embedding (CTMTE), which transformed the topic distribution previously obtained into lower dimension topic embedding space. The correlation between topics were directly computed through the similarity calculation in the vector space. The paper stated it reduces the running time as a scalable framework into large applications.
-
 %% Amortized inference
 Amortized inference\cite{kingma_auto-encoding_2014} are common in implementing to topic models, specifically, a neural network architecture with encoder-decoder are used into topic model structure for model inference.
 % # AVITM
 Srivastava\cite{srivastava_autoencoding_2017} applied amortized variational inference to approximate the variational distribution of the model. Specifically, product of expert were used to collapse out the document-topic assignment parameter and simplify the inference process.
-% # ETM
-Dieng\cite{dieng_topic_2019} improve a model which on top of the ProdLDA topic model, implemented Word2Vec semantics to further improve the performance on topic coherence and predictive distribution.
-Some other attempts use graph techniques to model topic distributions.
 
 % Graph model
+Some other attempts use graph techniques to model topic distributions.
 % # GATON
 Yang\cite{yang_graph_2020} introduced new topic model with Graph neural network techniques. The paper introduced Graph Attention TOpic Network (GATON) which hybridized the graph attention network (GAT) and amortized inference into application of topic modeling which supposed to reduce the require computation complexity.
 % # GTM
@@ -41,10 +29,9 @@ In past research, some considered n-gram to model the word pattern under a sente
 Wallach \cite{wallach_topic_2006} proposed a topic model using bi-gram information from the data set to yield a better performance in topic interpretibility.
 % Wang 07
 Wang \cite{wang_topical_2007} extends the topic model to n-gram assumption with similar approach.
-
 % Times Series model
-Hening\cite{hennig_kernel_2012} proposed Kernel topic model, which the model is equipped the gaussian process with kernel covariance as the hyperparameter of Dirichlet prior for document-topic proportion.
-Tomasi\cite{tomasi_stochastic_nodate} implemented a time-series correlated topic model, using Gaussian process to model for modeling the hyperparameter of topic-word proportion and the mean for document-topic proportion, along with using Wishart process for parametrising the covariance matrix.
+
+
 % Gaussian Process
 % deep Gaussian processes (Dai et al., 2015)
 % stochastic variational sparse GP formulation (Hensman et al., 2013)

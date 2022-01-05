@@ -1,5 +1,5 @@
 \section{Experiment and results}
-In this chapter, we select the original model dynamic topic model(DTM)\cite{blei_dynamic_2006} as a baseline, and latest approach dynamic embedded topic model(DETM)\cite{dieng_dynamic_2019} to compare with our model.
+In this chapter, Dynamic Correlated Topic Model(DCTM)\cite{tomasi_stochastic_nodate}, and Dynamic Embedded Topic Model(DETM)\cite{dieng_dynamic_2019} to compare with our model.
 \subsection{Experiment settings}
 \paragraph{Datasets}
 % First datasets, vocabularies, years 
@@ -10,19 +10,21 @@ Second dataset we selected is NeurIPS conference paper dataset. The dataset cont
 \paragraph{Data pre-processing}
 To prepare the data sets for training, we pre-process the documents and turn them into useful corpus.
 % Preprocess
-We remove the special characters and stop words, perform tokenization. 
+We remove the special characters and stop words, and perform tokenization to split document sentences into a list of tokens. 
 % three datas
 In order to train the model, we have to leverage the data sets to feed-in different model. Specifically, three input data are to be generated to feed
 % document-vocabularies
 First, the bag-of-word $ w\in\mathbb{R}^{D\times V} $ is a matrix consist of the word count for vocabularies exist in every document. The document frequency for tokens are set to 100 documents minimum and 50\% at max.
 % time-vocabularies
 We also created a time-vocabularies word count matrix for the training of $ \eta $. The data set $ \tilde{w}\in\mathbb{R}^{T\times V} $ holds the word count for the vocabulary set over the time span $ t=1,\dots,T $.
-% word sequence (seqlen=40)
-For transformer embedding training, we alternate the data set into a sequence set $ S $ of equal distance of pre-defined sentence length $ \textsc{seqlen} $. Token $ \textsc{<empty>} $ are padded to the sequence when the sentence in i-index $ S[i]<\textsc{seqlen} $. The sequence data set are to train the transformer embedding as input in the training process.
+\paragraph{Transformer learning task}
+% word sequence (seqlen=40) <OOV> <MASK> <IGNORE>
+For transformer embedding training, we alternate the data set into a sequence set $ S $ of equal distance of pre-defined sentence length $ \textsc{seqlen} $. Token $ \textsc{<PAD>} $ are padded to the sequence when the sentence in i-index $ S[i]\textsc{<seqlen>} $. The out-of-vocab tokens are replaced with $ \textsc{<OOV>} $ token. The sequence data set are to train the transformer embedding as input in the training process. To organize the training task, we define a set of token and target to Transformer learn it explicitly. We configure 15\% of tokens within a sentence are to be masked 
 % DTM, DETM, our model
 \paragraph{Models}
 % TODO
-For D-ETM model, we follow the default settings instructed in \cite{dieng_dynamic_2019}. We set the variance of  on the prior to 0.005.
+We maintain the default settings for DCTM \cite{tomasi_stochastic_nodate}, with 0.1 kernel bandwidth and 1 for kernel amplitude.\footnote{\url{https://github.com/spotify-research/dctm/}}
+For D-ETM model, we follow the default settings instructed in \cite{dieng_dynamic_2019}. We set the variance of  on the prior to 0.005.\footnote{\url{https://github.com/adjidieng/DETM/}}
 \paragraph{Algorithm configurations}
 % alpha	
 Following the parameter settings from \cite{blei_dynamic_2006}, the variance of prior in $  $ are set to $ \gamma^2=0.005 $ on $ \alpha\sim\mathcal{N}(\cdot,\cdot) $.
@@ -41,24 +43,26 @@ The result of models are to compare in terms of perplexity, Topic Coherence (TC)
 \begin{tabular}{llll}
 \hline
      & Perplexity  &TC&TD\\ \hline
-D-LDA	     	&  pending & pending&pending\\
-D-ETM	     	&  3050.5 & pending&0.1996\\
-\textbf{Our model}  & 5139.5 & 0.129& 0.749\\ \hline
+DCTM	     	&  4205.1 & -0.017 & \textbf{0.953}\\
+D-ETM	     	&  \textbf{2842.1} & 0.076 & 0.427 \\
+Our model(ch3) & 3984.1 & 0.153 & 0.561\\
+\textbf{Our model}  & 4103.8 & \textbf{0.092} & 0.429\\ \hline
 \end{tabular}
-\captionof{table}{Result on UN debates dataset, k=50\label{tbl:ch6_t1}}
+\captionof{table}{Result on UN debates dataset, k=30\label{tbl:ch6_t1}}
 \end{table}
 \begin{table}[h]
 \centering
 \begin{tabular}{llll}
 \hline
-     & Perplexity  &TC&TD\\ \hline
-D-LDA	     	&  pending & pending&pending\\
-D-ETM	     	&  pending & pending&pending\\
-\textbf{Our model}  & 5387.9 & 0.159& 0.611\\ \hline
+     & Perplexity & TC & TD \\\hline
+DCTM	     	& 4898.4 & -0.092 & \textbf{0.966} \\
+D-ETM	     	& \textbf{2485.4} & 0.115 & 0.367 \\
+Our model(ch3) & 4886.2 & 0.199 &0.635 \\
+\textbf{Our model}  & 5461.0 & \textbf{0.136} & 0.502 \\ \hline
 \end{tabular}
-\captionof{table}{Result on NeurIPS dataset (1987-2019), k=20\label{tbl:ch6_t2}}
+\captionof{table}{Result on NeurIPS dataset (1987-2019), k=30\label{tbl:ch6_t2}}
 \end{table}
-From table \ref{tbl:ch6_t1}, we have compared our model with the latest model. On the UN debate data set, we conduct the experiment with number of topic $ k=50 $. In terms of perplexity, the D-ETM model has performed a better score. On the other hand, our model obtain a better performance in terms of topic coherence and topic diversity, which is 0.129 and 0.749 respectively. 
+From table \ref{tbl:ch6_t1}, we have compared our model with the latest model. On the UN debate data set, we conduct the experiment with number of topic $ k=30 $. In terms of perplexity, the D-ETM model has performed a better score. On the other hand, our model obtain a better performance in terms of topic coherence and topic diversity, which is 0.092 and 0.429 respectively. 
 \subsubsection{Qualitative results}
 % visualization for the documents by topics
 \paragraph{UN debates}We put the document-topic proportion obtained from the model and run t-SNE algorithm to transform the document-topic proportion into 2-dimensional continuous space. Shown in figure \ref{fig:tsne1}, different colors of dots represent a specific topic. As can be seen, apparently the documents can be classified in to interpretable cluster according to their topic.\\
@@ -73,7 +77,7 @@ From the result we obtained, we select top-6 topics have the highest proportion 
 % add specific information, what can you see from the word on some topic
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/1128/scatter}
+\includegraphics[width=0.9\linewidth]{figures/1220/scatter}
 \caption{word trends over time (UN debates)}
 \label{fig:scatter}
 \end{figure}
@@ -82,7 +86,7 @@ Accordingly, in figure \ref{fig:stack} we also track the change of those topic o
 % Specific: explain what you saw from the topic trend
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/1128/stack}
+\includegraphics[width=0.9\linewidth]{figures/1220/stack}
 \caption{Topic trend in top-6 topics (UN debate)}
 \label{fig:stack}
 \end{figure}
@@ -93,11 +97,19 @@ To investigate the word trends change over time, table \ref{tbl:ch6_t3} visualiz
 On figure\ref{fig:scatter2}, displays the word trend from top-6 topics over the time. We have selected 3 representative tokens from top-10 words for each topic. And observe how the words trends though the years. 
 % Topic trend over time
 On figure \ref{fig:stack2}, we provide a stack plot for how those top-6 topics changed over time. Apparently it demonstrates how the topics are inclining or declining. For example, the topic related to "reinforcement" is gaining more popularity over time. Besides, the topic about "cortex, cells" is being less important by the years.
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth]{figures/1128/scatter(2)}
+\caption{Word trend for top-6 topics (NeurIPS dataset)}
+\label{fig:scatter2}
+\end{figure}
 \begin{table}[h]
 \centering
 \begin{tabular}{ll}
 \hline
 Year&Topic: Reinforcement Learning\\ \hline
+-&policy reward action goal control \\
+&agent states actions reinforcement search\\
 1987 &\hl{control} position world simulated initial \\
 &search change \hl{environment} modification \hl{action}\\
 1992 &temporal watkins cambridge dynamic controller \\
@@ -131,3 +143,5 @@ Year&Topic: Reinforcement Learning\\ \hline
 % Discussion
 \subsubsection{Discussion}
 In the result, we observe that our model has been out perform the D-ETM model in TC and TD scores. Apparently the topic words in our model generated are both consistent  and coherent over time.
+% the worse performance
+On the other hand, we notice that our model does not beat the state-of-the-art model in perplexity. Which we speculate that the 

@@ -1,8 +1,30 @@
-In this chapter, we give a detailed explanation and procedure of LKJTM to be implemented.
+In this chapter, we give a detailed explanation and procedure of Transformer embedding with Correlated Topic Model(TECTM) to be implemented.
+\section{Introduction}
+\paragraph{}Latent dirichlet allocation(LDA)\cite{blei_latent_2003} is one of the popular model in topic modeling. However, the model take bag-of-word assumption that all words are independently distributed. Also, the original model take optimization step on entire set of document, where it limits the size of the data set can be trained within a limited memory size and hence scalability is a concern for LDA.
+% Correlated Topic Model
+Correlated Topic Model(CTM)\cite{blei_correlated_2007} take consideration between topics by implementing the correlation information over the document-topic proportion. However, the model does not make assumption of prior information on the covariance matrix.
+% Embedded Topic Model
+Embedded Topic Model(ETM)\cite{dieng_topic_2020} explore the possibilities the word2vec embedding to be working together with topic model to improve the quality of topic-words generation. However, since word2vec is a simple embedding architecture, the model could be better to be working with embedding that captures positional information.
+% Intro
+\paragraph{}In this chapter, we propose Transformer embedding with Correlated Topic Model(TECTM), a topic model that takes prior assumption on covariance matrix over the document-topic distribution, and integrate Transformer with the topic model to maintain a better quality of word representations in latent space.
+% LKJ Prior
+We propose LKJ correlation prior into our correlated topic model, where the correlation prior take place to capture correlation between topics by modeling the proportion over document-topic.
+% Positional information
+To take advantage of positional information, we access the possibility the use of Transformer model to improve topic model performance. Transformer takes input sequence from documents and perform scaled dot-product to compute the each token in a sentence relates each other and the importance over a hidden context.
+% topic model
+In the following of the chapter, we first go through the related works that have been proposed by other authors. Then, we define the proposed model TECTM and derive its inference process. After that, we explain the implementation detail and the algorithmic setting for the experiment. Finally, the results are compared with other state-of-the-art models and discuss the performance our model out perform the other instances.
+\section{Related works}
+Correlated Topic Model (CTM)\cite{blei_correlated_2007} is the original work that proposed to alleviate the problem LDA, which did not utilize the topic information between correlated topics. The proposed model replaced Dirichlet distribution with a logistic-normal prior with covariance matrix to represent the relationship between topics.
+%% Embedded Topic Models
+\cite{dieng_topic_2020}. There have been a several of works focus on word embedding and topic model. Major of them combined statistical model and embedding approach to model topic distribution. In other words, representing a word by mapping every single word into continuous space.
+% # CGTM
+Xun \cite{xun_correlated_2017} employed words embedding into Correlated Topic Model, the new correlated topic model as Correlated Gaussian Topic Model (CGTM). In their paper they make use of word embedding space and model the correlation between topics by calculation of similarity between words in the embedding space.
+% # CTMTE
+Similarly, He\cite{he_efficient_2017} proposed Correlated Topic Modeling with Topic Embedding (CTMTE), which transformed the topic distribution previously obtained into lower dimension topic embedding space. The correlation between topics were directly computed through the similarity calculation in the vector space. The paper stated it reduces the running time as a scalable framework into large applications.
 \section{Model description}
-The TETM utilizes the Transformer as embedding to the topic-word representations. To compare with the original topic model, the word-topic distribution $ \beta $ is the 
+The TECTM utilizes the Transformer as embedding to the topic-word representations. To compare with the original topic model, the word-topic distribution $ \beta $ is the 
 First, the topic embedding embeds the vocabulary into L-dimensional space, which is by Transformer embedding. Second, the context embedding maps the embedding into K-dimensional space . 
-In the generative process, the LKJTM uses the topic embedding to form a per-topic vector to represent the meaning over the vocabulary. 
+In the generative process, the TECTM uses the topic embedding to form a per-topic vector to represent the meaning over the vocabulary. 
 % Graphical Model'
 \begin{figure}
 \centering
@@ -38,7 +60,7 @@ In the generative process, the LKJTM uses the topic embedding to form a per-topi
   \node[rectangle, inner sep=4.6mm, fit= (w),label=below right:D, xshift=0mm] {};
   \node[rectangle, inner sep=9mm, draw=black!100, fit = (theta) (w)] {};
 \end{tikzpicture}
-\caption{Graphical model for LKJTM}
+\caption{Graphical model for TECTM}
 \label{graph:lkjtm}
 \end{figure}
 
@@ -46,65 +68,72 @@ In the generative process, the LKJTM uses the topic embedding to form a per-topi
 The generative process of the $ d^{th} $ document is the following:\\
 \begin{algorithm}[H]
 Initialize hyperparameters $ \gamma $, $ \mu $\\
-Sample Correlation Matrix $ L\sim \text{LKJChol}(\gamma)$\\
+Sample Cholesky factor $ L\sim \text{LKJChol}(\gamma)$\\
 \For{document d in D}{
-Sample topic distribution $ \theta_d\sim \mathcal{LN}(\mu,\sigma LL^\top\sigma) $\\
+Sample topic distribution $ \theta_d\sim \mathcal{LN}(\mu,LL^\top) $\\
 \For{word position n in $ N_d $}{
 Sample word $ w_{d,n}\sim \sigma(\theta_d(\rho^\top\alpha)_{\cdot,w_{d,n}}) $
 }
 }
-\caption{Generative Process for LKJTM}
+\caption{Generative Process for TECTM}
 \label{algorithm:lkjtm}
 \end{algorithm}
 From algorithm \ref{algorithm:lkjtm}, starting from step 1, the topic proportion $ \theta_d $ is drawn from the logistic-normal distribution $ \mathcal{LN}(\cdot) $ with zero mean and identical covariance.
 From Step 2-a, for each word position $ n $ in document $ d $, a topic assignment to word $ w_{dn} $ is drawn from categorical distribution $ Cat(\theta_d) $ parameterized by topic proportion $ \theta_d $
 Step 2-b, the model draw a word from embedding of the vocabulary $ \rho $ and the assigned topic embedding $ \alpha_{z_{dn}} $ to draw the observed word from the assigned topic, as given by $ z_{dn} $. The embedding is applied softmax function to make them topic distribution.
-The TETM likelihood uses a matrix of word embedding $ \rho $, a representation of the vocabulary in a lower dimensional space. In practice, it can either rely on previously fitted embeddings as part of the fitting procedure, it simultaneously finds topics and an embedding space.
-
+The TECTM likelihood uses a matrix of word embedding $ \rho $, a representation of the vocabulary in a lower dimensional space. In practice, it can either rely on previously fitted embeddings as part of the fitting procedure, it simultaneously finds topics and an embedding space.
 % TODO LKJ Correlation Distribution Formulation
-
+\subsection{LKJ Correlation prior}
+The LKJ Correlation prior LKJChol a A Cholesky factor of lower triangle matrix L, from a decomposed LKJ correlation distribution. The product of lower triangular matrix $ LL^\top $ reconstruct the correlation matrix
+\begin{align*}
+\Sigma = LL^\top
+\end{align*}
+A covariance matrix can be reconstructed in following fashion.
+In our implementation, we don't scale the covariance matrix with variance $ \sigma $, which is simply a correlation matrix.
 % TODO Transformer Embeddings
-% Transformer embeddings
 \subsection{Transformer Embeddings}
 Following the ETM architecture, we modify topic-word distribution as an embedding and put transformer embedding to work into it. 
-\begin{equation}\label{eq:transformer_embedding}
+\begin{equation}\label{eq:ch4_transformer_embedding}
 \beta\sim\text{softmax}(\rho^\top\alpha)
 \end{equation}
-Equation \ref{eq:transformer_embedding}, 
+Equation \ref{eq:transformer_embedding}, the topic-word distribution is composed of the dot product of transformer embedding $ \rho\in\mathbb{R}^{L\times V} $ representing the word vector in L-dimension of continuous space and topic matrix $ \alpha\in\mathbb{R}^{L\times K} $ mapping the L dimension vector into K-dimension of topic proportions.
 % Marginal Likelihood
 \subsection{Marginal Likelihood}
-The parameter $ \alpha $ is the topic embedding on the word embedding space of dimension K. We take a log marginal likelihood of the document,
-\begin{align*}
-\mathcal{L}(\alpha)=\sum_{d=1}^{D}\log p(w_d|\alpha)
-\end{align*}
-\begin{align*}
-p(w_d|\alpha)=\int p(\theta_d|\mu,\Sigma)\prod_{n=1}^{N_d}p(w_{dn}|\theta_d,\alpha)d\theta_d
-\end{align*}
-the conditional distribution $ p(w_{dn}|\theta_d,\alpha) $ marginalize out the the topic assignment $ z_{dn} $,
-\begin{align*}
-p(w_{dn}|\theta_d,\alpha)=\sum_{k=1}^{K}\theta_{dk}\beta_{k,w_{dn}}
-\end{align*}
-where $ \beta $ represent the topic-word distribution, composed of transformer embedding $ \rho $ and topic embedding $ \alpha $, in such case
-\begin{align*}
-\beta_{kv}=\text{softmax}(\rho^\top\alpha)_{v}.
-\end{align*}
-then we take the amortized inference to take out neural network for the representation,
-\begin{align*}
-p(w_{d}|N(\mu_\theta(w),\sigma_\theta(w)),\beta)=\mathbb{E}_{\theta\sim N(\mu_\theta(w),\sigma_\theta(w))}\left[w^\top\sigma(\beta\theta)\right]
-\end{align*}
-Reparametrization Trick $ \theta=\mu+\sigma^{1/2}\epsilon $\\
-\begin{align*}
-p(w_{d}|\mu_\theta(w)+\epsilon\sigma^{1/2}_\theta(w),\beta)=\mathbb{E}_{\epsilon\sim N(0,1)}\left[w_d^\top\sigma(\beta(\mu_\theta(w)+\epsilon\sigma^{1/2}_\theta(w)))\right]
-\end{align*}
+To compute the parameters of the model, we first construct the log-marginal likelihood. In equation \ref{eq:ch4_marginal_likelihood}, the marginal likelihood is parameterized by transformer embedding $ \rho $ and topic embedding $ \alpha $, which is for constructing topic-word proportion $ \beta $ as referenced in equation \ref{eq:ch4_transformer_embedding},
+\begin{equation}\label{eq:ch4_marginal_likelihood}
+\mathcal{L}(\rho,\alpha)=\sum_{d=1}^{D}\log p(w_d|\rho,\alpha)
+\end{equation}
+the marginal probability for document $ d $
+\begin{align}
+p(w_d|\alpha)=\int p(\theta_d|\mu,\Sigma)\prod_{n=1}^{N_d}p(w_{dn}|\theta_d,\rho,\alpha)d\theta_d
+\end{align}
+the conditional distribution $ p(w_{dn}|\theta_d,\alpha) $ marginalize out the topic assignment $ z_{dn} $ by collapsing parameters,
+\begin{align}
+p(w_{dn}|\theta_d,\rho,\alpha)=\sum_{k=1}^{K}\theta_{dk}\beta_{k,w_{dn}}
+\end{align}
+as always, computing integral for posterior is intractable, approximate inference is necessary to estimate the true parameter from the integral.
+%where $ \beta $ represent the topic-word distribution, composed of transformer embedding $ \rho $ and topic embedding $ \alpha $, in such case, the vocab $ v $ represent the proportion of topic $ k $ that $ \beta_{kv} $ becomes,
+%\begin{align}
+%\beta_{kv}=\text{softmax}(\rho_v^\top\alpha_k).
+%\end{align}
+% TODO move this part (amortized inference)
+%then we take the amortized inference to take out neural network for the representation,
+%\begin{align}
+%p(w_{d}|N(\mu_\theta(w),\sigma_\theta(w)),\beta)=\mathbb{E}_{\theta\sim N(\mu_\theta(w),\sigma_\theta(w))}\left[w_d^\top\sigma(\beta\theta)\right]
+%\end{align}
+%then apply reparametrization trick $ \theta=\mu+\sigma^{1/2}\epsilon $ to reduce the construction for in following term\\
+%\begin{align}
+%p(w_{d}|\mu_\theta(w)+\epsilon\sigma^{1/2}_\theta(w),\beta)=\mathbb{E}_{\epsilon\sim N(0,1)}\left[w_d^\top\sigma(\beta(\mu_\theta(w)+\epsilon\sigma^{1/2}_\theta(w)))\right]
+%\end{align}
 %% Joint Distribution
 \subsection{Joint Distribution}
 We give a description of the joint distribution, $ W,Z,\theta $ and $ \Sigma $ are variables and $ \beta, \mu $ and $ \gamma $ are latent variables. $ W $ is the word likelihood from the document collections, $ Z $ represents the topic-word assignment, $ \theta $ models the topic distribution for each document, and $ \Sigma $ is the covariance matrix which depends on the document-topic distribution $ \theta $.
 \begin{align*}
-p(W,Z,\theta,\Sigma|\beta,\mu,\gamma)&=P(W|Z)P(Z|\theta)P(\theta|\mu,\Sigma)\\
-&=p(\Sigma|\gamma)\prod_{d=1}^{D}P(\theta_d|\mu,\Sigma)\prod_{n=1}^{V}P(z_{d,n}|\theta_d)P(w_{d,n}|z_{d,n},\beta)
+p(W,Z,\theta,\Sigma|\beta,\mu,\gamma)&=p(W|Z)p(Z|\theta)p(\theta|\mu,\Sigma)\\
+&=p(\Sigma|\gamma)\prod_{d=1}^{D}p(\theta_d|\mu,\Sigma)\prod_{n=1}^{V}p(z_{d,n}|\theta_d)p(w_{d,n}|z_{d,n},\beta)
 \end{align*}
 by taking  log on the joint probability, we obtain a objective function for optimization
 \begin{align*}
-\log p(W,Z,\theta,\Sigma|\beta,\mu,\gamma)=&\sum_{d=1}^{D}\left[\log P(\theta_d|\mu,\Sigma)+\sum_{n=1}^{V}\left[\log P(z_{d,n}|\theta_d)+\log P(w_{d,n}|z_{d,n},\beta)\right]\right]\\
+\log p(W,Z,\theta,\Sigma|\beta,\mu,\gamma)=&\sum_{d=1}^{D}\left[\log p(\theta_d|\mu,\Sigma)+\sum_{n=1}^{V}\left[\log p(z_{d,n}|\theta_d)+\log p(w_{d,n}|z_{d,n},\beta)\right]\right]\\
 &+\log p(\Sigma|\gamma)
 \end{align*}
