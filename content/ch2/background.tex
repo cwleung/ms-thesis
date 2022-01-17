@@ -17,13 +17,13 @@ LKJ distribution \cite{lewandowski_generating_2009} is a distribution for modeli
 f(C|\eta)=&2^{\sum_{k=1}^{K-1}(2(\eta-1)+K-k)(K-k)}\times\\
 &\prod_{k=1}^{K-1}(B(\eta+(K-k-1)/2,\eta+(K-k-1)/2)^{K-k})(\det(C)^{\eta-1})
 \end{align}
-$ B(\cdot,\cdot) $ is beta distribution, and K is the number of variable in correlation matrix. $ \eta $ is concentration parameter for LKJ distribution. When $ \eta=1 $ it is simply a uniform distribution allocated over the correlation matrix. If $ \eta>0 $, it is a modal correlation matrix. The density concentrated around center when the $ \eta $ value become larger.
-To apply it into normal distribution as covariance, we could apply transformation equation \ref{eq:lkj_trans} and turn it into covariance matrix\cite{barnard_modeling_2000}.
+$ B(\cdot,\cdot) $ is beta distribution, and K is the number of variable in correlation matrix. $ \eta $ is concentration parameter for LKJ distribution. When $ \eta=1 $ it is basically an uniform distribution allocated over the correlation matrix. If $ \eta>0 $ and become larger, the density of the matrix concentrates around center.
+To apply it into normal distribution as covariance, we could apply transformation equation \ref{eq:lkj_trans} and turn it into covariance matrix\cite{barnard_modeling_2000}. $ \text{diag}(\sigma) $ is the diagonal elements of the variance vector $ \sigma $.
 \begin{align}\label{eq:lkj_trans}
 \Sigma=\text{diag}(\sigma)\cdot C \cdot \text{diag}(\sigma)
 \end{align}
 % Transformation
-Directly drawing correlation matrix from LKJ distribution is not practical in reality case. It is common to draw correlation matrix from factorized Cholesky LKJ distribution instead, where the probability density function is described as equation \ref{eq:lkj_chol}
+Directly drawing correlation matrix from LKJ distribution is not efficient in reality case. It is common to draw correlation matrix from factorized Cholesky LKJ distribution instead, where the probability density function is described as equation \ref{eq:lkj_chol}
 \begin{align} \label{eq:lkj_chol}
 \text{LKJChol}(L|\eta)&\propto|J|\det(LL^\top)^{(\eta-1)}\\
 &=\prod_{k=2}^{K}L_{kk}^{K-k+2\eta-2}
@@ -50,7 +50,7 @@ Sample a word $ w_{dn}\sim \text{Mult}(\beta_{z_d,n}) $
 \label{algorithm:ctm}
 \caption{Generative Process for CTM}
 \end{algorithm}
-From Algorithm \ref{algorithm:ctm}, the parametrization $ \mu, \Sigma $ are initialized. For each document d in document collection D, a topic distribution $ \eta_d $ is drawn from normal distribution parametrized $ \mu,\Sigma $. Then for each word position n in $ N $ words in doucment d, a topic assignment $ z_{dn} $ is drawn from multinomial distribution parametrized $ f(\eta_d) $, where the transformation $ f(\eta) $ represents the softmax function maps the sample draw from normal distribution to topic proportion $ \theta $, a topic distribution which points on the K-1 simplex. Finally, a word is sampled from multinomial distribution $ Mult(\beta_{z_d,n}) $.
+From Algorithm \ref{algorithm:ctm}, the parametrization $ \mu, \Sigma $ are initialized. For each document d in document collection D, a topic distribution $ \eta_d $ is drawn from normal distribution parametrized $ \mu,\Sigma $. Then for each word position n in $ N $ words in doucment d, a topic assignment $ z_{dn} $ is drawn from multinomial distribution parametrized $ f(\eta_d) $, where the transformation $ f(\eta) $ represents the softmax function maps the sample draw from normal distribution to topic proportion $ \theta $, a topic distribution which points on the simplex that all elements in the vector sums to 1. Finally, a word is sampled from multinomial distribution $ Mult(\beta_{z_d,n}) $.
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}
@@ -110,7 +110,6 @@ Draw word $ w_{d,n}\sim \sigma(\rho^\top\alpha)_{z_{dn}} $
 }}
 \caption{Generative Process for ETM}
 \end{algorithm}
-Although ETM can maintain for Word2Vec training as the embedding for topic modeling, it cannot capture 
 \section{Representation learning}
 \subsection{Word Embedding} \label{ch2:we}
 % explain what is word embeddings
@@ -162,15 +161,15 @@ x=\text{LayerNorm}(x+\text{Sublayers}(x))
 %\text{head}_i = \text{Attention}(QW_i^{Q}, KW_i^K,VW_i^V)
 %\end{align*}
 \subsubsection{Positional Encoding}
-One drawback for Multi-Head Attention block is that it does not consider information about word positioning, 
+One drawback for Multi-Head Attention block is that it does not consider information about word positioning. The positional encoding function maps the sentence sequences into i-dimension of hidden space fo each permutation position $ pos $. And so the model can identify the from the additional positional features space of the input.
+\footnote{Description from \url{https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial6/Transformers_and_MHAttention.html.}}
 \[ PE_{(pos,i)} = \begin{cases} 
 \sin\left(\frac{pos}{10000^{i/d}model}\right) & \text{if }i \mod 2 = 0 \\
 \cos\left(\frac{pos}{10000^{(i-1)/d}model}\right) & \text{otherwise}
        \end{cases}
     \]
-    
-For the decoder part, we only consider autoregressive Transformer-decoder in the remaining research.
-In this chapter, we explore the detail for posterior inference and give specification to how we . In section \ref{ch4:1}, we give definition to the variational inference method that we use to posterior approximation. Then a detailed derivation for the evidence lower bound(ELBO) of our proposed model will be given in section\ref{ch4:2}. Finally, section \ref{ch4:3} will demonstrate the algorithm that to optimization process of the LKJTM.
+the positional encoding function $ PE_{pos,i} $, where the $ pos $ represents the permutation 
+and the odd/even dimension are treated on sine/cosine function respectively. 
 \section{Time Series model}
 \subsection{Gaussian Process (GP)}
 Gaussian Process is a versatile algorithm which is commonly used for both supervised and unsupervised learning problems including regression, classification and clustering. It has been demonstrated a strong pursuit on times-series and reinforcement learning problems. A Gaussian Process $ \mathcal{GP}(\cdot,\cdot) $ is denoted by following, where m is the mean and k stands for a kernel for covariance function,
@@ -186,13 +185,7 @@ p(f(X))=\mathcal{N}(m(X),k(X,X))
 %\end{align*}
 In particular, in Gaussian Process regression task, a output variable $ y_i $ denoted $ y_i\sim f(x_i)+\epsilon $ where $ \epsilon $ is a Gaussian noise. Therefore, given a set of training input and target, 
 \begin{align*}
-p(f)=\mathcal{N}(f|0,K)
-\end{align*}
-\begin{align*}
-p(y_i|f)=\mathcal{N}(y;f,\sigma_\epsilon^2I)
-\end{align*}
-\begin{align*}
-p(y)=\mathcal{N}(y|0,K+\sigma_\epsilon^2I)
+p(y|f)=\mathcal{N}(y;f,\sigma_\epsilon^2I)
 \end{align*}
 For a Gaussian Process, is defined as follows
 To simply define the Gaussian Process model, here 
@@ -213,14 +206,15 @@ The ELBO for GP is derived from \cite{hensman_gaussian_nodate}, as
 \end{align*}
 where the variational distribution is $ q(f)\approx\int p(f|u)q(u)du $
 \subsection{Gaussian Process Latent Variable Model (GPLVM)}
-Gaussian Process Latent Variable Model \cite{lawrence_gaussian_nodate,titsias_bayesian_nodate} is a dimension reduction method turn high dimensional data into low-dimension space. Formally, given a latent variable $ X\in\mathbb{R}^{N\times Q} $, and high dimensional real valued observations $ Y\in\mathbb{R}^{N\times D} $, the model induce high dimensional from a low-dimensional mapping $ \mathcal{X}\rightarrow\mathcal{Y} $ such that $ Q<<D $.　The prior latent variable X is defined at a standard normal distribution. 
+Gaussian Process Latent Variable Model \cite{lawrence_gaussian_nodate,titsias_bayesian_nodate} is a dimension reduction method turn high dimensional data into low-dimension space. Formally, given a latent variable $ X\in\mathbb{R}^{N\times Q} $, and high dimensional real valued observations $ Y\in\mathbb{R}^{N\times D} $, the model induce high dimensional from a low-dimensional mapping $ \mathcal{X}\rightarrow\mathcal{Y} $ such that $ Q<<D $.　The prior latent variable X is defined at a standard normal distribution in dimension Q.
 \begin{align*}
 p(X)=\prod_{n=1}^{N}\mathcal{N}(x_n;0,I_Q)
 \end{align*}
-
+The latent function $ f $ take the kernel $ K_d $ that determine the covariance matrix at $ D $-dimension
 \begin{align*}
 p(f|X,\theta)=\prod_{d=1}^{D}\mathcal{GP}(f_d;0,K_d)
 \end{align*}
+and then it can recover back the observed data through the latent function $ f $ conditioned on the $ \mathcal{GP} $ prior with $ p(Y|f,X) $
 \begin{align*}
 p(Y|f,X)=\prod_{i=1}^{N}\prod_{i=1}^{D}\mathcal{N}(y_{n,d};f_d(x_n),\sigma_y^2)
 \end{align*}
@@ -274,7 +268,7 @@ Two main improvement are made by the SVI: stochastic optimization and noisy grad
 \subsection{Collapsing Parameters}
 In original LDA model, the parameter z is responsible for sampling topic assignment for each word position in every single document. Collapsing parameters\cite{srivastava_autoencoding_2017} introduced to reduce the latent variable $ z $ in the generative process in hence to speed up computation.
 \begin{align}\label{eq:cp}
-w_d\sim\prod_{n=1}^{N_d}\text{Cat}(\sigma(\beta_{w_{dn}}\theta_d))
+w_d\sim\prod_{n=1}^{N_d}\text{Cat}(\theta_d\beta_{w_{dn}})
 \end{align}
 The trick in equation \ref{eq:cp} rewrite the original LDA word drawing process, and hence define a new evidence lower bound for the topic model.
 % TODO Blei's notes

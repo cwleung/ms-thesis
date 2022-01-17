@@ -4,7 +4,7 @@ In this chapter, we give a detailed explanation and procedure of Transformer emb
 % Correlated Topic Model
 Correlated Topic Model(CTM)\cite{blei_correlated_2007} take consideration between topics by implementing the correlation information over the document-topic proportion. However, the model does not make assumption of prior information on the covariance matrix.
 % Embedded Topic Model
-Embedded Topic Model(ETM)\cite{dieng_topic_2020} explore the possibilities the word2vec embedding to be working together with topic model to improve the quality of topic-words generation. However, since word2vec is a simple embedding architecture, the model could be better to be working with embedding that captures positional information.
+Embedded Topic Model(ETM)\cite{dieng_topic_2019} explore the possibilities the word2vec embedding to be working together with topic model to improve the quality of topic-words generation. However, since word2vec is a simple embedding architecture, the model could be better to be working with embedding that captures positional information.
 % Intro
 \paragraph{}In this chapter, we propose Transformer embedding with Correlated Topic Model(TECTM), a topic model that takes prior assumption on covariance matrix over the document-topic distribution, and integrate Transformer with the topic model to maintain a better quality of word representations in latent space.
 % LKJ Prior
@@ -63,7 +63,6 @@ In the generative process, the TECTM uses the topic embedding to form a per-topi
 \caption{Graphical model for TECTM}
 \label{graph:lkjtm}
 \end{figure}
-
 % Generative process
 The generative process of the $ d^{th} $ document is the following:\\
 \begin{algorithm}[H]
@@ -72,7 +71,7 @@ Sample Cholesky factor $ L\sim \text{LKJChol}(\gamma)$\\
 \For{document d in D}{
 Sample topic distribution $ \theta_d\sim \mathcal{LN}(\mu,LL^\top) $\\
 \For{word position n in $ N_d $}{
-Sample word $ w_{d,n}\sim \sigma(\theta_d(\rho^\top\alpha)_{\cdot,w_{d,n}}) $
+Sample word $ w_{d,n}\sim \text{Cat}(\theta_d\sigma(\rho^\top\alpha)_{w_{d,n}}) $
 }
 }
 \caption{Generative Process for TECTM}
@@ -96,18 +95,18 @@ Following the ETM architecture, we modify topic-word distribution as an embeddin
 \begin{equation}\label{eq:ch4_transformer_embedding}
 \beta\sim\text{softmax}(\rho^\top\alpha)
 \end{equation}
-Equation \ref{eq:transformer_embedding}, the topic-word distribution is composed of the dot product of transformer embedding $ \rho\in\mathbb{R}^{L\times V} $ representing the word vector in L-dimension of continuous space and topic matrix $ \alpha\in\mathbb{R}^{L\times K} $ mapping the L dimension vector into K-dimension of topic proportions.
+Equation \ref{eq:ch4_transformer_embedding}, the topic-word distribution is composed of the dot product of transformer embedding $ \rho\in\mathbb{R}^{L\times V} $ representing the word vector in L-dimension of continuous space and topic matrix $ \alpha\in\mathbb{R}^{L\times K} $ mapping the L dimension vector into K-dimension of topic proportions.
 % Marginal Likelihood
 \subsection{Marginal Likelihood}
-To compute the parameters of the model, we first construct the log-marginal likelihood. In equation \ref{eq:ch4_marginal_likelihood}, the marginal likelihood is parameterized by transformer embedding $ \rho $ and topic embedding $ \alpha $, which is for constructing topic-word proportion $ \beta $ as referenced in equation \ref{eq:ch4_transformer_embedding},
+To compute the parameters of the model, we first compute the log-marginal likelihood. In equation \ref{eq:ch4_marginal_likelihood}, the marginal likelihood is parameterized by transformer embedding $ \rho $ and topic embedding $ \alpha $, which is for constructing topic-word proportion $ \beta $ as referenced in equation \ref{eq:ch4_transformer_embedding},
 \begin{equation}\label{eq:ch4_marginal_likelihood}
 \mathcal{L}(\rho,\alpha)=\sum_{d=1}^{D}\log p(w_d|\rho,\alpha)
 \end{equation}
-the marginal probability for document $ d $
+the marginal probability for $ p(w|\alpha) $ on $ d $-th document,
 \begin{align}
-p(w_d|\alpha)=\int p(\theta_d|\mu,\Sigma)\prod_{n=1}^{N_d}p(w_{dn}|\theta_d,\rho,\alpha)d\theta_d
+p(w_d|\rho,\alpha)=\int p(\theta_d|\mu,\Sigma)\prod_{n=1}^{N_d}p(w_{dn}|\theta_d,\rho,\alpha)d\theta_d
 \end{align}
-the conditional distribution $ p(w_{dn}|\theta_d,\alpha) $ marginalize out the topic assignment $ z_{dn} $ by collapsing parameters,
+the conditional distribution $ p(w_{dn}|\theta_d,\alpha) $ marginalize out the topic assignment $ z_{dn} $ by collapsing parameters transformation $ w\sim \theta^\top\beta $,
 \begin{align}
 p(w_{dn}|\theta_d,\rho,\alpha)=\sum_{k=1}^{K}\theta_{dk}\beta_{k,w_{dn}}
 \end{align}

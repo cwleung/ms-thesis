@@ -1,12 +1,27 @@
 \section{Objective and Outline}\label{ch1:4}
-In this paper, we develop the Transformer Embedded Topic Model (TMTE), a model that combine word embedding and topic model together to make a better fit of the dataset. Moreover, we integrate the Transformer into embedding, such that we can also take assumption of word position and convert it into meaningful contextual embeddings. 
-In its generative process, the model uses the topic embedding to forma a per-topic distribution over the vocabulary. Specifically, the TMTE uses a log-linear model that takes the inner product of the word embedding matrix and the topic embedding.
+% value portray
+In the thesis, we would like to construct a topic model that make use of the positional information we obtain from the document set. Moreover, we would exploit the usage for imposing a prior to model the covariance on the document-topic proportion.
+% our model
+Particularly, we develop the Transformer Embedding Correlated Topic Model(TECTM), a model that combine word embedding and topic model together to make a better fit of the dataset. Moreover, we integrate the Transformer into embedding, such that we can also take assumption of word position and convert it into meaningful contextual embeddings.
+In its generative process, the model uses the topic embedding to form a per-topic distribution over the vocabulary. Specifically, the TMTE uses a log-linear model that takes the inner product of the word embedding matrix and the topic embedding.
 With this form, the TMTE assigns high probability to a word v in topic k by measuring the agreement between the word’s embedding and the topic’s embedding.
-
-To evaluate our model, we applied the proposed model on 20Newsgroups and Reuter-21578 dataset. The experiment results demonstrate that our model is capable to obtain high quality topics than the state-of-the-art model. 
-
+% evaluation
+To evaluate our model, we applied the proposed model on \textit{20Newsgroups} and \textit{Reuter-21578} dataset. The experiment results demonstrate that our model is capable to obtain high quality topics than the state-of-the-art model. 
+% time-series model
+We also extended the model to handle time-series information, the model extends the architecture based on chapter \ref{ch4}.
+% model specification
+Specifically, we built Dynamic Transformer Embedding Correlated Topic Model(DTECTM), a model on top of the one from chapter \ref{ch4}, that make use of Gaussian Process Latent Variable Model(GPLVM) to captures time series information. 
+% comparsion
+We put our model into a set of experiments with other instances to examine the effectiveness. The models are compared with \textit{NIPS} dataset and \textit{UN debates} dataset, which each of them consist of a time label that represents the year a specific document belongs to.
+% evaluation
+Additionally, we also visualize the time-to-topic proportion that the model obtained to explore the topics evolve over time. 
+% result
+The result shows that 
 % Explain chapters
-To give a outline of this thesis, chapter \ref{ch2} will give a brief background to the problem description and the related knowledge. 
-Then chapter \ref{ch4} will specify the methodology and explain the detail of our model, we compare the proposed model with LDA and latest model. 
-In \ref{ch5}, we extends the model to model times-series data. In particular we . 
-Lastly, chapter \ref{ch6} will sum up the merit and limitation overall the research, prospect the future works.
+To give a outline of this thesis, chapter \ref{ch2} will give a brief background to the problem description and the related knowledge, including the existing topic models, the related methodology in  , and the evaluation metric in NLP domain such as perplexity, and topic coherence and topic diversity, which is specifically for topic model evaluations.
+% ch3: model, inference, result, visualization
+Then chapter \ref{ch4} will specify the methodology and explain the detail of our model, we compare the proposed model with LDA and the latest model. 
+% ch4: model, inference, result, visualization
+In \ref{ch5}, we explore the DTECTM model to train with time-series data. We will specify the model and the 
+% ch5: conclusion
+Lastly, chapter \ref{ch6} will sum up the merit and limitation overall the research, and prospect the future works.
