@@ -15,8 +15,10 @@ To take advantage of positional information, we access the possibility the use o
 In the following of the chapter, we first go through the related works that have been proposed by other authors. Then, we define the proposed model TECTM and derive its inference process. After that, we explain the implementation detail and the algorithmic setting for the experiment. Finally, the results are compared with other state-of-the-art models and discuss the performance our model out perform the other instances.
 \section{Related works}
 Correlated Topic Model (CTM)\cite{blei_correlated_2007} is the original work that proposed to alleviate the problem LDA, which did not utilize the topic information between correlated topics. The proposed model replaced Dirichlet distribution with a logistic-normal prior with covariance matrix to represent the relationship between topics.
+
+There have been a several of works focus on word embedding and topic model. Major of them combined statistical model and embedding approach to model topic distribution. In other words, these method representing a word by mapping every single word into continuous space instead of using a probability distribution as was in typical LDA model.
 %% Embedded Topic Models
-\cite{dieng_topic_2020}. There have been a several of works focus on word embedding and topic model. Major of them combined statistical model and embedding approach to model topic distribution. In other words, representing a word by mapping every single word into continuous space.
+Embedded Topic Model\cite{dieng_topic_2019} uses word2vec embedding to capture the word representation in latent continuous space. The posterior of the model was approximated by amortized inference.
 % # CGTM
 Xun \cite{xun_correlated_2017} employed words embedding into Correlated Topic Model, the new correlated topic model as Correlated Gaussian Topic Model (CGTM). In their paper they make use of word embedding space and model the correlation between topics by calculation of similarity between words in the embedding space.
 % # CTMTE

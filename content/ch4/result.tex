@@ -24,11 +24,11 @@ To perform posterior inference, we employed Stochastic Variational Inference (SV
 % Other model
 For LDA, we applied the model provided from sklearn package (version 0.24.0) \footnote{Sklearn website \url{https://scikit-learn.org/stable/index.html}}. For ETM, we run the experiment with the parameter suggested \cite{dieng_topic_2019}. For ProdLDA, we perform optimization with inference network architecture as described in the paper \cite{srivastava_autoencoding_2017}. 
 % epochs
-To train the models, every model run on 200 epochs to give the best performance. 
+To train the models, every model run on 300 epochs to give the best performance. 
 % learning rate
 To perform optimization, we use Adam for the gradient ascent algorithm, and we set the learning rate to 2e-3.
 % l2-regularization factor
-we use $ l2 $-regularization to the 1e-5,
+we use $ l2 $-regularization to the 1e-6,
 % inference network [size, activation function, dropout, batch-norm]
 We applied the settings from \cite{srivastava_autoencoding_2017} to perform amortized inference. The inference architecture included 300 dimension of hidden layers. 
 % embedding dimension 512
@@ -156,9 +156,9 @@ ETM  \\ \hline
 %\label{fig:hm20t}
 %\end{figure}
 \subsection{Visualization}
-To clearly demonstrate the representation for the word embedding space inside the parameters that obtained, we ran t-SNE algorithm to map the topic-word representation into 2-dimension continuous space. In figure \ref{fig:tsne20t25w2} and \ref{fig:tsne50t25w0}, demonstrate the t-SNE visualization of the topic-word distribution for 20Newsgroups for k=20 and k=50. 
+To clearly demonstrate the representation for the word embedding space inside the parameters that obtained, we ran t-SNE algorithm to map the topic-word representation into 2-dimension continuous space. We selected and zoomed-in a specific topic with its neighboring topics with a red box and displayed over the figures. In figure \ref{fig:tsne20t25w2} and \ref{fig:tsne50t25w0}, demonstrate the t-SNE visualization of the topic-word distribution for 20Newsgroups for k=20 and k=50. 
 
-We also compare the model with the ETM as displayed on figure \ref{fig:tsne20t50w1_etm}. In figure \ref{fig:tsne20t25w2}, the topic "space"(which consist of words like space, nasa, moon, etc) laying on the 2-dimensional space. The most neighboring topic includes "vehicles", "politics" and "america". For ETM, the nearest topic for "space" are "america", "operating system" and "vehicle". Generally, ETM do not able to distinct the words of topics into visible clusters, as shown on the figure, the upper part of word dots with different topic labels mix together. This implies ETM does not generate good enough topic-words representation to distinguish the difference between topics.
+We also compare the model with the ETM as displayed on figure \ref{fig:tsne20t50w1_etm}. In figure \ref{fig:tsne20t25w2}, the topic "space"(which consist of words like space, earth, orbit, etc) laying on the 2-dimensional space. The most neighboring topic includes "hardware" and "operating system", which appear the words such as "cable", "cd", "power" for "hardware" topic, and "images", "graphics" and "files" for "operating system" topic. Generally speaking, ETM do not able to distinct the words of topics into visible clusters, as shown on the figure, the upper part of word dots with different topic labels mix together. And inside the topic cluster, there are also some word from other topic mixed in to it. This may implies ETM does not generate good enough topic-words representation to distinguish the difference between topics.
 \begin{figure}
 \centering
 \includegraphics[width=1\linewidth]{figures/0908/tsne_20t_25w_2}
@@ -167,7 +167,7 @@ We also compare the model with the ETM as displayed on figure \ref{fig:tsne20t50
 \end{figure}
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth]{"figures/0112/tsne_20t_50w(1) - Copy"}
+\includegraphics[width=1\linewidth]{"figures/0106/tsne_20t_50w_2"}
 \caption{t-SNE visualization for ETM \#Topic:20}
 \label{fig:tsne20t50w1_etm}
 \end{figure}

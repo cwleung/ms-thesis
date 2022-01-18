@@ -3,23 +3,23 @@ In this chapter, Dynamic Correlated Topic Model(DCTM)\cite{tomasi_stochastic_nod
 \subsection{Experiment settings}
 \paragraph{Datasets}
 % First datasets, vocabularies, years 
-We select the \textsc{un} debates as one of the testing corpus for the experiment. It is a collection of transcript from the official of UN member countries expressing about the  government's perspective over the world issues at the time.
+We select the \textsc{un debates} as one of the testing corpus for the experiment. It is a collection of transcript from the official of UN member countries expressing about the  government's perspective over the world issues at the time.
 After preprocessing, It contains 46 years time span of data, with 7507 documents and 6831 tokens in total. We selected 6005 for training, 1402 documents for testing and 100 documents for validation.
 % Second datasets - NeurIPS 1987-2019
-Second dataset we selected is NeurIPS conference paper dataset. The dataset contains conference papers ranged from 1987-2019. After preprocessing, it contains 9677 papers in total and 9182 tokens. Within the dataset, we pick 7345 documents for training, 1737 for testing and 100 for validation.
+Second dataset we selected is \textsc{NeurIPS} conference paper dataset. The dataset contains conference papers ranged from 1987-2019. After preprocessing, it contains 9677 papers in total and 9182 tokens. Within the dataset, we pick 7345 documents for training, 1737 for testing and 100 for validation.
 \paragraph{Data pre-processing}
-To prepare the data sets for training, we pre-process the documents and turn them into useful corpus.
+To prepare the datasets for training, we pre-process the documents and turn them into useful corpus.
 % Preprocess
 We remove the special characters and stop words, and perform tokenization to split document sentences into a list of tokens. 
 % three datas
-In order to train the model, we have to leverage the data sets to feed-in different model. Specifically, the data are shaped into different forms.
+In order to train the model, we have to leverage the datasets to feed-in different model. Specifically, the data are shaped into different forms.
 % document-vocabularies
 First, the bag-of-word $ w_{1:D}\in\mathbb{R}^{D\times V} $ is a matrix consist of the word count for vocabularies exist in every document. The document frequency for tokens are set to 100 documents minimum and 50\% at max.
 % time-vocabularies
-We also created a time-vocabularies word count matrix for the training of $ \eta $. The data set $ \tilde{w}_{1:T}\in\mathbb{R}^{T\times V} $ holds the word count for the vocabulary set over the time span $ t=1,\dots,T $.
+We also created a time-vocabularies word count matrix for the training of $ \eta $. The dataset $ \tilde{w}_{1:T}\in\mathbb{R}^{T\times V} $ holds the word count for the vocabulary set over the time span $ t=1,\dots,T $.
 \paragraph{Transformer learning task}
 % word sequence (seqlen=40) <OOV> <MASK> <IGNORE>
-For transformer embedding training, we shape the data set into a sequence set $ S $ of equal distance of pre-defined sentence length $ \textsc{seqlen} $. Token $ \textsc{<pad>} $ are padded to the sequence when the sentence in i-index $ S[i]\textsc{<seqlen>} $. The out-of-vocab tokens are replaced with $ \textsc{<oov>} $ token. The sequence data set are to train the transformer embedding as input in the training process. To organize the training task, we define a set of token and target to Transformer learn it explicitly. We configure 15\% of tokens within a sentence are to be masked for the training task. First we replace a $ \textsc{<mask>} $ token on the selected word position of the token input. Other tokens will be filled a $ \textsc{<ignore>} $ token on the corresponding target position to exclude those token position to be calculate in the prediction score. 
+For transformer embedding training, we shape the dataset into a sequence set $ S $ of equal distance of pre-defined sentence length $ \textsc{seqlen} $. Token $ \textsc{<pad>} $ are padded to the sequence when the sentence in i-index $ S[i]\textsc{<seqlen>} $. The out-of-vocab tokens are replaced with $ \textsc{<oov>} $ token. The sequence dataset are to train the transformer embedding as input in the training process. To organize the training task, we define a set of token and target to Transformer learn it explicitly. We configure 15\% of tokens within a sentence are to be masked for the training task. First we replace a $ \textsc{<mask>} $ token on the selected word position of the token input. Other tokens will be filled a $ \textsc{<ignore>} $ token on the corresponding target position to exclude those token position to be calculate in the prediction score. 
 % DTM, DETM, our model
 \paragraph{Models}
 % TODO
@@ -36,7 +36,10 @@ For the gaussian process latent variable model, we selected zero mean with squar
 \paragraph{Training}
 In the training stage, we perform black box variational inference to estimate the unbiased gradient estimator with Monte Carlo sampling for intractable variational lower bound.
 \paragraph{Quantitative results}
-The result of models are to compare in terms of perplexity, Topic Coherence (TC), Topic Diversity (TD). To calculate the topic coherence and topic diversity, we average down the scores over time span $ 1\dots T $. We put the models into UN debates and NIPS data set for comparison.
+The result of models are to compare in terms of perplexity, Topic Coherence (TC), Topic Diversity (TD). To calculate the topic coherence and topic diversity, we average down the scores over time span $ 1\dots T $. We put the models into UN debates and NIPS dataset for comparison.
+
+% non-time series
+In addition to both of the results above, we also put the model we construct from chapter $ \ref{ch4} $ to compare with the time-series version models in this chapter. Since the model does not consider time series information, it only predicts a single set of topic words and thus for the TC and TD score.
 % table for perplexity, topic coherence, and topic diversity
 \begin{table}[h]
 \centering
@@ -44,9 +47,9 @@ The result of models are to compare in terms of perplexity, Topic Coherence (TC)
 \hline
      & Perplexity  &TC&TD\\ \hline
 DCTM	     	&  4205.1 & -0.017 & \textbf{0.953}\\
-D-ETM	     	&  2842.1 & 0.076 & 0.427 \\
+D-ETM	     	&  \textbf{2842.1} & 0.076 & 0.427 \\
 Our model(ch3) & 2746.3 & 0.152 & 0.643 \\
-\textbf{Our model}  & 4103.8 & 0.092 & 0.429 \\ \hline
+\textbf{Our model}  & 4103.8 & \textbf{0.092} & 0.429 \\ \hline
 \end{tabular}
 \captionof{table}{Result on UN debates dataset, k=30\label{tbl:ch6_t1}}
 \end{table}
@@ -56,20 +59,21 @@ Our model(ch3) & 2746.3 & 0.152 & 0.643 \\
 \hline
      & Perplexity & TC & TD \\\hline
 DCTM	     	& 4898.4 & -0.092 & \textbf{0.966} \\
-D-ETM	     	& 2282.3 & 0.120 & 0.517 \\
+D-ETM	     	& \textbf{2282.3} & 0.120 & 0.517 \\
 Our model(ch3) & 1960.8 & 0.201 & 0.733 \\
-\textbf{Our model}  & 5461 & 0.136 & 0.502 \\\hline
+\textbf{Our model}  & 5461.0 & \textbf{0.136} & 0.502 \\\hline
 \end{tabular}
 \captionof{table}{Result on NeurIPS dataset (1987-2019), k=30\label{tbl:ch6_t2}}
 \end{table}
+
+% model
+From table \ref{tbl:ch6_t1}, we have compared our model with the latest model. We only highlight the times-series model with the highest score. 
 % un debates
-From table \ref{tbl:ch6_t1}, we have compared our model with the latest model. On the UN debate data set, we conduct the experiment with number of topic $ k=30 $. In terms of perplexity, the D-ETM model has performed a better score. On the other hand, our model obtain a better performance in terms of topic coherence and topic diversity, which is 0.092 and 0.429 respectively. In particular, UN debates data set tends to contain more diversified topic mentions in different years and word usages by leaders from different countries. 
+On the UN debate dataset, we conduct the experiment with number of topic $ k=30 $. In terms of perplexity, the D-ETM model has performed a better score. On the other hand, our model obtain a better performance in terms of topic coherence and topic diversity, which is 0.092 and 0.429 respectively. In particular, UN debates dataset tends to contain more diversified topic mentions in different years and word usages by leaders from different countries. 
 % DCTM
 The DCTM holds the best topic diversity value, but the poor result in perplexity and topic coherence score make it meaningless.
 % nips dataset
-On NIPS data set, table \ref{tbl:ch6_t2} contains the scores that we obtained from each model we conducted experiment. From the result, when $ k=30 $, our model resulted 0.136 in topic coherence score and 0.502 in topic diversity. To compare with other instances, our model perform the best in topic coherence score. D-ETM has the lowest perplexity score, which perform the best in predictive task. On the other hand, our model has apparently beats the other models in both TC and TD scores. 
-% non-time series
-In addition to both of the results above, we also put the model we construct from chapter $ \ref{ch4} $ to compare with the time-series version models in this chapter. Since the model does not consider time series information, it only predicts a single set of topic words and thus for the TC and TD score.
+On NIPS dataset, table \ref{tbl:ch6_t2} contains the scores that we obtained from each model we conducted experiment. From the result, when $ k=30 $, our model resulted 0.136 in topic coherence score and 0.502 in topic diversity. To compare with other instances, our model perform the best in topic coherence score. D-ETM has the lowest perplexity score, which perform the best in predictive task. On the other hand, our model has apparently beats the other models in both TC and TD scores. 
 \subsubsection{Qualitative results}
 % visualization for the documents by topics
 \paragraph{UN debates}We put the document-topic proportion obtained from the model and run t-SNE algorithm to transform the document-topic proportion into 2-dimensional continuous space. Shown in figure \ref{fig:tsne1}, different colors of dots represent a specific topic. As can be seen, apparently the documents can be classified in to interpretable cluster according to their topic.\\
@@ -142,7 +146,7 @@ Year&Topic: Reinforcement Learning\\ \hline
 \label{fig:stack2}
 \end{figure}
 % Discussion
-\subsubsection{Discussion}
+\subsection{Discussion}
 In the result, we observe that our model has been out perform the D-ETM model in TC and TD scores. Apparently the topic words in our model generated are both consistent  and coherent over time.
 % the worse performance
 On the other hand, we notice that our model does not beat the state-of-the-art model in perplexity. Which we speculate that the model trade off the loss from training transformer bring down the predictive performance of the model.

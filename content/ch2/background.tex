@@ -172,7 +172,7 @@ the positional encoding function $ PE_{pos,i} $, where the $ pos $ represents th
 and the odd/even dimension are treated on sine/cosine function respectively. 
 \section{Time Series model}
 \subsection{Gaussian Process (GP)}
-Gaussian Process is a versatile algorithm which is commonly used for both supervised and unsupervised learning problems including regression, classification and clustering. It has been demonstrated a strong pursuit on times-series and reinforcement learning problems. A Gaussian Process $ \mathcal{GP}(\cdot,\cdot) $ is denoted by following, where m is the mean and k stands for a kernel for covariance function,
+Gaussian Process\cite{rasmussen_gaussian_2005} is a versatile algorithm which is commonly used for both supervised and unsupervised learning problems including regression, classification and clustering. It has been demonstrated a strong pursuit on times-series and reinforcement learning problems. A Gaussian Process $ \mathcal{GP}(\cdot,\cdot) $ is denoted by following, where m is the mean and k stands for a kernel for covariance function,
 \begin{align*}
 f\sim\mathcal{GP}(m,k)
 \end{align*}
@@ -186,20 +186,16 @@ p(f(X))=\mathcal{N}(m(X),k(X,X))
 In particular, in Gaussian Process regression task, a output variable $ y_i $ denoted $ y_i\sim f(x_i)+\epsilon $ where $ \epsilon $ is a Gaussian noise. Therefore, given a set of training input and target, 
 \begin{align*}
 p(y|f)=\mathcal{N}(y;f,\sigma_\epsilon^2I)
-\end{align*}
-For a Gaussian Process, is defined as follows
-To simply define the Gaussian Process model, here 
-radial basis function kernel (namely RBF kernel)
+\end{align*} 
+Radial Basis Function kernel (namely RBF kernel) is a common function that used as a kernel in GP model. For a kernel $ k(x,x') $,
 \begin{align*}
 k(x,x')=\sigma^2\exp\left(-\frac{||x-x'||^2}{2l^2}\right)
 \end{align*}
+where $ l $ is the kernel bandwith.
 %\paragraph{Matern Kernel}
 %\begin{align*}
 %k_{\text{Matern}}(x_1,x_2)=\frac{2^{1-\nu}}{\Gamma(\nu)}(\sqrt{2\nu}d)^{\nu}K_\nu(\sqrt{2\nu}d)
 %\end{align*}
-$ d $ is the Mab distance between variables $ x_1 $ and $ x_2 $, where $ \Theta $ manage the scale of the distance
-$ \nu $ is the 
-$ K_\nu $ is a modified Bessel function.
 The ELBO for GP is derived from \cite{hensman_gaussian_nodate}, as
 \begin{align*}
 \log p(y)\geq\mathbb{E}_{q(f)}[\log p(y|f)]-KL[q(u)||p(u)]
@@ -247,7 +243,7 @@ Sample word $ w_{d,n}\sim\text{Cat}(\sigma(\rho^\top\alpha_{z_{d_n}}^{(t_d)})) $
 \label{algorithm:dtm}
 \end{algorithm}
 $\alpha_k^{t-1}$ is the mean of current time $ t $ which take the value previous time step $ t-1 $.
-$ \gamma^2 $ and $ \xi^2 $ is the variance for the prior.
+$ \gamma^2 $ and $ \xi^2 $ are the variances for the prior.
 \section{Posterior Inference}\label{ch4:1}
 Since the exact inference of the posterior is intractable in real application, we employed approximation scheme for the posterior inference. The popular approaches are Markov Chain Monte Carlo Method (MCMC) and Variational Inference(VI)\cite{blei_variational_2006,hoffman_stochastic_2013}. Gibbs sampling is one of the MCMC method and it is fast to compute the approximation and easy to the implementation. Then, Variational EM algorithm to be carried out for maximizing the likelihood over all word in corpus in the document. An alternative way to perform estimation is Monte Carlo method.
 \subsection{Variational Inference}
@@ -268,7 +264,7 @@ Two main improvement are made by the SVI: stochastic optimization and noisy grad
 \subsection{Collapsing Parameters}
 In original LDA model, the parameter z is responsible for sampling topic assignment for each word position in every single document. Collapsing parameters\cite{srivastava_autoencoding_2017} introduced to reduce the latent variable $ z $ in the generative process in hence to speed up computation.
 \begin{align}\label{eq:cp}
-w_d\sim\prod_{n=1}^{N_d}\text{Cat}(\theta_d\beta_{w_{dn}})
+w_d\sim\prod_{n=1}^{N_d}\text{Cat}(\theta_d^\top\beta_{w_{dn}})
 \end{align}
 The trick in equation \ref{eq:cp} rewrite the original LDA word drawing process, and hence define a new evidence lower bound for the topic model.
 % TODO Blei's notes
