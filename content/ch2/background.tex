@@ -233,16 +233,19 @@ Dynamic Topic Model \cite{blei_dynamic_2006} is a model enables to capture topic
 % Generative process
 The generative process of the $ d^{th} $ document is the following:\\
 \begin{algorithm}[H]
-Draw topc embedding $ \alpha_k^t\sim\mathcal{N}(\alpha_k^{t-1},\gamma^2I) $\\
-Sample topc proportion $ \theta_{t_d}\sim\mathcal{N}(\eta_{t_d},\xi^2I) $\\
+Sample topics $ \beta^{(t)}\sim\mathcal{N}(\beta^{(t-1)},\sigma^2I) $\\
+Sample topic proportion mean $ \eta_{t}\sim\mathcal{N}(\eta_{t-1},\delta^2I) $\\
+\For{document d in $ D $}{
+Sample $ \theta_d\sim\mathcal{LN}(\eta_{t_d},\alpha^2I) $\\
 \For{word position n in $ N_d $}{
-Sample topic $ z_{d,n}\sim\text{Mult}(\theta_{t_d}) $\\
-Sample word $ w_{d,n}\sim\text{Cat}(\sigma(\rho^\top\alpha_{z_{d_n}}^{(t_d)})) $
+Sample topic $ z_{d,n}\sim\text{Mult}(\theta_{d}) $\\
+Sample word $ w_{d,n}\sim\text{Cat}(\beta_{z_{dn}}^{t_d}) $
+}
 }
 \caption{Generative Process for DTM}
 \label{algorithm:dtm}
 \end{algorithm}
-$\alpha_k^{t-1}$ is the mean of current time $ t $ which take the value previous time step $ t-1 $.
+The model assume the topic-word proportion and the are in state-space model that move along the time $ 1\dots T $ with their corresponding variance $ \sigma $ and $ \delta $. $ \eta_t $ is the latent variable model the prior mean to the topic proportion along the time line. $\alpha_k^{t-1}$ is the mean of current time $ t $ which take the value previous time step $ t-1 $. The original DTM model approximate the prior by deriving the variational lower bound with Kalman Filter method.
 $ \gamma^2 $ and $ \xi^2 $ are the variances for the prior.
 \section{Posterior Inference}\label{ch4:1}
 Since the exact inference of the posterior is intractable in real application, we employed approximation scheme for the posterior inference. The popular approaches are Markov Chain Monte Carlo Method (MCMC) and Variational Inference(VI)\cite{blei_variational_2006,hoffman_stochastic_2013}. Gibbs sampling is one of the MCMC method and it is fast to compute the approximation and easy to the implementation. Then, Variational EM algorithm to be carried out for maximizing the likelihood over all word in corpus in the document. An alternative way to perform estimation is Monte Carlo method.
@@ -264,7 +267,7 @@ Two main improvement are made by the SVI: stochastic optimization and noisy grad
 \subsection{Collapsing Parameters}
 In original LDA model, the parameter z is responsible for sampling topic assignment for each word position in every single document. Collapsing parameters\cite{srivastava_autoencoding_2017} introduced to reduce the latent variable $ z $ in the generative process in hence to speed up computation.
 \begin{align}\label{eq:cp}
-w_d\sim\prod_{n=1}^{N_d}\text{Cat}(\theta_d^\top\beta_{w_{dn}})
+w_d\sim\prod_{n=1}^{N_d}\text{Cat}(\sigma(\theta_d^\top\beta_{w_{dn}}))
 \end{align}
 The trick in equation \ref{eq:cp} rewrite the original LDA word drawing process, and hence define a new evidence lower bound for the topic model.
 % TODO Blei's notes

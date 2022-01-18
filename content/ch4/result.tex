@@ -10,6 +10,9 @@ The experiment will be conducted with a number of existing proposed topic models
 \textit{Reuter-21578} data set is a collection of documents from Reuters newswire in 1987. After performing the preprocessing, the processed data set consist of 7769, 3019 documents for train/test documents with 1622 vocabularies.
 % preprocessing
 On the data preprocessing stage, we perform tokenization, stopword removal, lemmatization on the documents.
+\paragraph{Transformer learning task}\label{ch4:transformer_learning}
+% word sequence (seqlen=40) <OOV> <MASK> <IGNORE>
+For transformer embedding training, we shape the dataset into a sequence set $ S $ of equal distance of pre-defined sentence length $ \textsc{seqlen} $. Token $ \textsc{<pad>} $ are padded to the sequence when the sentence in i-index $ S[i]\textsc{<seqlen>} $. The out-of-vocab tokens are replaced with $ \textsc{<oov>} $ token. The sequence dataset are to train the transformer embedding as input in the training process. To organize the training task, we define a set of token and target to Transformer learn it explicitly. We configure 15\% of tokens within a sentence are to be masked for the training task. First we replace a $ \textsc{<mask>} $ token on the selected word position of the token input. Other tokens will be filled a $ \textsc{<ignore>} $ token on the corresponding target position to exclude those token position to be calculate in the prediction score. 
 \subsection{Models}\label{ch4:result_model}
 We compare the model performance with a numbers of rivals. We take Latent Dirichlet Allocation (LDA)\cite{blei_latent_2003} as the baseline model. Other models include Transformer\cite{vaswani_attention_nodate}\footnote{Not a topic model, but we think it is worth to make comparison still.},  ProdLDA\cite{srivastava_autoencoding_2017} and Embedded Topic Model(ETM)\cite{dieng_topic_2019}.
 % LDA

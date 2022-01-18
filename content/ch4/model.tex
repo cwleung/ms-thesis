@@ -73,7 +73,7 @@ Sample Cholesky factor $ L\sim \text{LKJChol}(\gamma)$\\
 \For{document d in D}{
 Sample topic distribution $ \theta_d\sim \mathcal{LN}(\mu,LL^\top) $\\
 \For{word position n in $ N_d $}{
-Sample word $ w_{d,n}\sim \text{Cat}(\theta_d\sigma(\rho^\top\alpha)_{w_{d,n}}) $
+Sample word $ w_{d,n}\sim \text{Cat}(\theta_d^\top\sigma(\rho^\top\alpha)) $
 }
 }
 \caption{Generative Process for TECTM}
@@ -110,7 +110,7 @@ p(w_d|\rho,\alpha)=\int p(\theta_d|\mu,\Sigma)\prod_{n=1}^{N_d}p(w_{dn}|\theta_d
 \end{align}
 the conditional distribution $ p(w_{dn}|\theta_d,\alpha) $ marginalize out the topic assignment $ z_{dn} $ by collapsing parameters transformation $ w\sim \theta^\top\beta $,
 \begin{align}
-p(w_{dn}|\theta_d,\rho,\alpha)=\sum_{k=1}^{K}\theta_{dk}\beta_{k,w_{dn}}
+p(w_{dn}|\theta_d,\rho,\alpha)=\text{Cat}\left(\sum_{k=1}^{K}\sigma(\theta_{dk}\beta_{k})\right)
 \end{align}
 as always, computing integral for posterior is intractable, approximate inference is necessary to estimate the true parameter from the integral.
 %where $ \beta $ represent the topic-word distribution, composed of transformer embedding $ \rho $ and topic embedding $ \alpha $, in such case, the vocab $ v $ represent the proportion of topic $ k $ that $ \beta_{kv} $ becomes,
@@ -136,5 +136,5 @@ p(W,Z,\theta,\Sigma|\beta,\mu,\gamma)&=p(W|Z)p(Z|\theta)p(\theta|\mu,\Sigma)\\
 by taking  log on the joint probability, we obtain a objective function for optimization
 \begin{align*}
 \log p(W,Z,\theta,\Sigma|\beta,\mu,\gamma)=&\sum_{d=1}^{D}\left[\log p(\theta_d|\mu,\Sigma)+\sum_{n=1}^{V}\left[\log p(z_{d,n}|\theta_d)+\log p(w_{d,n}|z_{d,n},\beta)\right]\right]\\
-&+\log p(\Sigma|\gamma)
+&+\log p(\Sigma)
 \end{align*}

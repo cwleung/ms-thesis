@@ -79,7 +79,7 @@ $ w_t \in\mathbb{R}^{V}$ is the bag-of-word of distribution at time t, which we 
 $\alpha_k^{(t)}\in\mathbb{R}^{V}$ is the topic embedding for topic k at time t. The topic embedding demonstrates the vocabulary representations on the specific time stamp for the document.
 $ \rho\in\mathbb{R}^{W\times L} $ is the transformer embedding that maps the words into L dimension of continuous latent space. 
 \begin{align}
-p(w_{d,n}|\theta_d,\rho,\alpha^{(t_d)})=\sum_{k=1}^{K}\theta_{dk}(\rho^\top\alpha^{(t_d)})_{k,w_{dn}}
+p(w_{d,n}|\theta_d,\rho,\alpha^{(t_d)})=\text{Cat}\left(\sigma\left(\sum_{k=1}^{K}\theta_{dk}(\rho^\top\alpha^{(t_d)})_{k,w_{dn}}\right)\right)
 \end{align}
 The $ p(\Sigma_{t_d}|\gamma_{t_d}) $ draws the covariance prior to the document-topic proportion $ \theta_d $. The LKJ correlation prior generates a positive definite matrix of $ \mathbb{R}^{K\times K} $
 \begin{align}

@@ -71,12 +71,12 @@ To speed up computation, we apply mini-batching as previous chapter
 % expectation
 The first term is the expected likelihood term for reconstructing the word $ w_{dn} $ from the model, where $ p(w_{d,n}|\theta_d, \rho,\alpha^{(t_d)}) $ is the log likelihood probability parameterized by the variational parameters $ \theta_d, \alpha^{t_d} $ and transformer embedding $ \rho $, which $ \sigma(\cdot) $ is the softmax function. The topic-word proportion is a dot product of transformer embedding $ \rho $ and $ \alpha^{(t_d)} $
 \begin{align}
-\mathbb{E}_{q(\theta_d)q(\alpha)}[\log p(w_{d,n}|\theta_d,\rho,\alpha^{(t_d)})]=\mathbb{E}_{\theta_d\sim\mathcal{N}(\mu_{\phi}(x),\Sigma^{\phi}_{t_d})}[w_{d,n}\sigma(\theta^\top(\rho^\top\alpha^{(t_d)}))_{d,n}]
+\mathbb{E}_{q(\theta_d)q(\alpha)}[\log p(w_{d,n}|\theta_d,\rho,\alpha^{(t_d)})]=\mathbb{E}_{\theta_d\sim\mathcal{N}(\mu_{\phi}(x),\Sigma^{\phi}_{t_d})}[w_{d,n}\text{Cat}\left(\sigma(\theta_d^\top(\rho^\top\alpha^{(t_d)}))\right)]
 \end{align}
 and then apply the reparameterization trick to maintain a low-variance gradient estimate to the likelihood term, the transformation $ \theta_d=\mu_{\phi}(x)+(\Sigma^{\phi}_{t_d})^{1/2}\epsilon $, where $ \epsilon\sim\mathcal{N}(0,I) $ is gaussian noise variance.
 % expectation 2
 \begin{equation}\label{eq:ch5_reconstruction}
-=\mathbb{E}_{\epsilon\sim\mathcal{N}(0,I)}\left[w_{d,n}\sigma((\mu_{\phi}(x_d)+(\Sigma^{\phi}_{t_d})^{1/2}\epsilon)^\top(\rho^\top\alpha^{(t_d)}))_{d,n}\right]
+=\mathbb{E}_{\epsilon\sim\mathcal{N}(0,I)}\left[w_{d,n}\text{Cat}\left(\sigma((\mu_{\phi}(x_d)+(\Sigma^{\phi}_{t_d})^{1/2}\epsilon)^\top(\rho^\top\alpha^{(t_d)}))\right)\right]
 \end{equation}
 % theta
 The second term is the KL-divergence between $ p(\theta_d) $ and $ q(\theta_d) $, the distributions are logistic-normal distributions so can be represented in closed-form. So we simply derive the KL-divergence by substitution,

@@ -17,9 +17,8 @@ In order to train the model, we have to leverage the datasets to feed-in differe
 First, the bag-of-word $ w_{1:D}\in\mathbb{R}^{D\times V} $ is a matrix consist of the word count for vocabularies exist in every document. The document frequency for tokens are set to 100 documents minimum and 50\% at max.
 % time-vocabularies
 We also created a time-vocabularies word count matrix for the training of $ \eta $. The dataset $ \tilde{w}_{1:T}\in\mathbb{R}^{T\times V} $ holds the word count for the vocabulary set over the time span $ t=1,\dots,T $.
-\paragraph{Transformer learning task}
+\paragraph{Transformer learning task} See \ref{ch4:transformer_learning}.
 % word sequence (seqlen=40) <OOV> <MASK> <IGNORE>
-For transformer embedding training, we shape the dataset into a sequence set $ S $ of equal distance of pre-defined sentence length $ \textsc{seqlen} $. Token $ \textsc{<pad>} $ are padded to the sequence when the sentence in i-index $ S[i]\textsc{<seqlen>} $. The out-of-vocab tokens are replaced with $ \textsc{<oov>} $ token. The sequence dataset are to train the transformer embedding as input in the training process. To organize the training task, we define a set of token and target to Transformer learn it explicitly. We configure 15\% of tokens within a sentence are to be masked for the training task. First we replace a $ \textsc{<mask>} $ token on the selected word position of the token input. Other tokens will be filled a $ \textsc{<ignore>} $ token on the corresponding target position to exclude those token position to be calculate in the prediction score. 
 % DTM, DETM, our model
 \paragraph{Models}
 % TODO
