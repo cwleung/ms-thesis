@@ -14,7 +14,7 @@ On the data preprocessing stage, we perform tokenization, stopword removal, lemm
 % word sequence (seqlen=40) <OOV> <MASK> <IGNORE>
 For transformer embedding training, we shape the dataset into a sequence set $ S $ of equal distance of pre-defined sentence length $ \textsc{seqlen} $. Token $ \textsc{<pad>} $ are padded to the sequence when the sentence in i-index $ S[i]\textsc{<seqlen>} $. The out-of-vocab tokens are replaced with $ \textsc{<oov>} $ token. The sequence dataset are to train the transformer embedding as input in the training process. To organize the training task, we define a set of token and target to Transformer learn it explicitly. We configure 15\% of tokens within a sentence are to be masked for the training task. First we replace a $ \textsc{<mask>} $ token on the selected word position of the token input. Other tokens will be filled a $ \textsc{<ignore>} $ token on the corresponding target position to exclude those token position to be calculate in the prediction score. 
 \subsection{Models}\label{ch4:result_model}
-We compare the model performance with a numbers of rivals. We take Latent Dirichlet Allocation (LDA)\cite{blei_latent_2003} as the baseline model. Other models include Transformer\cite{vaswani_attention_nodate}\footnote{Not a topic model, but we think it is worth to make comparison still.},  ProdLDA\cite{srivastava_autoencoding_2017} and Embedded Topic Model(ETM)\cite{dieng_topic_2019}.
+We compare the model performance with a numbers of rivals. We take Latent Dirichlet Allocation (LDA)\cite{blei_latent_2003} as the baseline model. Other models include Transformer\cite{vaswani_attention_2017}\footnote{Not a topic model, but we think it is worth to make comparison still.},  ProdLDA\cite{srivastava_autoencoding_2017} and Embedded Topic Model(ETM)\cite{dieng_topic_2019}.
 % LDA
 LDA fits the model with with mean-field variational inference \footnote{Adopted from \textmd{scikit-learn} library}
 % ProdLDA
@@ -39,7 +39,7 @@ The dimension for embedding $ \rho $ are set to 256.
 % Transformer settings
 For the Transformer model settings, we define the sequence length to 20, number of head to 8, and 4 layer stacks of transformer encoder and 256 hidden dimension.
 \subsection{Quantitative Result}
-Perplexity has been known for evaluating the fitness of NLP models, however it may not be the best metrics to examine the wellness of a topic model\cite{newman_automatic_nodate}.
+Perplexity has been known for evaluating the fitness of NLP models, however it may not be the best metrics to examine the wellness of a topic model\cite{newman_automatic_2010}
 Secondly, in order to compute the perplexity for topic model using AEVB, we follow the previous work, using the variational lower bound to compute the perplexity.
 For the same reason, the perplexity may not perfectly reflects the true quality of a topic model. 
 Hence, we take the topic coherence \cite{mimno_optimizing_2011} as the main measure to evaluate the models.
@@ -136,13 +136,13 @@ ETM  \\ \hline
 \end{table}
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth]{figures/0106/ppl_20t}
+\includegraphics[width=0.8\linewidth]{figures/0106/ppl_20t.png}
 \caption{20Newsgroups (k=20)}
 \label{fig:ppl20t}
 \end{figure}
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth]{figures/0106/ppl_50t}
+\includegraphics[width=0.8\linewidth]{figures/0106/ppl_50t.png}
 \caption{20Newsgroups (k=50)}
 \label{fig:ppl50t}
 \end{figure}
@@ -164,26 +164,25 @@ To clearly demonstrate the representation for the word embedding space inside th
 We also compare the model with the ETM as displayed on figure \ref{fig:tsne20t50w1_etm}. In figure \ref{fig:tsne20t25w2}, the topic "space"(which consist of words like space, earth, orbit, etc) laying on the 2-dimensional space. The most neighboring topic includes "hardware" and "operating system", which appear the words such as "cable", "cd", "power" for "hardware" topic, and "images", "graphics" and "files" for "operating system" topic. Generally speaking, ETM do not able to distinct the words of topics into visible clusters, as shown on the figure, the upper part of word dots with different topic labels mix together. And inside the topic cluster, there are also some word from other topic mixed in to it. This may implies ETM does not generate good enough topic-words representation to distinguish the difference between topics.
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth]{figures/0908/tsne_20t_25w_2}
+\includegraphics[width=1\linewidth]{figures/0908/tsne_20t_25w_2.png}
 \caption{t-SNE Visualization for our model \#Topic:20}
 \label{fig:tsne20t25w2}
 \end{figure}
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth]{"figures/0106/tsne_20t_50w_2"}
+\includegraphics[width=1\linewidth]{figures/0106/tsne_20t_50w_2.png}
 \caption{t-SNE visualization for ETM \#Topic:20}
 \label{fig:tsne20t50w1_etm}
 \end{figure}
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth]{figures/0908/tsne_50t_25w_0}
+\includegraphics[width=1\linewidth]{figures/0908/tsne_50t_25w_0.png}
 \caption{Visualization \#Topics:50}
 \label{fig:tsne50t25w0}
 \end{figure}
 \subsection{Discussion}
 We have compared our model with a number of state-of-the-art models on multiple data sets. 
 % mention the perplexity is not a good measure
-As we mentioned in previous section, perplexity may not be a good measure for comparing the topic models. Also, normally the perplexity for topic model are calculated using the posterior distribution, while the topic model using Autoencoding Variational Bayes(AEVB) are calculated using the variational lower bound\cite{srivastava_autoencoding_2017}. The results between these models may not able to draw conclusion easily. We have carefully compared the models on topic-model specific metrics like topic coherence and topic diversity. The result have
-The result exhibits our model has a outstanding performance on obtaining high quality topic words over various of predefined topic numbers, especially in topic coherence score. In two of the metric we compared, topic coherence and topic diversity, our model shows its strength in generating high quality topics and diversified words. The comparison on the quantitative result also demonstrate that our model is robust to generate high quality topics upon the topic number defined increases.
+As we mentioned in previous section, perplexity may not be a good measure for comparing the topic models. Also, normally the perplexity for topic model are calculated using the posterior distribution, while the topic model using Autoencoding Variational Bayes(AEVB) are calculated using the variational lower bound\cite{srivastava_autoencoding_2017}. The results between these models may not able to draw conclusion easily. We have carefully compared the models on topic-model specific metrics like topic coherence and topic diversity. The result exhibits our model has a outstanding performance on obtaining high quality topic words over various of predefined topic numbers, especially in topic coherence score. In two of the metric we compared, topic coherence and topic diversity, our model shows its strength in generating high quality topics and diversified words. The comparison on the quantitative result also demonstrate that our model is robust to generate high quality topics upon the topic number defined increases.
 % visualization
 In the t-SNE visualization, our model also made a clearer representation on 2-dimensional space which implies a better intra-cluster divergence the model distinguish the difference between topics.

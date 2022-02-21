@@ -4,8 +4,11 @@
 
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{hyperref}
+\usepackage{breakurl}
+\usepackage{xurl}
 
-\usepackage{natbib}
+\usepackage{bmpsize}
+\usepackage[dvipdfmx]{graphicx,xcolor}% ドライバ指定のため
 
 \usepackage[%
     font={small,sf},
@@ -32,7 +35,7 @@
 
 %-------------------
 \etitle{Correlated Topic Model with Transformer Embeddings}
-\jtitle{}
+\jtitle{トランスフォーマーの埋め込みによる相関トピックモデル}
 %
 \eauthor{Chun Wa Leung}
 \jauthor{梁　俊華}
@@ -45,12 +48,9 @@
 \begin{eabstract}
 \input{content/abstract}
 \end{eabstract}
-\begin{jabstract}
-\input{content/abstract}
-\end{jabstract}
 \maketitle
 \begin{acknowledge}
-I would like to express my thanks of gratitude to my guiding professor Takano Akihiko as well as professor Abekawa me along the master thesis. It is my pleasure to receive many valuable suggestion on thesis which helped me a lot in doing research.
+I would like to express my thanks of gratitude to my guiding professor Akihiko Takano as well as professor Takeshi Abekawa me along the master thesis. It is my pleasure to receive many valuable suggestions on thesis writing which helped me a lot in doing research.
 \end{acknowledge}
 \frontmatter
 \tableofcontents
@@ -82,7 +82,8 @@ I would like to express my thanks of gratitude to my guiding professor Takano Ak
 \chapter{Conclusions}\label{ch6}
 \input{content/ch6/conclusion}
 %-------------------
-\bibliographystyle{plainnat}
+%\bibliographystyle{alpha}
+\bibliographystyle{jplain}
 \bibliography{thesis}
 %-------------------
 %\appendix

@@ -1,5 +1,5 @@
 \section{Experiment and results}
-In this chapter, Dynamic Correlated Topic Model(DCTM)\cite{tomasi_stochastic_nodate}, and Dynamic Embedded Topic Model(DETM)\cite{dieng_dynamic_2019} to compare with our model.\footnote{DTM was tested in our experiment, nonetheless, did not yield result after 10 hours of running time.}
+In this chapter, Dynamic Correlated Topic Model(DCTM)\cite{tomasi_stochastic_2020}, and Dynamic Embedded Topic Model(DETM)\cite{dieng_dynamic_2019} to compare with our model.\footnote{DTM was tested in our experiment, nonetheless, did not yield result after 10 hours of running time.}
 \subsection{Experiment settings}
 \paragraph{Datasets}
 % First datasets, vocabularies, years 
@@ -22,7 +22,7 @@ We also created a time-vocabularies word count matrix for the training of $ \eta
 % DTM, DETM, our model
 \paragraph{Models}
 % TODO
-We maintain the default settings for DCTM \cite{tomasi_stochastic_nodate}, with 0.1 kernel bandwidth and 1 for kernel amplitude.\footnote{\url{https://github.com/spotify-research/dctm/}}
+We maintain the default settings for DCTM \cite{tomasi_stochastic_2020}, with 0.1 kernel bandwidth and 1 for kernel amplitude.\footnote{\url{https://github.com/spotify-research/dctm/}}
 For D-ETM model, we follow the default settings instructed in \cite{dieng_dynamic_2019}. We set the variance of  on the prior to 0.005.\footnote{\url{https://github.com/adjidieng/DETM/}}
 \paragraph{Algorithm configurations}
 % alpha	
@@ -30,7 +30,7 @@ Following the parameter settings from \cite{blei_dynamic_2006}, the variance of 
 % transformer
 We set the dimension for the transformer embedding is 256, and so for the hidden dimension for both transformer encoder and decoder. Each transformer encoder and transformer decoder consist of two layers and 2 heads for scaled dot-product. The sequence length the transformer are set to 20.
 % gaussian process
-For the gaussian process latent variable model, we selected zero mean with squared exponential function (RBF kernel) as the covariance prior, which allows providing adaptive change on topic-proportion against the possible rapid topic changes from documents. The number of inducing point are set to 50. We follow the setting from \cite{tomasi_stochastic_nodate} and set the length scale of kernel as 0.1.
+For the gaussian process latent variable model, we selected zero mean with squared exponential function (RBF kernel) as the covariance prior, which allows providing adaptive change on topic-proportion against the possible rapid topic changes from documents. The number of inducing point are set to 50. We follow the setting from \cite{tomasi_stochastic_2020} and set the length scale of kernel as 0.1.
 \subsection{Results}
 \paragraph{Training}
 In the training stage, we perform black box variational inference to estimate the unbiased gradient estimator with Monte Carlo sampling for intractable variational lower bound.

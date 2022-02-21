@@ -95,7 +95,7 @@ and the ELBO is defined as,
 \end{align*}
 \subsection{Embedded Topic Model} \label{ch2:etm}
 Embedded Topic Model \cite{dieng_topic_2019} is one of the state-of-art approaches for topic model task. It takes word distribution $ \beta $ as a topic embedding for words. % explain the algorithm
-Similar to Word2Vec\cite{mikolov_distributed_nodate}, the word distribution is a softmax function of the inner product of context matrix $ \rho $ and context embedding $ \alpha $. Specifically, the algorithm   equation \ref{eq:etm_embedding}
+Similar to Word2Vec\cite{mikolov_distributed_2013}, the word distribution is a softmax function of the inner product of context matrix $ \rho $ and context embedding $ \alpha $. Specifically, the algorithm   equation \ref{eq:etm_embedding}
 \begin{equation}\label{eq:etm_embedding}
 \beta\sim\sigma(\rho^\top\alpha)
 \end{equation}
@@ -113,13 +113,13 @@ Draw word $ w_{d,n}\sim \sigma(\rho^\top\alpha)_{z_{dn}} $
 \section{Representation learning}
 \subsection{Word Embedding} \label{ch2:we}
 % explain what is word embeddings
-Word embedding\cite{bengio_neural_nodate} is a kind of representation for words from document collections using a vector formulation. The nature of word embedding is that, the words that having similar meaning have a close distance(in most case euclidean distance), and vice versa. For instance, continuous bag-of-words(CBOW) \cite{mikolov_distributed_nodate} is a kind of word embeddings converting bag-of-word in to a vector of n-dimension continuous space, which contains the following formulation,
+Word embedding\cite{bengio_neural_2003} is a kind of representation for words from document collections using a vector formulation. The nature of word embedding is that, the words that having similar meaning have a close distance(in most case euclidean distance), and vice versa. For instance, continuous bag-of-words(CBOW) \cite{mikolov_distributed_2013} is a kind of word embeddings converting bag-of-word in to a vector of n-dimension continuous space, which contains the following formulation,
 \begin{align*}
 w\sim\text{softmax}(\rho^\top\alpha)
 \end{align*}
 where $ \rho\in\mathbb{R}^{L\times V} $ is the embedding matrix which a function $ f:\mathbb{R}^V\mapsto\mathbb{R}^{L} $ maps $ V $ vocabularies into $ L $ dimension of continuous vector space. And $ \alpha $ is the context embedding, which conveniently convert the latent dimension L to a custom dimension of continuous embedding space $ \mathbb{R}^{N} $ as $ \tilde{f}:\mathbb{R}^L\mapsto\mathbb{R}^{N} $.
 \subsection{Transformer} \label{ch2:transformer}
-Transformer\cite{vaswani_attention_nodate} is a popular neural network architecture in natural language processing. To briefly explain transformer, it is an stacked encoder-decoder architecture. The component that makes transformer stands out of other architectures it the mutli-head self-attention mechanism. 
+Transformer\cite{vaswani_attention_2017} is a popular neural network architecture in natural language processing. To briefly explain transformer, it is an stacked encoder-decoder architecture. The component that makes transformer stands out of other architectures it the mutli-head self-attention mechanism. 
 
 In this section we only cover the main components of transformer. The details for transformer can be reviewed in author's blog post\footnote{\url{https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html}}.
 
@@ -162,7 +162,7 @@ x=\text{LayerNorm}(x+\text{Sublayers}(x))
 %\end{align*}
 \subsubsection{Positional Encoding}
 One drawback for Multi-Head Attention block is that it does not consider information about word positioning. The positional encoding function maps the sentence sequences into i-dimension of hidden space fo each permutation position $ pos $. And so the model can identify the from the additional positional features space of the input.
-\footnote{Description from \url{https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial6/Transformers_and_MHAttention.html.}}
+\footnote{Description from \url{https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial6/Transformers_and_MHAttention.html}.}
 \[ PE_{(pos,i)} = \begin{cases} 
 \sin\left(\frac{pos}{10000^{i/d}model}\right) & \text{if }i \mod 2 = 0 \\
 \cos\left(\frac{pos}{10000^{(i-1)/d}model}\right) & \text{otherwise}
@@ -196,13 +196,13 @@ where $ l $ is the kernel bandwith.
 %\begin{align*}
 %k_{\text{Matern}}(x_1,x_2)=\frac{2^{1-\nu}}{\Gamma(\nu)}(\sqrt{2\nu}d)^{\nu}K_\nu(\sqrt{2\nu}d)
 %\end{align*}
-The ELBO for GP is derived from \cite{hensman_gaussian_nodate}, as
+The ELBO for GP is derived from \cite{hensman2013gaussian}, as
 \begin{align*}
 \log p(y)\geq\mathbb{E}_{q(f)}[\log p(y|f)]-KL[q(u)||p(u)]
 \end{align*}
 where the variational distribution is $ q(f)\approx\int p(f|u)q(u)du $
 \subsection{Gaussian Process Latent Variable Model (GPLVM)}
-Gaussian Process Latent Variable Model \cite{lawrence_gaussian_nodate,titsias_bayesian_nodate} is a dimension reduction method turn high dimensional data into low-dimension space. Formally, given a latent variable $ X\in\mathbb{R}^{N\times Q} $, and high dimensional real valued observations $ Y\in\mathbb{R}^{N\times D} $, the model induce high dimensional from a low-dimensional mapping $ \mathcal{X}\rightarrow\mathcal{Y} $ such that $ Q<<D $.　The prior latent variable X is defined at a standard normal distribution in dimension Q.
+Gaussian Process Latent Variable Model \cite{lawrence_gaussian_2003,titsias_bayesian_2010} is a dimension reduction method turn high dimensional data into low-dimension space. Formally, given a latent variable $ X\in\mathbb{R}^{N\times Q} $, and high dimensional real valued observations $ Y\in\mathbb{R}^{N\times D} $, the model induce high dimensional from a low-dimensional mapping $ \mathcal{X}\rightarrow\mathcal{Y} $ such that $ Q<<D $.　The prior latent variable X is defined at a standard normal distribution in dimension Q.
 \begin{align*}
 p(X)=\prod_{n=1}^{N}\mathcal{N}(x_n;0,I_Q)
 \end{align*}
